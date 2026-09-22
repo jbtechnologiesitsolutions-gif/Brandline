@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MoveDownRight } from "lucide-react";
+import { ArrowRight, MoveDownRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
+import { AnimatedSection } from "@/components/animated-section";
+import { GlowEffect } from "@/components/core/glow-effect";
 import {
   AboutBlock,
   Addons,
@@ -64,127 +67,231 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <main>
+    <main className="overflow-hidden">
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="section-shell grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
           {/* Left */}
-          <div className="reveal">
-            <p className="label-caps text-gold">
-              E-Commerce &nbsp;•&nbsp; Marketplaces &nbsp;•&nbsp; Digital Growth
-            </p>
-            <h1 className="display-title mt-7 max-w-3xl">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5"
+            >
+              <Sparkles className="size-3.5 text-gold" />
+              <p className="label-caps text-gold text-[10px]">
+                E-Commerce &nbsp;•&nbsp; Marketplaces &nbsp;•&nbsp; Digital Growth
+              </p>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="display-title mt-7 max-w-3xl"
+            >
               Grow Your Brand
               <br />
               <span className="text-gradient-gold">Across Every Digital Shelf.</span>
-            </h1>
-            <h2 className="mt-6 max-w-xl font-display text-xl font-semibold leading-snug text-muted-foreground sm:text-2xl">
+            </motion.h1>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-6 max-w-xl font-display text-xl font-semibold leading-snug text-muted-foreground sm:text-2xl"
+            >
               Your products. Every marketplace. One growth partner.
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground">
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-6 max-w-xl text-base leading-8 text-muted-foreground"
+            >
               From marketplace onboarding and catalog management to advertising,
               inventory coordination and D2C growth, BrandlineTech helps businesses
               build, manage and scale their online operations.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="gold" size="lg">
-              <Link to="/contact">
-                Get Free Consultation <ArrowRight />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <a href="#services">
-                Explore Our Services <MoveDownRight />
-              </a>
-            </Button>
-            </div>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
+            >
+              <div className="group relative inline-flex">
+                <motion.div className="pointer-events-none absolute -inset-1 rounded-xl opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100">
+                  <GlowEffect
+                    colors={["#0894FF", "#C959DD", "#FF2E54", "#FF9004"]}
+                    mode="colorShift"
+                    blur="soft"
+                    duration={3}
+                  />
+                </motion.div>
+                <Button asChild variant="gold" size="lg" className="relative z-10">
+                  <Link to="/contact">
+                    Get Free Consultation <ArrowRight className="ml-1 size-4" />
+                  </Link>
+                </Button>
+              </div>
+              <Button asChild variant="outline" size="lg">
+                <a href="#services">
+                  Explore Our Services <MoveDownRight className="ml-1 size-4" />
+                </a>
+              </Button>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+            >
               Strategy{" "}
               <span className="mx-2 text-gold">•</span> Technology{" "}
               <span className="mx-2 text-gold">•</span> Marketing{" "}
               <span className="mx-2 text-gold">•</span> Execution
-            </p>
+            </motion.p>
           </div>
 
           {/* Right — Dashboard */}
-          <GrowthDashboard />
+          <motion.div
+            initial={{ opacity: 0, x: 40, scale: 0.96 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            <GrowthDashboard />
+          </motion.div>
         </div>
       </section>
 
       {/* ── Trust Strip ───────────────────────────────────────────────────── */}
-      <TrustStrip />
+      <AnimatedSection direction="fade" delay={0.1}>
+        <TrustStrip />
+      </AnimatedSection>
 
       {/* ── Who We Help ───────────────────────────────────────────────────── */}
-      <WhoWeHelp />
+      <AnimatedSection direction="up">
+        <WhoWeHelp />
+      </AnimatedSection>
 
       {/* ── Services Grid ─────────────────────────────────────────────────── */}
-      <ServicesSection />
+      <AnimatedSection direction="up">
+        <ServicesSection />
+      </AnimatedSection>
 
       {/* ── Growth Framework ──────────────────────────────────────────────── */}
-      <GrowthFramework />
+      <AnimatedSection direction="left">
+        <GrowthFramework />
+      </AnimatedSection>
 
       {/* ── Marketplace Feature (tabbed dashboard) ────────────────────────── */}
-      <MarketplaceFeature />
+      <AnimatedSection direction="up">
+        <MarketplaceFeature />
+      </AnimatedSection>
 
       {/* ── Marketplace Services 12-card grid ─────────────────────────────── */}
-      <MarketplaceServices />
+      <AnimatedSection direction="up">
+        <MarketplaceServices />
+      </AnimatedSection>
 
       {/* ── Platform Section ──────────────────────────────────────────────── */}
-      <PlatformSection />
+      <AnimatedSection direction="right">
+        <PlatformSection />
+      </AnimatedSection>
 
       {/* ── Seller Audit (dark lead-gen) ──────────────────────────────────── */}
-      <SellerAudit />
+      <AnimatedSection direction="up">
+        <SellerAudit />
+      </AnimatedSection>
 
       {/* ── Pricing ───────────────────────────────────────────────────────── */}
-      <PricingSection />
+      <AnimatedSection direction="up">
+        <PricingSection />
+      </AnimatedSection>
 
       {/* ── Add-ons ───────────────────────────────────────────────────────── */}
-      <Addons />
+      <AnimatedSection direction="left">
+        <Addons />
+      </AnimatedSection>
 
       {/* ── Stats ─────────────────────────────────────────────────────────── */}
-      <Stats />
+      <AnimatedSection direction="zoom">
+        <Stats />
+      </AnimatedSection>
 
       {/* ── Why BrandlineTech + Industries ────────────────────────────────── */}
-      <WhyIndustries />
+      <AnimatedSection direction="right">
+        <WhyIndustries />
+      </AnimatedSection>
 
       {/* ── Case Studies ──────────────────────────────────────────────────── */}
-      <CaseStudies />
+      <AnimatedSection direction="up">
+        <CaseStudies />
+      </AnimatedSection>
 
       {/* ── D2C Section ───────────────────────────────────────────────────── */}
-      <D2CSection />
+      <AnimatedSection direction="left">
+        <D2CSection />
+      </AnimatedSection>
 
       {/* ── Digital Marketing ─────────────────────────────────────────────── */}
-      <DigitalMarketing />
+      <AnimatedSection direction="right">
+        <DigitalMarketing />
+      </AnimatedSection>
 
       {/* ── Technology ────────────────────────────────────────────────────── */}
-      <WebTechnology />
+      <AnimatedSection direction="left">
+        <WebTechnology />
+      </AnimatedSection>
 
       {/* ── Goal/Outcome Section ──────────────────────────────────────────── */}
-      <GoalSection />
+      <AnimatedSection direction="up">
+        <GoalSection />
+      </AnimatedSection>
 
       {/* ── Process ───────────────────────────────────────────────────────── */}
-      <ProcessSection />
+      <AnimatedSection direction="up">
+        <ProcessSection />
+      </AnimatedSection>
 
       {/* ── Resources ─────────────────────────────────────────────────────── */}
-      <ResourcesSection />
+      <AnimatedSection direction="right">
+        <ResourcesSection />
+      </AnimatedSection>
 
       {/* ── Tools ─────────────────────────────────────────────────────────── */}
-      <ToolsSection />
+      <AnimatedSection direction="up">
+        <ToolsSection />
+      </AnimatedSection>
 
       {/* ── About Block ───────────────────────────────────────────────────── */}
-      <AboutBlock />
+      <AnimatedSection direction="left">
+        <AboutBlock />
+      </AnimatedSection>
 
       {/* ── Value Section ─────────────────────────────────────────────────── */}
-      <ValueSection />
+      <AnimatedSection direction="up">
+        <ValueSection />
+      </AnimatedSection>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <FAQ />
+      <AnimatedSection direction="up">
+        <FAQ />
+      </AnimatedSection>
 
       {/* ── Final CTA ─────────────────────────────────────────────────────── */}
-      <CTASection />
+      <AnimatedSection direction="zoom">
+        <CTASection />
+      </AnimatedSection>
 
       {/* ── Contact ───────────────────────────────────────────────────────── */}
-      <ContactSection />
+      <AnimatedSection direction="up">
+        <ContactSection />
+      </AnimatedSection>
     </main>
   );
 }

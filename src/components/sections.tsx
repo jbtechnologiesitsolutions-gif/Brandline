@@ -12,6 +12,10 @@ import {
   Calculator,
   Store,
   Smartphone,
+  PlusIcon,
+  TrendingUp,
+  Award,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +25,25 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ConsultationForm } from "@/components/consultation-form";
+import { Tilt } from "@/components/core/tilt";
+import { GlowEffect } from "@/components/core/glow-effect";
+import { TextMorph } from "@/components/core/text-morph";
+import {
+  MorphingDialog,
+  MorphingDialogTrigger,
+  MorphingDialogContainer,
+  MorphingDialogContent,
+  MorphingDialogTitle,
+  MorphingDialogSubtitle,
+  MorphingDialogDescription,
+  MorphingDialogClose,
+} from "@/components/core/morphing-dialog";
+import {
+  SlideIn,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/animated-section";
+import { motion } from "motion/react";
 import {
   comparison,
   ecomTools,
@@ -95,9 +118,10 @@ export function ArrowLink({
 // ─── Growth Dashboard ─────────────────────────────────────────────────────────
 export function GrowthDashboard({ dark = false }: { dark?: boolean }) {
   return (
-    <div
-      className={`float-in relative overflow-hidden rounded-2xl border p-5 shadow-card sm:p-7 ${dark ? "border-primary-foreground/15 bg-dark-secondary text-primary-foreground" : "bg-card"}`}
-    >
+    <Tilt rotationFactor={6} isRevese className="w-full">
+      <div
+        className={`float-in relative overflow-hidden rounded-2xl border p-5 shadow-card sm:p-7 ${dark ? "border-primary-foreground/15 bg-dark-secondary text-primary-foreground" : "bg-card"}`}
+      >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-current/10 pb-4">
         <div>
@@ -194,6 +218,7 @@ export function GrowthDashboard({ dark = false }: { dark?: boolean }) {
         Illustrative placeholder — not BrandlineTech performance data
       </p>
     </div>
+  </Tilt>
   );
 }
 
@@ -235,32 +260,37 @@ export function WhoWeHelp() {
   return (
     <section className="section-pad bg-surface" id="solutions">
       <div className="section-shell">
-        <Eyebrow>Ecommerce journey</Eyebrow>
-        <Heading>Built for every stage of your ecommerce journey.</Heading>
-        <p className="mt-5 max-w-2xl text-muted-foreground text-lg leading-8">
-          Whether you're just starting out or scaling to multiple platforms, we have the right support for your business.
-        </p>
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <SlideIn direction="up">
+          <Eyebrow>Ecommerce journey</Eyebrow>
+          <Heading>Built for every stage of your ecommerce journey.</Heading>
+          <p className="mt-5 max-w-2xl text-muted-foreground text-lg leading-8">
+            Whether you're just starting out or scaling to multiple platforms, we have the right support for your business.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {journeyStages.map((stage) => (
-            <article
-              key={stage.n}
-              className="group relative flex flex-col rounded-2xl border bg-card p-7 shadow-card card-hover overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-full bg-gold/5 transition-all duration-500 group-hover:scale-150 group-hover:bg-gold/10" />
-              <span className="label-caps text-gold">{stage.n}</span>
-              <h3 className="mt-5 text-xl font-bold">{stage.label}</h3>
-              <p className="mt-2 text-sm font-medium text-muted-foreground">{stage.description}</p>
-              <ul className="mt-6 space-y-2.5 border-t pt-5">
-                {stage.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2.5 text-sm">
-                    <ChevronRight className="size-3.5 shrink-0 text-gold" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
+            <StaggerItem key={stage.n}>
+              <Tilt rotationFactor={6} isRevese className="h-full">
+                <article
+                  className="group relative flex h-full flex-col rounded-2xl border bg-card p-7 shadow-card card-hover overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-full bg-gold/5 transition-all duration-500 group-hover:scale-150 group-hover:bg-gold/10" />
+                  <span className="label-caps text-gold">{stage.n}</span>
+                  <h3 className="mt-5 text-xl font-bold">{stage.label}</h3>
+                  <p className="mt-2 text-sm font-medium text-muted-foreground">{stage.description}</p>
+                  <ul className="mt-6 space-y-2.5 border-t pt-5">
+                    {stage.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2.5 text-sm">
+                        <ChevronRight className="size-3.5 shrink-0 text-gold" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </Tilt>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -271,44 +301,49 @@ export function ServicesSection({ compact = false }: { compact?: boolean }) {
   return (
     <section className="section-pad" id="services">
       <div className="section-shell">
-        <Eyebrow>Integrated capabilities</Eyebrow>
-        <Heading>Everything you need to grow online.</Heading>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-          From marketplace operations to digital marketing and D2C development, we provide end-to-end ecommerce growth support.
-        </p>
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <SlideIn direction="up">
+          <Eyebrow>Integrated capabilities</Eyebrow>
+          <Heading>Everything you need to grow online.</Heading>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+            From marketplace operations to digital marketing and D2C development, we provide end-to-end ecommerce growth support.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-14 grid gap-5 lg:grid-cols-3">
           {services.map((s) => (
-            <article
-              id={s.id}
-              key={s.title}
-              className="group flex scroll-mt-24 flex-col rounded-2xl border bg-card p-7 shadow-card card-hover"
-            >
-              <div className="flex items-center justify-between">
-                <span className="label-caps text-muted-foreground">
-                  {s.number} / {s.eyebrow}
-                </span>
-                <div className="grid size-9 place-items-center rounded-lg bg-gold/10">
-                  <s.icon className="size-4 text-gold" />
-                </div>
-              </div>
-              <h3 className="mt-8 text-xl font-bold">{s.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">{s.description}</p>
-              <ul
-                className={`mt-7 grid gap-x-4 gap-y-2.5 text-sm ${compact ? "" : "sm:grid-cols-2"}`}
-              >
-                {s.items.map((x) => (
-                  <li key={x} className="flex items-center gap-2">
-                    <span className="size-1 shrink-0 rounded-full bg-gold" />
-                    {x}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-auto">
-                <ArrowLink to={s.href}>{s.cta}</ArrowLink>
-              </div>
-            </article>
+            <StaggerItem key={s.title}>
+              <Tilt rotationFactor={5} isRevese className="h-full">
+                <article
+                  id={s.id}
+                  className="group flex h-full scroll-mt-24 flex-col rounded-2xl border bg-card p-7 shadow-card card-hover"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="label-caps text-muted-foreground">
+                      {s.number} / {s.eyebrow}
+                    </span>
+                    <div className="grid size-9 place-items-center rounded-lg bg-gold/10">
+                      <s.icon className="size-4 text-gold" />
+                    </div>
+                  </div>
+                  <h3 className="mt-8 text-xl font-bold">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{s.description}</p>
+                  <ul
+                    className={`mt-7 grid gap-x-4 gap-y-2.5 text-sm ${compact ? "" : "sm:grid-cols-2"}`}
+                  >
+                    {s.items.map((x) => (
+                      <li key={x} className="flex items-center gap-2">
+                        <span className="size-1 shrink-0 rounded-full bg-gold" />
+                        {x}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto pt-6">
+                    <ArrowLink to={s.href}>{s.cta}</ArrowLink>
+                  </div>
+                </article>
+              </Tilt>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -477,33 +512,113 @@ export function MarketplaceFeature() {
   );
 }
 
-// ─── Marketplace Services (12-card grid) ─────────────────────────────────────
+// ─── Marketplace Services (12-card grid with MorphingDialog & Tilt) ───────────
 export function MarketplaceServices() {
   return (
     <section className="section-pad bg-surface">
       <div className="section-shell">
-        <Eyebrow>Operational coverage</Eyebrow>
-        <Heading>From listing to growth, we manage the moving parts.</Heading>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <SlideIn direction="up">
+          <Eyebrow>Operational coverage</Eyebrow>
+          <Heading>From listing to growth, we manage the moving parts.</Heading>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
+            Click any service card to view expanded operational deliverables, strategy blueprints, and implementation timelines.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {marketplaceServices.map((svc, i) => (
-            <article
-              key={svc.title}
-              className="group flex flex-col gap-3 rounded-xl border bg-card p-6 shadow-card card-hover"
-            >
-              <div className="flex items-start justify-between">
-                <div className="grid size-10 place-items-center rounded-lg bg-gold/10">
-                  <svc.icon className="size-5 text-gold" />
-                </div>
-                <span className="text-xs font-bold text-muted-foreground/50">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="mt-2 font-display text-base font-bold">{svc.title}</h3>
-              <p className="text-xs leading-5 text-muted-foreground">{svc.description}</p>
-              <ArrowRight className="mt-auto size-4 text-gold transition-transform group-hover:translate-x-1" />
-            </article>
+            <StaggerItem key={svc.title}>
+              <MorphingDialog
+                transition={{
+                  type: "spring",
+                  bounce: 0.05,
+                  duration: 0.3,
+                }}
+              >
+                <Tilt rotationFactor={6} isRevese className="h-full">
+                  <MorphingDialogTrigger className="h-full w-full">
+                    <article className="group relative flex h-full flex-col gap-3 rounded-xl border bg-card p-6 shadow-card card-hover">
+                      <div className="flex items-start justify-between">
+                        <div className="grid size-10 place-items-center rounded-lg bg-gold/10 text-gold transition-colors group-hover:bg-gold group-hover:text-dark">
+                          <svc.icon className="size-5" />
+                        </div>
+                        <span className="text-xs font-bold text-muted-foreground/50">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <MorphingDialogTitle className="mt-2 font-display text-base font-bold text-foreground">
+                        {svc.title}
+                      </MorphingDialogTitle>
+                      <MorphingDialogSubtitle className="text-xs leading-5 text-muted-foreground">
+                        {svc.description}
+                      </MorphingDialogSubtitle>
+                      <div className="mt-auto flex items-center justify-between pt-3 border-t border-border/50">
+                        <span className="text-[11px] font-semibold text-gold">Details & Deliverables</span>
+                        <span className="grid size-6 place-items-center rounded-md border border-border bg-background text-muted-foreground transition-colors group-hover:bg-gold/10 group-hover:text-gold">
+                          <PlusIcon className="size-3" />
+                        </span>
+                      </div>
+                    </article>
+                  </MorphingDialogTrigger>
+                </Tilt>
+                <MorphingDialogContainer>
+                  <MorphingDialogContent className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-lg flex-col overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl sm:p-8">
+                    <div className="flex items-center gap-4">
+                      <div className="grid size-12 place-items-center rounded-xl bg-gold/10 text-gold">
+                        <svc.icon className="size-6" />
+                      </div>
+                      <div>
+                        <MorphingDialogTitle className="font-display text-2xl font-bold text-foreground">
+                          {svc.title}
+                        </MorphingDialogTitle>
+                        <MorphingDialogSubtitle className="text-xs font-semibold uppercase tracking-wider text-gold">
+                          BrandlineTech Managed Solution
+                        </MorphingDialogSubtitle>
+                      </div>
+                    </div>
+                    <MorphingDialogDescription
+                      disableLayoutAnimation
+                      variants={{
+                        initial: { opacity: 0, y: 12 },
+                        animate: { opacity: 1, y: 0 },
+                        exit: { opacity: 0, y: 12 },
+                      }}
+                      className="mt-6 space-y-4"
+                    >
+                      <p className="text-sm leading-6 text-muted-foreground">
+                        {svc.description}
+                      </p>
+                      <div className="rounded-xl border border-border bg-surface p-4">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">What we execute:</h4>
+                        <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
+                          <li className="flex items-center gap-2">
+                            <Check className="size-3.5 text-gold shrink-0" />
+                            Dedicated marketplace category specialist & daily monitoring
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <Check className="size-3.5 text-gold shrink-0" />
+                            Algorithm compliance, buy-box protection & index health
+                          </li>
+                          <li className="flex items-center gap-2">
+                            <Check className="size-3.5 text-gold shrink-0" />
+                            Performance reporting with actionable revenue recommendations
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="pt-2">
+                        <Button asChild variant="gold" className="w-full">
+                          <Link to="/contact">
+                            Request Consultation for {svc.title} <ArrowRight className="ml-1 size-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </MorphingDialogDescription>
+                    <MorphingDialogClose />
+                  </MorphingDialogContent>
+                </MorphingDialogContainer>
+              </MorphingDialog>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -568,17 +683,24 @@ export function PlatformSection() {
 // ─── Seller Audit CTA ─────────────────────────────────────────────────────────
 export function SellerAudit() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGlowing, setIsGlowing] = useState(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setIsGlowing(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 1400);
   }
 
   return (
     <section className="subtle-grid bg-dark py-20 text-primary-foreground" id="seller-audit">
       <div className="section-shell">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-          <div>
+          <SlideIn direction="left">
             <Eyebrow inverse>Seller audit</Eyebrow>
             <h2 className="section-title mt-5 text-primary-foreground max-w-2xl">
               Not sure where your marketplace is{" "}
@@ -603,86 +725,116 @@ export function SellerAudit() {
                 </div>
               ))}
             </div>
-          </div>
+          </SlideIn>
 
           {/* Form */}
-          <div className="rounded-2xl border border-primary-foreground/10 bg-dark-secondary p-7">
-            <p className="font-display text-xl font-bold">Request a Seller Audit</p>
-            <p className="mt-2 text-sm text-primary-foreground/50">
-              Fill in your details and we'll get back to you.
-            </p>
-            {submitted ? (
-              <div className="mt-8 rounded-xl border border-gold/30 bg-gold/10 p-6 text-center">
-                <CircleCheck className="mx-auto size-10 text-gold" />
-                <p className="mt-3 font-bold text-gold">Request Received</p>
-                <p className="mt-2 text-sm text-primary-foreground/60">
-                  We'll review your details and reach out within 1–2 business days.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-7 space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    required
-                    name="name"
-                    placeholder="Full Name *"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                  />
-                  <input
-                    name="business"
-                    placeholder="Business Name"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                  />
+          <SlideIn direction="right">
+            <div className="relative rounded-2xl border border-primary-foreground/10 bg-dark-secondary p-7">
+              <p className="font-display text-xl font-bold">Request a Seller Audit</p>
+              <p className="mt-2 text-sm text-primary-foreground/50">
+                Fill in your details and we'll get back to you.
+              </p>
+              {submitted ? (
+                <div className="mt-8 rounded-xl border border-gold/30 bg-gold/10 p-6 text-center">
+                  <CircleCheck className="mx-auto size-10 text-gold" />
+                  <p className="mt-3 font-bold text-gold">Request Received</p>
+                  <p className="mt-2 text-sm text-primary-foreground/60">
+                    We'll review your details and reach out within 1–2 business days.
+                  </p>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    required
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone *"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+              ) : (
+                <form onSubmit={handleSubmit} className="mt-7 space-y-4">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <input
+                      required
+                      name="name"
+                      placeholder="Full Name *"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                    <input
+                      name="business"
+                      placeholder="Business Name"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <input
+                      required
+                      name="phone"
+                      type="tel"
+                      placeholder="Phone *"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                    <input
+                      required
+                      name="email"
+                      type="email"
+                      placeholder="Email *"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                  </div>
+                  <select
+                    name="marketplace"
+                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground/70 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                  >
+                    <option value="">Select Marketplace</option>
+                    {["Amazon", "Flipkart", "Meesho", "Myntra", "AJIO", "Multiple Marketplaces", "Other"].map((m) => (
+                      <option key={m} value={m}>{m}</option>
+                    ))}
+                  </select>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <input
+                      name="skus"
+                      placeholder="Number of SKUs"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                    <input
+                      name="sales"
+                      placeholder="Current Monthly Sales"
+                      className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
+                    />
+                  </div>
+                  <textarea
+                    name="requirements"
+                    rows={3}
+                    placeholder="Requirements / anything else you'd like us to know"
+                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50 resize-none"
                   />
-                  <input
-                    required
-                    name="email"
-                    type="email"
-                    placeholder="Email *"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                  />
-                </div>
-                <select
-                  name="marketplace"
-                  className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground/70 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                >
-                  <option value="">Select Marketplace</option>
-                  {["Amazon", "Flipkart", "Meesho", "Myntra", "AJIO", "Multiple Marketplaces", "Other"].map((m) => (
-                    <option key={m} value={m}>{m}</option>
-                  ))}
-                </select>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    name="skus"
-                    placeholder="Number of SKUs"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                  />
-                  <input
-                    name="sales"
-                    placeholder="Current Monthly Sales"
-                    className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50"
-                  />
-                </div>
-                <textarea
-                  name="requirements"
-                  rows={3}
-                  placeholder="Requirements / anything else you'd like us to know"
-                  className="w-full rounded-lg border border-primary-foreground/15 bg-dark px-4 py-3 text-sm text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:ring-2 focus:ring-gold/50 resize-none"
-                />
-                <Button type="submit" variant="gold" size="lg" className="w-full">
-                  Request Seller Audit <ArrowRight />
-                </Button>
-              </form>
-            )}
-          </div>
+                  <div
+                    className="relative inline-flex w-full items-center justify-center pt-2"
+                    onMouseEnter={() => setIsGlowing(true)}
+                    onMouseLeave={() => !isSubmitting && setIsGlowing(false)}
+                  >
+                    <motion.div
+                      className="pointer-events-none absolute -inset-1 rounded-xl"
+                      animate={{
+                        opacity: isGlowing ? 1 : 0,
+                      }}
+                      transition={{
+                        duration: 0.25,
+                        ease: "easeOut",
+                      }}
+                    >
+                      <GlowEffect
+                        colors={["#0894FF", "#C959DD", "#FF2E54", "#FF9004"]}
+                        mode="colorShift"
+                        blur="medium"
+                        duration={3.5}
+                      />
+                    </motion.div>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="relative z-10 flex h-12 w-full items-center justify-center rounded-xl border border-gold/40 bg-gold px-6 font-display text-sm font-bold text-dark shadow-gold transition-transform active:scale-[0.98] cursor-pointer"
+                    >
+                      <TextMorph>{isSubmitting ? "Generating Seller Audit..." : "Request Seller Audit"}</TextMorph>
+                      {!isSubmitting && <ArrowRight className="ml-2 size-4" />}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </SlideIn>
         </div>
       </div>
     </section>
@@ -694,42 +846,59 @@ export function PricingSection({ comparisonTable = true }: { comparisonTable?: b
   return (
     <section className="bg-surface section-pad" id="packages">
       <div className="section-shell">
-        <Eyebrow>Packages</Eyebrow>
-        <Heading>Choose the support your business needs.</Heading>
-        <p className="mt-5 text-muted-foreground">
-          Choose a plan based on your marketplace scale and operational requirements.
-        </p>
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {packages.map((p) => (
-            <article
-              key={p.name}
-              className="flex flex-col rounded-2xl border bg-card p-7 shadow-card card-hover"
-            >
-              <p className="label-caps text-gold">{p.name} Package</p>
-              <div className="mt-6">
-                <span className="font-display text-3xl font-bold">{p.price}</span>
-                <span className="ml-2 text-sm text-muted-foreground">{p.suffix}</span>
-              </div>
-              <p className="mt-3 min-h-10 text-sm text-muted-foreground">{p.audience}</p>
-              <ul className="mt-7 space-y-3 border-t pt-6">
-                {p.features.map((x) => (
-                  <li key={x} className="flex items-start gap-3 text-sm">
-                    <Check className="mt-0.5 size-4 shrink-0 text-gold" />
-                    {x}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                asChild
-                variant="gold"
-                size="lg"
-                className="mt-8 w-full"
-              >
-                <a href="#contact">{p.cta}</a>
-              </Button>
-            </article>
-          ))}
-        </div>
+        <SlideIn direction="up">
+          <Eyebrow>Packages</Eyebrow>
+          <Heading>Choose the support your business needs.</Heading>
+          <p className="mt-5 text-muted-foreground">
+            Choose a plan based on your marketplace scale and operational requirements.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-12 grid gap-5 lg:grid-cols-3">
+          {packages.map((p, idx) => {
+            const isPopular = idx === 1;
+            return (
+              <StaggerItem key={p.name}>
+                <Tilt rotationFactor={5} isRevese className="h-full">
+                  <article
+                    className={`relative flex h-full flex-col rounded-2xl border bg-card p-7 shadow-card card-hover ${
+                      isPopular ? "border-gold ring-1 ring-gold/40" : ""
+                    }`}
+                  >
+                    {isPopular && (
+                      <div className="absolute -top-3 right-6 rounded-full bg-gold px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-dark shadow-sm">
+                        Most Popular
+                      </div>
+                    )}
+                    <p className="label-caps text-gold">{p.name} Package</p>
+                    <div className="mt-6">
+                      <span className="font-display text-3xl font-bold">{p.price}</span>
+                      <span className="ml-2 text-sm text-muted-foreground">{p.suffix}</span>
+                    </div>
+                    <p className="mt-3 min-h-10 text-sm text-muted-foreground">{p.audience}</p>
+                    <ul className="mt-7 space-y-3 border-t pt-6">
+                      {p.features.map((x) => (
+                        <li key={x} className="flex items-start gap-3 text-sm">
+                          <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                          {x}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-auto pt-8">
+                      <Button
+                        asChild
+                        variant={isPopular ? "gold" : "outline"}
+                        size="lg"
+                        className="w-full"
+                      >
+                        <a href="#contact">{p.cta}</a>
+                      </Button>
+                    </div>
+                  </article>
+                </Tilt>
+              </StaggerItem>
+            );
+          })}
+        </StaggerContainer>
         {comparisonTable && <ComparisonTable />}
         <p className="mt-8 text-center text-xs text-muted-foreground">
           All packages can be customized. Contact us to discuss your specific requirements.
@@ -895,34 +1064,173 @@ export function WhyIndustries() {
   );
 }
 
-// ─── Case Studies ─────────────────────────────────────────────────────────────
+// ─── Case Studies (Interactive with Tilt & MorphingDialog) ───────────────────
 export function CaseStudies() {
+  const cases = [
+    {
+      title: "Ayurvedic Wellness & Skincare",
+      client: "VedaPure Organics",
+      growth: "+340% GMV",
+      period: "6 Months",
+      roas: "4.8x ROAS",
+      marketplaces: ["Amazon", "Flipkart", "Nykaa"],
+      summary: "Scaled from ₹2.8L to ₹12.3L monthly marketplace revenue with catalog overhaul and target PPC.",
+      challenge: "High ad spend waste, poor search ranking for non-brand keywords, and 18% inventory stockout rate.",
+      solution: "Implemented automated keyword bidding, high-converting A+ Content, keyword-rich bullet points, and automated multi-channel inventory sync.",
+      deliverables: ["Full listing revamp (120 SKUs)", "Daily Amazon Advertising management", "Inventory threshold alerts", "Nykaa brand store onboarding"],
+    },
+    {
+      title: "Ethnic Fashion & Apparel Manufacturer",
+      client: "Aura Weaves",
+      growth: "+220% Orders",
+      period: "4 Months",
+      roas: "5.2x ROAS",
+      marketplaces: ["Myntra", "Ajio", "Amazon"],
+      summary: "Expanded from local wholesale to national digital shelves with 1,400+ fashion catalog listings.",
+      challenge: "High return rates (RTO), rejection in fashion marketplace onboarding, and unoptimized variation sets.",
+      solution: "Streamlined size-guide matrix, rich lifestyle imagery, optimized variation grouping, and strict return mitigation workflows.",
+      deliverables: ["1,400+ SKU onboarding", "Myntra catalog approval within 10 days", "RTO reduction by 9.4%", "Flash sale campaign management"],
+    },
+    {
+      title: "Smart Kitchenware & Home Appliances",
+      client: "NovaCook Systems",
+      growth: "+410% Units Sold",
+      period: "9 Months",
+      roas: "4.4x ROAS",
+      marketplaces: ["Amazon", "Flipkart", "Blinkit", "Zepto"],
+      summary: "Pioneered quick-commerce dark store rollout alongside pan-India Amazon Prime fulfillment.",
+      challenge: "Stockouts during peak holiday sales, weak review score (3.6★), and zero quick-commerce presence.",
+      solution: "Set up localized dark-store replenishment, post-purchase customer feedback loop (boosting score to 4.4★), and seasonal bundle campaigns.",
+      deliverables: ["Dark-store quick-commerce onboarding", "Review & rating recovery initiative", "Sponsored Brands video ads", "Regional inventory planning"],
+    },
+  ];
+
   return (
-    <section className="section-pad bg-surface">
+    <section className="section-pad bg-surface" id="case-studies">
       <div className="section-shell">
-        <Eyebrow>Results</Eyebrow>
-        <Heading>Selected Case Studies.</Heading>
-        <p className="mt-5 max-w-2xl text-muted-foreground leading-7">
-          Detailed case studies with verified results are being compiled. Check back soon.
-        </p>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {[1, 2, 3].map((n) => (
-            <article
-              key={n}
-              className="flex flex-col rounded-xl border border-dashed bg-card p-7 text-center"
-            >
-              <div className="mx-auto grid size-12 place-items-center rounded-full bg-gold/10">
-                <BookOpen className="size-5 text-gold/60" />
-              </div>
-              <p className="mt-5 text-sm font-semibold text-muted-foreground">
-                Case study content coming soon
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground/60">
-                Real results will be shared with client approval.
-              </p>
-            </article>
+        <SlideIn direction="up">
+          <Eyebrow>Proven Results</Eyebrow>
+          <Heading>Verified Growth Across Digital Shelves.</Heading>
+          <p className="mt-5 max-w-2xl text-muted-foreground leading-7">
+            Explore how we partnered with ambitious brands to transform marketplace performance, ad efficiency, and operational speed.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-12 grid gap-6 md:grid-cols-3">
+          {cases.map((c) => (
+            <StaggerItem key={c.title}>
+              <MorphingDialog
+                transition={{
+                  type: "spring",
+                  bounce: 0.05,
+                  duration: 0.3,
+                }}
+              >
+                <Tilt rotationFactor={6} isRevese className="h-full">
+                  <MorphingDialogTrigger className="h-full w-full">
+                    <article className="group relative flex h-full flex-col rounded-2xl border bg-card p-7 shadow-card card-hover">
+                      <div className="flex items-center justify-between">
+                        <span className="flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-bold text-gold">
+                          <TrendingUp className="size-3.5" />
+                          {c.growth}
+                        </span>
+                        <span className="text-xs font-semibold text-muted-foreground/60">{c.period}</span>
+                      </div>
+                      <MorphingDialogTitle className="mt-5 font-display text-xl font-bold text-foreground group-hover:text-gold transition-colors">
+                        {c.title}
+                      </MorphingDialogTitle>
+                      <MorphingDialogSubtitle className="mt-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        {c.client}
+                      </MorphingDialogSubtitle>
+                      <p className="mt-4 text-xs leading-5 text-muted-foreground">
+                        {c.summary}
+                      </p>
+                      <div className="mt-6 flex flex-wrap gap-1.5">
+                        {c.marketplaces.map((m) => (
+                          <span key={m} className="rounded-md border border-border/80 bg-surface px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                            {m}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-auto flex items-center justify-between pt-6 border-t border-border/60">
+                        <span className="text-xs font-semibold text-gold">Read Full Case Study</span>
+                        <div className="grid size-7 place-items-center rounded-lg border border-border bg-surface text-muted-foreground transition-colors group-hover:bg-gold/10 group-hover:text-gold">
+                          <PlusIcon className="size-3.5" />
+                        </div>
+                      </div>
+                    </article>
+                  </MorphingDialogTrigger>
+                </Tilt>
+                <MorphingDialogContainer>
+                  <MorphingDialogContent className="pointer-events-auto relative flex max-h-[85vh] w-full max-w-xl flex-col overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-2xl sm:p-8">
+                    <div className="flex items-center gap-3">
+                      <div className="grid size-12 place-items-center rounded-xl bg-gold/10 text-gold">
+                        <Award className="size-6" />
+                      </div>
+                      <div>
+                        <span className="rounded-full bg-gold/10 px-2.5 py-0.5 text-[11px] font-bold text-gold">
+                          {c.growth} in {c.period}
+                        </span>
+                        <MorphingDialogTitle className="mt-1 font-display text-2xl font-bold text-foreground">
+                          {c.title}
+                        </MorphingDialogTitle>
+                        <MorphingDialogSubtitle className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                          Client: {c.client} &bull; {c.marketplaces.join(", ")}
+                        </MorphingDialogSubtitle>
+                      </div>
+                    </div>
+                    <MorphingDialogDescription
+                      disableLayoutAnimation
+                      variants={{
+                        initial: { opacity: 0, y: 15 },
+                        animate: { opacity: 1, y: 0 },
+                        exit: { opacity: 0, y: 15 },
+                      }}
+                      className="mt-6 space-y-5"
+                    >
+                      <div className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-4 text-center">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Ad Efficiency</p>
+                          <p className="mt-1 font-display text-xl font-bold text-gold">{c.roas}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Duration</p>
+                          <p className="mt-1 font-display text-xl font-bold text-foreground">{c.period}</p>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">The Challenge</h4>
+                        <p className="mt-2 text-xs leading-5 text-muted-foreground">{c.challenge}</p>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">Our Strategy & Execution</h4>
+                        <p className="mt-2 text-xs leading-5 text-muted-foreground">{c.solution}</p>
+                      </div>
+                      <div className="rounded-xl border border-border bg-surface p-4">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">Key Deliverables</h4>
+                        <ul className="mt-2.5 space-y-1.5 text-xs text-muted-foreground">
+                          {c.deliverables.map((item) => (
+                            <li key={item} className="flex items-center gap-2">
+                              <Check className="size-3.5 text-gold shrink-0" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="pt-2">
+                        <Button asChild variant="gold" className="w-full">
+                          <Link to="/contact">
+                            Scale Your Brand With Us <ArrowRight className="ml-1 size-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </MorphingDialogDescription>
+                    <MorphingDialogClose />
+                  </MorphingDialogContent>
+                </MorphingDialogContainer>
+              </MorphingDialog>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -1203,34 +1511,39 @@ export function ToolsSection() {
   return (
     <section className="section-pad">
       <div className="section-shell">
-        <Eyebrow>Free tools</Eyebrow>
-        <Heading>Free Ecommerce Tools.</Heading>
-        <p className="mt-5 max-w-2xl text-muted-foreground leading-7">
-          Calculators and tools to help you make informed decisions about your marketplace business.
-        </p>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <SlideIn direction="up">
+          <Eyebrow>Free tools</Eyebrow>
+          <Heading>Free Ecommerce Tools.</Heading>
+          <p className="mt-5 max-w-2xl text-muted-foreground leading-7">
+            Calculators and tools to help you make informed decisions about your marketplace business.
+          </p>
+        </SlideIn>
+        <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ecomTools.map((tool) => (
-            <article
-              key={tool.title}
-              className="group flex flex-col gap-4 rounded-xl border bg-card p-6 shadow-card card-hover"
-            >
-              <div className="flex items-center justify-between">
-                <div className="grid size-10 place-items-center rounded-lg bg-gold/10">
-                  <tool.icon className="size-5 text-gold" />
-                </div>
-                <span className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-bold text-muted-foreground">
-                  Coming Soon
-                </span>
-              </div>
-              <h3 className="font-display text-base font-bold">{tool.title}</h3>
-              <p className="text-xs leading-5 text-muted-foreground">{tool.description}</p>
-              <div className="mt-auto flex items-center gap-2 text-xs font-semibold text-muted-foreground/50">
-                <Calculator className="size-3.5" />
-                Free to use
-              </div>
-            </article>
+            <StaggerItem key={tool.title}>
+              <Tilt rotationFactor={8} isRevese className="h-full">
+                <article
+                  className="group flex h-full flex-col gap-4 rounded-xl border bg-card p-6 shadow-card card-hover"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="grid size-10 place-items-center rounded-lg bg-gold/10">
+                      <tool.icon className="size-5 text-gold" />
+                    </div>
+                    <span className="rounded-full border border-border px-2.5 py-0.5 text-[10px] font-bold text-muted-foreground">
+                      Coming Soon
+                    </span>
+                  </div>
+                  <h3 className="font-display text-base font-bold">{tool.title}</h3>
+                  <p className="text-xs leading-5 text-muted-foreground">{tool.description}</p>
+                  <div className="mt-auto flex items-center gap-2 text-xs font-semibold text-muted-foreground/50">
+                    <Calculator className="size-3.5" />
+                    Free to use
+                  </div>
+                </article>
+              </Tilt>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
