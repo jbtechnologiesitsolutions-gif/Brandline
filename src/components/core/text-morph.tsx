@@ -5,7 +5,7 @@ import { AnimatePresence, motion, type Transition, type Variants } from 'motion/
 import React, { useMemo, useId } from 'react';
 
 export type TextMorphProps = {
-  children: string;
+  children: React.ReactNode;
   as?: React.ElementType;
   className?: string;
   style?: React.CSSProperties;
@@ -23,10 +23,17 @@ export function TextMorph({
 }: TextMorphProps) {
   const uniqueId = useId();
 
+  const textContent = useMemo(() => {
+    if (typeof children === 'string') return children;
+    if (typeof children === 'number') return String(children);
+    if (Array.isArray(children)) return children.join('');
+    return children ? String(children) : '';
+  }, [children]);
+
   const characters = useMemo(() => {
     const charCounts: Record<string, number> = {};
 
-    return children.split('').map((char) => {
+    return textContent.split('').map((char) => {
       const lowerChar = char.toLowerCase();
       charCounts[lowerChar] = (charCounts[lowerChar] || 0) + 1;
 
@@ -35,7 +42,7 @@ export function TextMorph({
         label: char === ' ' ? '\u00A0' : char,
       };
     });
-  }, [children, uniqueId]);
+  }, [textContent, uniqueId]);
 
   const defaultVariants: Variants = {
     initial: { opacity: 0 },
@@ -51,17 +58,17 @@ export function TextMorph({
   };
 
   return (
-    <Component className={cn(className)} aria-label={children} style={style}>
-      <AnimatePresence mode='popLayout' initial={false}>
+    <Component className={cn(className)} aria-label={textContent} style={style}>
+      <AnimatePresence mode="popLayout" initial={false}>
         {characters.map((character) => (
           <motion.span
             key={character.id}
             layoutId={character.id}
-            className='inline-block'
-            aria-hidden='true'
-            initial='initial'
-            animate='animate'
-            exit='exit'
+            className="inline-block"
+            aria-hidden="true"
+            initial="initial"
+            animate="animate"
+            exit="exit"
             variants={variants || defaultVariants}
             transition={transition || defaultTransition}
           >
