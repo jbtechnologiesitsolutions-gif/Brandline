@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Phone, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, Menu, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -29,10 +29,13 @@ const mobileLinks = [
   ...desktopLinks,
 ] as const;
 
-export function Logo() {
+export function Logo({ inverse = false }: { inverse?: boolean }) {
   return (
     <Link to="/" className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.02]" aria-label="BrandlineTech home">
-      <span className="font-display text-xl font-extrabold tracking-tight text-[#1F1F1F]">
+      <span className={cn(
+        "font-display text-xl font-extrabold tracking-tight",
+        inverse ? "text-white" : "text-[#1F1F1F]",
+      )}>
         Brandline<span className="text-[#C89B5A] transition-colors group-hover:text-[#E4C27A]">Tech</span>
       </span>
     </Link>
@@ -55,22 +58,20 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={cn(
-        "sticky top-0 z-40 border-b backdrop-blur-xl transition-all duration-300",
-        scrolled
-          ? "border-[#292526]/10 bg-[#F8F7F5]/90 shadow-sm py-1"
-          : "border-transparent bg-[#F8F7F5]/70 py-2",
+        "sticky top-0 z-50 border-b border-white/10 bg-[#070707]/80 backdrop-blur-xl transition-all duration-300",
+        scrolled ? "shadow-[0_12px_40px_-24px_rgba(0,0,0,.8)]" : "bg-[#070707]/60",
       )}
     >
       <div className="section-shell flex h-[4.25rem] items-center justify-between gap-4">
-        <Logo />
+        <Logo inverse />
         <div className="hidden items-center gap-8 lg:flex">
           <nav className="flex items-center gap-6" aria-label="Main navigation">
             {desktopLinks.map(([label, to]) => (
               <Link
                 key={label}
                 to={to}
-                className="group relative py-1 text-sm font-medium text-[#6B6868] transition-colors hover:text-[#1F1F1F]"
-                activeProps={{ className: "text-[#1F1F1F] font-semibold" }}
+                className="group relative py-1 text-sm font-medium text-white/55 transition-colors hover:text-white"
+                activeProps={{ className: "text-white font-semibold" }}
               >
                 {label}
                 <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#C89B5A] transition-all duration-300 ease-out group-hover:w-full" />
@@ -82,7 +83,7 @@ export function Navbar() {
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
           >
-            <Button asChild variant="gold" size="lg" className="shadow-gold group relative overflow-hidden bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
+            <Button asChild variant="gold" size="lg" className="shadow-gold group relative overflow-hidden bg-[#C89B5A] text-[#111] font-bold hover:bg-[#E4C27A]">
               <Link to="/contact">
                 Get Free Consultation{" "}
                 <ArrowRight className="ml-1 size-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -93,8 +94,8 @@ export function Navbar() {
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden border-[#292526]/15 hover:bg-[#C89B5A]/10" aria-label="Open navigation">
-              <Menu className="size-5 text-[#1F1F1F]" />
+            <Button variant="outline" size="icon" className="lg:hidden border-white/15 bg-white/[0.04] hover:bg-white/[0.08]" aria-label="Open navigation">
+              <Menu className="size-5 text-white" />
             </Button>
           </SheetTrigger>
           <SheetContent className="w-full max-w-md bg-[#F8F7F5] border-l border-[#292526]/10">
@@ -116,7 +117,7 @@ export function Navbar() {
               ))}
             </nav>
             <SheetClose asChild>
-              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
+              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#C89B5A] text-[#111] font-bold hover:bg-[#E4C27A]">
                 <Link to="/contact">
                   Get Free Consultation <ArrowRight className="ml-1 size-4" />
                 </Link>
