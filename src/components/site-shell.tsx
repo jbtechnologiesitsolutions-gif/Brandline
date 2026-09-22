@@ -142,36 +142,30 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#292525] text-white">
-      <div className="section-shell relative z-10 border-t border-white/15 py-14 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.05fr_3fr] lg:gap-16">
-          {/* Brand / contact */}
+    <footer className="bg-dark text-primary-foreground">
+      <div className="section-shell py-16 lg:py-20">
+        <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.4fr_2fr]">
           <div>
-            <Link
-              to="/"
-              className="font-display text-2xl font-extrabold tracking-tight text-white"
-            >
-              Brandline<span className="text-[#C89B5A]">Tech</span>
+            <Link to="/" className="font-display text-2xl font-bold">
+              Brandline<span className="text-gold">Tech</span>
             </Link>
-
-            <p className="mt-5 max-w-xs text-sm leading-6 text-white/65">
+            <p className="mt-4 max-w-xs text-sm leading-7 text-primary-foreground/60">
               Empowering Your Brand's Digital Journey
             </p>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-white/45">
+            <p className="mt-4 max-w-xs text-xs leading-6 text-primary-foreground/40">
               Your products. Every marketplace. One growth partner.
             </p>
-
-            <div className="mt-7 space-y-3 text-sm text-white/65">
+            <div className="mt-7 space-y-3 text-sm">
               <a
                 href="tel:+919789104651"
-                className="flex items-center gap-3 transition-colors hover:text-[#C89B5A]"
+                className="flex items-center gap-2.5 text-primary-foreground/60 hover:text-gold transition-colors"
               >
                 <Phone className="size-4 shrink-0" />
                 +91 9789 104 651
               </a>
               <a
                 href="mailto:support@brandlinetech.com"
-                className="flex items-center gap-3 break-all transition-colors hover:text-[#C89B5A]"
+                className="flex items-center gap-2.5 break-all text-primary-foreground/60 hover:text-gold transition-colors"
               >
                 <Mail className="size-4 shrink-0" />
                 support@brandlinetech.com
@@ -179,8 +173,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Navigation columns */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:gap-x-10">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <FooterCol
               title="Marketplace"
               links={[
@@ -211,56 +204,34 @@ export function Footer() {
                 ["Contact", "/contact"],
               ]}
             />
-
             <div>
-              <p className="label-caps text-[#C89B5A]">Contact</p>
-              <div className="mt-5 space-y-3 text-sm leading-5 text-white/60">
+              <p className="label-caps text-gold">Contact</p>
+              <div className="mt-5 space-y-3 text-sm text-primary-foreground/60">
                 <p>Coimbatore, Tamil Nadu</p>
                 <p>Palakkad, Kerala</p>
-                <a
-                  href="tel:+919789104651"
-                  className="block transition-colors hover:text-white"
-                >
+                <a href="tel:+919789104651" className="block hover:text-primary-foreground">
                   +91 9789 104 651
                 </a>
-                <a
-                  href="mailto:support@brandlinetech.com"
-                  className="block break-all transition-colors hover:text-white"
-                >
+                <a href="mailto:support@brandlinetech.com" className="block break-all hover:text-primary-foreground">
                   support@brandlinetech.com
                 </a>
               </div>
-
-              <p className="mt-6 label-caps text-[#C89B5A]">Legal</p>
-              <div className="mt-4 space-y-3 text-sm text-white/60">
-                <Link
-                  to="/privacy-policy"
-                  className="block transition-colors hover:text-white"
-                >
+              <p className="mt-5 label-caps text-gold">Legal</p>
+              <div className="mt-3 space-y-2 text-sm">
+                <Link to="/privacy-policy" className="block text-primary-foreground/60 hover:text-primary-foreground">
                   Privacy Policy
                 </Link>
-                <Link
-                  to="/terms"
-                  className="block transition-colors hover:text-white"
-                >
-                  Terms &amp; Conditions
+                <Link to="/terms" className="block text-primary-foreground/60 hover:text-primary-foreground">
+                  Terms & Conditions
                 </Link>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 pt-7 text-xs text-primary-foreground/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 BrandlineTech. All Rights Reserved.</p>
           <p>Brandline Tech Solutions Pvt. Ltd.</p>
-        </div>
-
-        {/* Oversized background wordmark */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none -mb-6 mt-16 select-none overflow-hidden whitespace-nowrap font-display text-[clamp(7rem,22vw,21rem)] font-extrabold leading-[0.72] tracking-[-0.07em] text-white/[0.035]"
-        >
-          Brandline
         </div>
       </div>
     </footer>

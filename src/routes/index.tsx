@@ -1,8 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, MoveDownRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { AnimatedSection } from "@/components/animated-section";
 import { GlowEffect } from "@/components/core/glow-effect";
 import {
@@ -68,74 +67,8 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
-  const [introVisible, setIntroVisible] = useState(true);
-
-  useEffect(() => {
-    // Cinematic intro: reveal the brand and supporting text, then fade into the existing homepage.
-    const doneTimer = window.setTimeout(() => setIntroVisible(false), 5600);
-    return () => window.clearTimeout(doneTimer);
-  }, []);
 
   return (
-    <>
-      <AnimatePresence>
-        {introVisible && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] overflow-hidden bg-[#080808]"
-            aria-hidden="true"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.88, y: 30 }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-              transition={{ duration: 1.55, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center whitespace-nowrap"
-            >
-              <motion.div
-                initial={{ opacity: 0, filter: "blur(16px)", letterSpacing: "0.24em" }}
-                animate={{ opacity: 1, filter: "blur(0px)", letterSpacing: "-0.04em" }}
-                transition={{ duration: 1.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="font-display text-5xl font-extrabold text-white sm:text-7xl md:text-8xl"
-              >
-                Brandline<span className="text-[#C89B5A]">Tech</span>
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 1.1, delay: 1.35, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-5 text-center font-display text-lg font-semibold text-white/90 sm:text-2xl"
-              >
-                Empowering Your Brand's Digital Journey
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.65 }}
-                className="mt-3 max-w-xl text-center text-sm text-white/45 sm:text-base"
-              >
-                Your products. Every marketplace. One growth partner.
-              </motion.p>
-
-              <motion.div
-                initial={{ width: 0, opacity: 0 }}
-                animate={{ width: 90, opacity: 1 }}
-                transition={{ duration: 1, delay: 0.9 }}
-                className="mt-8 h-px bg-[#C89B5A]/50"
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: introVisible ? 0 : 1 }}
-        transition={{ duration: 0.8 }}
-      >
     <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
       {/* ── Hero Section ────────────────────────────────────────────────── */}
       <section className="relative subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
@@ -413,7 +346,5 @@ function HomePage() {
         <ContactSection />
       </AnimatedSection>
     </main>
-      </motion.div>
-    </>
   );
 }
