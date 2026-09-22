@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Phone, Mail } from "lucide-react";
+import { ArrowRight, Menu, Phone, Mail, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 
 const desktopLinks = [
   ["Services", "/services"],
@@ -30,12 +31,9 @@ const mobileLinks = [
 
 export function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2.5" aria-label="BrandlineTech home">
-      <span className="grid size-9 place-items-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-        B
-      </span>
-      <span className="font-display text-lg font-bold text-foreground">
-        Brandline<span className="text-gold">Tech</span>
+    <Link to="/" className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.02]" aria-label="BrandlineTech home">
+      <span className="font-display text-xl font-extrabold tracking-tight text-[#1F1F1F]">
+        Brandline<span className="text-[#C89B5A] transition-colors group-hover:text-[#E4C27A]">Tech</span>
       </span>
     </Link>
   );
@@ -52,82 +50,93 @@ export function Navbar() {
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={cn(
         "sticky top-0 z-40 border-b backdrop-blur-xl transition-all duration-300",
         scrolled
-          ? "border-border bg-background/95 shadow-nav"
-          : "border-transparent bg-background/70",
+          ? "border-[#292526]/10 bg-[#F8F7F5]/90 shadow-sm py-1"
+          : "border-transparent bg-[#F8F7F5]/70 py-2",
       )}
     >
-      <div className="section-shell flex h-[4.5rem] items-center justify-between gap-4">
+      <div className="section-shell flex h-[4.25rem] items-center justify-between gap-4">
         <Logo />
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           <nav className="flex items-center gap-6" aria-label="Main navigation">
             {desktopLinks.map(([label, to]) => (
               <Link
                 key={label}
                 to={to}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                activeProps={{ className: "text-foreground" }}
+                className="group relative py-1 text-sm font-medium text-[#6B6868] transition-colors hover:text-[#1F1F1F]"
+                activeProps={{ className: "text-[#1F1F1F] font-semibold" }}
               >
                 {label}
+                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#C89B5A] transition-all duration-300 ease-out group-hover:w-full" />
               </Link>
             ))}
           </nav>
-          <Button asChild variant="gold" size="lg">
-            <Link to="/contact">
-              Get Free Consultation <ArrowRight />
-            </Link>
-          </Button>
+          <motion.div
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          >
+            <Button asChild variant="gold" size="lg" className="shadow-gold group relative overflow-hidden bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
+              <Link to="/contact">
+                Get Free Consultation{" "}
+                <ArrowRight className="ml-1 size-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden" aria-label="Open navigation">
-              <Menu />
+            <Button variant="outline" size="icon" className="lg:hidden border-[#292526]/15 hover:bg-[#C89B5A]/10" aria-label="Open navigation">
+              <Menu className="size-5 text-[#1F1F1F]" />
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-full max-w-md bg-background">
+          <SheetContent className="w-full max-w-md bg-[#F8F7F5] border-l border-[#292526]/10">
             <SheetHeader className="text-left">
               <SheetTitle>
                 <Logo />
               </SheetTitle>
-              <SheetDescription>
+              <SheetDescription className="text-xs text-[#6B6868]">
                 Ecommerce growth, marketplace management and digital solutions.
               </SheetDescription>
             </SheetHeader>
-            <nav className="mt-10 flex flex-col" aria-label="Mobile navigation">
+            <nav className="mt-8 flex flex-col" aria-label="Mobile navigation">
               {mobileLinks.map(([label, to]) => (
                 <SheetClose asChild key={label}>
-                  <Link to={to} className="border-b py-4 font-display text-2xl font-semibold">
+                  <Link to={to} className="border-b border-[#292526]/10 py-3.5 font-display text-xl font-semibold text-[#1F1F1F] hover:text-[#C89B5A] transition-colors">
                     {label}
                   </Link>
                 </SheetClose>
               ))}
             </nav>
             <SheetClose asChild>
-              <Button asChild variant="gold" size="lg" className="mt-8 w-full">
+              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
                 <Link to="/contact">
-                  Get Free Consultation <ArrowRight />
+                  Get Free Consultation <ArrowRight className="ml-1 size-4" />
                 </Link>
               </Button>
             </SheetClose>
-            <div className="mt-6 flex gap-5 text-sm text-muted-foreground">
-              <a href="tel:+919789104651" className="flex items-center gap-2 hover:text-gold transition-colors">
-                <Phone className="size-4" /> Call Us
+            <div className="mt-6 flex flex-col gap-3 text-sm text-[#6B6868]">
+              <a href="tel:+919789104651" className="flex items-center gap-2.5 hover:text-[#C89B5A] transition-colors">
+                <Phone className="size-4 text-[#C89B5A]" /> +91 9789 104 651
               </a>
               <a
                 href="mailto:support@brandlinetech.com"
-                className="flex items-center gap-2 hover:text-gold transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#C89B5A] transition-colors"
               >
-                <Mail className="size-4" /> Email Us
+                <Mail className="size-4 text-[#C89B5A]" /> support@brandlinetech.com
               </a>
             </div>
           </SheetContent>
         </Sheet>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

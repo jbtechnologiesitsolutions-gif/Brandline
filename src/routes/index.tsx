@@ -66,102 +66,155 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
+
   return (
-    <main className="overflow-hidden">
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24">
+    <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
+      {/* ── Hero Section ────────────────────────────────────────────────── */}
+      <section className="relative subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
+        {/* Minimal floating particles / ambient glow dots */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <motion.div
+            className="absolute top-1/4 left-1/6 size-2 rounded-full bg-[#C89B5A]/30"
+            animate={{ y: [0, -12, 0], opacity: [0.3, 0.7, 0.3] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute top-1/2 right-1/4 size-3 rounded-full bg-[#E4C27A]/20"
+            animate={{ y: [0, 15, 0], opacity: [0.2, 0.6, 0.2] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+          />
+        </div>
+
         <div className="section-shell grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
-          {/* Left */}
-          <div>
+          {/* Left Column — Hero Content */}
+          <div className="flex flex-col items-start">
+            {/* 1. Small Eyebrow Badge */}
             <motion.div
-              initial={{ opacity: 0, y: -15 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5"
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 rounded-full border border-[#C89B5A]/30 bg-[#C89B5A]/10 px-3.5 py-1.5 shadow-sm"
             >
-              <Sparkles className="size-3.5 text-gold" />
-              <p className="label-caps text-gold text-[10px]">
+              <Sparkles className="size-3.5 text-[#C89B5A]" />
+              <p className="label-caps text-[#C89B5A] text-[10px] font-bold tracking-widest">
                 E-Commerce &nbsp;•&nbsp; Marketplaces &nbsp;•&nbsp; Digital Growth
               </p>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="display-title mt-7 max-w-3xl"
-            >
-              Grow Your Brand
-              <br />
-              <span className="text-gradient-gold">Across Every Digital Shelf.</span>
-            </motion.h1>
+            {/* 2. Main Headline (Staggered line-by-line reveal with blur) */}
+            <h1 className="display-title mt-7 max-w-3xl font-display font-extrabold tracking-tight text-[#1F1F1F]">
+              {headlineLines.map((line, index) => {
+                const isGold = index > 0;
+                return (
+                  <motion.span
+                    key={line}
+                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    transition={{
+                      duration: 0.7,
+                      delay: 0.12 + index * 0.12,
+                      ease: [0.21, 0.47, 0.32, 0.98],
+                    }}
+                    className={`block ${
+                      isGold
+                        ? "bg-gradient-to-r from-[#C89B5A] via-[#E4C27A] to-[#C89B5A] bg-[length:200%_auto] text-transparent bg-clip-text"
+                        : ""
+                    }`}
+                  >
+                    {line}
+                  </motion.span>
+                );
+              })}
+            </h1>
 
+            {/* 3. Supporting Text */}
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-6 max-w-xl font-display text-xl font-semibold leading-snug text-muted-foreground sm:text-2xl"
+              transition={{ duration: 0.6, delay: 0.45, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-6 max-w-xl font-display text-xl font-bold leading-snug text-[#292526] sm:text-2xl"
             >
               Your products. Every marketplace. One growth partner.
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-6 max-w-xl text-base leading-8 text-muted-foreground"
+              transition={{ duration: 0.6, delay: 0.52, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-5 max-w-xl text-base leading-8 text-[#6B6868]"
             >
               From marketplace onboarding and catalog management to advertising,
               inventory coordination and D2C growth, BrandlineTech helps businesses
               build, manage and scale their online operations.
             </motion.p>
 
+            {/* 4. Interactive CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-8 flex flex-col gap-3 sm:flex-row"
+              transition={{ duration: 0.6, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center"
             >
-              <div className="group relative inline-flex">
-                <motion.div className="pointer-events-none absolute -inset-1 rounded-xl opacity-0 blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                  <GlowEffect
-                    colors={["#0894FF", "#C959DD", "#FF2E54", "#FF9004"]}
-                    mode="colorShift"
-                    blur="soft"
-                    duration={3}
-                  />
-                </motion.div>
-                <Button asChild variant="gold" size="lg" className="relative z-10">
+              {/* Primary CTA */}
+              <motion.div
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <Button
+                  asChild
+                  variant="gold"
+                  size="lg"
+                  className="group relative z-10 overflow-hidden bg-[#C89B5A] px-7 py-3.5 font-display text-sm font-bold text-[#1F1F1F] shadow-gold transition-colors hover:bg-[#E4C27A]"
+                >
                   <Link to="/contact">
-                    Get Free Consultation <ArrowRight className="ml-1 size-4" />
+                    Get Free Consultation{" "}
+                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
                   </Link>
                 </Button>
-              </div>
-              <Button asChild variant="outline" size="lg">
-                <a href="#services">
-                  Explore Our Services <MoveDownRight className="ml-1 size-4" />
-                </a>
-              </Button>
+              </motion.div>
+
+              {/* Secondary CTA */}
+              <motion.div
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              >
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="group border border-[#292526]/20 bg-white/80 px-6 py-3.5 font-display text-sm font-semibold text-[#1F1F1F] shadow-sm transition-colors hover:bg-[#C89B5A]/10 hover:border-[#C89B5A]/50"
+                >
+                  <a href="#services">
+                    Explore Our Services{" "}
+                    <MoveDownRight className="ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:translate-y-1" />
+                  </a>
+                </Button>
+              </motion.div>
             </motion.div>
 
+            {/* 5. Micro-label Tagline */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-8 text-xs font-semibold uppercase tracking-widest text-muted-foreground"
+              transition={{ duration: 0.6, delay: 0.72 }}
+              className="mt-9 text-[11px] font-bold uppercase tracking-widest text-[#6B6868]"
             >
               Strategy{" "}
-              <span className="mx-2 text-gold">•</span> Technology{" "}
-              <span className="mx-2 text-gold">•</span> Marketing{" "}
-              <span className="mx-2 text-gold">•</span> Execution
+              <span className="mx-2 text-[#C89B5A]">•</span> Technology{" "}
+              <span className="mx-2 text-[#C89B5A]">•</span> Marketing{" "}
+              <span className="mx-2 text-[#C89B5A]">•</span> Execution
             </motion.p>
           </div>
 
-          {/* Right — Dashboard */}
+          {/* Right Column — Growth Command Center Interactive Visual */}
           <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.96 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
+            initial={{ opacity: 0, scale: 0.94, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="w-full"
           >
             <GrowthDashboard />
           </motion.div>

@@ -120,105 +120,141 @@ export function GrowthDashboard({ dark = false }: { dark?: boolean }) {
   return (
     <Tilt rotationFactor={6} isRevese className="w-full">
       <div
-        className={`float-in relative overflow-hidden rounded-2xl border p-5 shadow-card sm:p-7 ${dark ? "border-primary-foreground/15 bg-dark-secondary text-primary-foreground" : "bg-card"}`}
+        className={`relative overflow-hidden rounded-2xl border p-5 shadow-card sm:p-7 transition-all duration-300 ${
+          dark
+            ? "border-[#292526]/20 bg-[#1F1F1F] text-[#F8F7F5]"
+            : "border-[#292526]/10 bg-white text-[#1F1F1F]"
+        }`}
       >
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-current/10 pb-4">
-        <div>
-          <p className="text-[11px] opacity-50">Ecommerce Overview</p>
-          <p className="mt-1 font-display text-base font-bold">Growth Command Center</p>
-        </div>
-        <span className="flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[10px] font-bold text-gold">
-          <span className="size-1.5 animate-pulse rounded-full bg-gold" />
-          Live View
-        </span>
-      </div>
+        {/* Subtle ambient light glow inside card */}
+        <div className="pointer-events-none absolute -right-10 -top-10 size-44 rounded-full bg-[#C89B5A]/15 blur-2xl" />
 
-      {/* KPIs */}
-      <div className="mt-5 grid grid-cols-2 gap-3">
-        {[
-          ["Total Sales", "₹24.8L", "+28.4%", true],
-          ["Orders", "12,480", "+14.2%", false],
-          ["Products", "2,450+", "Active", false],
-          ["Ad ROAS", "4.8x", "+0.6x", false],
-        ].map(([k, v, sub, highlight]) => (
-          <div
-            key={k as string}
-            className={`rounded-xl border border-current/10 p-4 ${highlight ? "bg-gold/15" : ""}`}
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-current/10 pb-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <p className="text-[11px] font-semibold opacity-60 uppercase tracking-wider">Ecommerce Overview</p>
+              <span className="rounded-full bg-[#C89B5A]/20 px-2 py-0.5 text-[9px] font-bold text-[#C89B5A]">
+                Demo data
+              </span>
+            </div>
+            <p className="mt-1 font-display text-base font-bold">Growth Command Center</p>
+          </div>
+          <span className="flex items-center gap-2 rounded-full border border-[#C89B5A]/30 bg-[#C89B5A]/10 px-3 py-1 text-[10px] font-bold text-[#C89B5A]">
+            <span className="size-1.5 animate-ping rounded-full bg-[#C89B5A]" />
+            Live View
+          </span>
+        </div>
+
+        {/* KPIs */}
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          {[
+            ["Total Sales", "₹24.8L", "+28.4%", true],
+            ["Orders", "12,480", "+14.2%", false],
+            ["Products", "2,450+", "Active", false],
+            ["Ad ROAS", "4.8x", "+0.6x", false],
+          ].map(([k, v, sub, highlight]) => (
+            <div
+              key={k as string}
+              className={`group relative overflow-hidden rounded-xl border border-current/10 p-3.5 transition-all duration-300 hover:border-[#C89B5A]/40 ${
+                highlight ? "bg-[#C89B5A]/15" : "bg-surface/50"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <p className="text-[10px] opacity-60">{k as string}</p>
+                <span className="text-[8px] font-bold uppercase tracking-widest text-[#C89B5A]/70">Demo</span>
+              </div>
+              <p className="mt-1 font-display text-xl font-bold sm:text-2xl">{v as string}</p>
+              <p className={`mt-0.5 text-[10px] font-semibold ${highlight ? "text-[#C89B5A]" : "opacity-55"}`}>
+                {sub as string}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Mini KPI row */}
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {[
+            ["Inventory Health", "92%", "Demo"],
+            ["Marketplaces", "6 Active", "Managed"],
+          ].map(([k, v, tag]) => (
+            <div key={k} className="rounded-xl border border-current/10 px-4 py-3 bg-surface/50">
+              <div className="flex items-center justify-between text-[10px] opacity-60">
+                <span>{k}</span>
+                <span className="text-[8px] font-bold uppercase text-[#C89B5A]/70">{tag}</span>
+              </div>
+              <p className="mt-1 font-display text-sm font-bold">{v}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Animated Performance Chart */}
+        <div className="mt-3 rounded-xl border border-current/10 p-4 bg-surface/30">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-medium opacity-60">Marketplace channel growth</span>
+            <span className="text-[10px] font-bold text-[#C89B5A]">+18.4% MoM (Demo)</span>
+          </div>
+          <svg
+            viewBox="0 0 500 120"
+            className="mt-3 w-full overflow-visible"
+            aria-label="Upward growth chart — illustrative placeholder"
+            role="img"
           >
-            <p className="text-[10px] opacity-55">{k as string}</p>
-            <p className="mt-1.5 font-display text-xl font-bold sm:text-2xl">{v as string}</p>
-            <p className={`mt-1 text-[10px] font-semibold ${highlight ? "text-gold" : "opacity-45"}`}>
-              {sub as string}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Mini KPI row */}
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        {[
-          ["Inventory Health", "92%"],
-          ["Marketplace", "6 Active"],
-        ].map(([k, v]) => (
-          <div key={k} className="rounded-xl border border-current/10 px-4 py-3">
-            <p className="text-[10px] opacity-50">{k}</p>
-            <p className="mt-1 font-display text-sm font-bold">{v}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Chart */}
-      <div className="mt-3 rounded-xl border border-current/10 p-4">
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] opacity-50">Marketplace performance</span>
-          <span className="text-[10px] font-bold text-gold">+18.4% MoM</span>
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#C89B5A" stopOpacity="0.25" />
+                <stop offset="100%" stopColor="#C89B5A" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 100 C55 88,75 100,115 76 S185 68,220 57 S285 72,330 38 S405 52,500 11 L500 120 L0 120 Z"
+              fill="url(#chartGrad)"
+            />
+            <path
+              d="M0 100 C55 88,75 100,115 76 S185 68,220 57 S285 72,330 38 S405 52,500 11"
+              fill="none"
+              stroke="#C89B5A"
+              strokeWidth="3"
+              strokeLinecap="round"
+              className="chart-draw"
+            />
+          </svg>
         </div>
-        <svg
-          viewBox="0 0 500 120"
-          className="mt-3 w-full"
-          aria-label="Upward growth chart — illustrative placeholder"
-          role="img"
-        >
-          <defs>
-            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--color-gold)" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="var(--color-gold)" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0 100 C55 88,75 100,115 76 S185 68,220 57 S285 72,330 38 S405 52,500 11 L500 120 L0 120 Z"
-            fill="url(#chartGrad)"
-          />
-          <path
-            d="M0 100 C55 88,75 100,115 76 S185 68,220 57 S285 72,330 38 S405 52,500 11"
-            fill="none"
-            stroke="currentColor"
-            strokeOpacity="0.1"
-            strokeWidth="18"
-          />
-          <path
-            d="M0 100 C55 88,75 100,115 76 S185 68,220 57 S285 72,330 38 S405 52,500 11"
-            fill="none"
-            stroke="var(--color-gold)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            className="chart-draw"
-          />
-        </svg>
-        <div className="mt-2 flex justify-between text-[9px] opacity-40">
-          <span>Amazon</span>
-          <span>Flipkart</span>
-          <span>Meesho</span>
-          <span>Shopify</span>
-        </div>
-      </div>
 
-      <p className="mt-3 text-[9px] opacity-30 text-center">
-        Illustrative placeholder — not BrandlineTech performance data
-      </p>
-    </div>
-  </Tilt>
+        {/* Marketplace Channel Flow */}
+        <div className="mt-4 rounded-xl border border-[#C89B5A]/20 bg-[#C89B5A]/5 p-3.5">
+          <p className="text-center text-[10px] font-bold uppercase tracking-wider text-[#C89B5A]">
+            Multiple digital channels managed from one growth partner
+          </p>
+          <div className="mt-3 flex items-center justify-between text-xs font-bold text-[#1F1F1F] dark:text-[#F8F7F5] px-2">
+            {["Amazon", "Flipkart", "Meesho", "Shopify"].map((name, i, arr) => (
+              <React.Fragment key={name}>
+                <div className="flex flex-col items-center">
+                  <span className="rounded-lg border border-[#C89B5A]/30 bg-background px-2.5 py-1 text-[11px] shadow-sm">
+                    {name}
+                  </span>
+                </div>
+                {i < arr.length - 1 && (
+                  <div className="relative flex-1 px-1 text-center">
+                    <div className="h-[2px] w-full bg-[#C89B5A]/30 relative overflow-hidden">
+                      <motion.div
+                        className="absolute h-full w-1/2 bg-[#C89B5A]"
+                        animate={{ x: ["-100%", "200%"] }}
+                        transition={{ repeat: Infinity, duration: 1.8, ease: "linear" }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        <p className="mt-3 text-[9px] opacity-40 text-center">
+          Illustrative dashboard — demo data for visualization purposes only
+        </p>
+      </div>
+    </Tilt>
   );
 }
 
