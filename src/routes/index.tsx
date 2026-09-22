@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ArrowRight, MoveDownRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
@@ -66,10 +67,46 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowIntro(false), 1850);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
 
   return (
-    <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
+    <>
+      {/* Landing-page intro: Brandline starts centered, then moves to the top-left before revealing the homepage. */}
+      {showIntro && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.45, delay: 1.38, ease: "easeOut" }}
+          className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center bg-[#080808]"
+        >
+          <motion.div
+            initial={{ x: 0, y: 0, scale: 1, opacity: 0 }}
+            animate={{
+              x: [0, 0, "calc(-50vw + 3rem)"],
+              y: [0, 0, "calc(-50vh + 2.1rem)"],
+              scale: [0.92, 1, 0.32],
+              opacity: [0, 1, 1],
+            }}
+            transition={{
+              duration: 1.55,
+              times: [0, 0.18, 1],
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="font-display text-5xl font-extrabold tracking-[-0.055em] text-white sm:text-6xl md:text-7xl"
+          >
+            Brandline<span className="text-[#C89B5A]">Tech</span>
+          </motion.div>
+        </motion.div>
+      )}
+
+      <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
       {/* ── Hero Section ────────────────────────────────────────────────── */}
       <section className="relative subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
         {/* Minimal floating particles / ambient glow dots */}
@@ -91,9 +128,9 @@ function HomePage() {
           <div className="flex flex-col items-start">
             {/* 1. Small Eyebrow Badge */}
             <motion.div
-              initial={{ opacity: 0, y: -10, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="inline-flex items-center gap-2 rounded-full border border-[#C89B5A]/30 bg-[#C89B5A]/10 px-3.5 py-1.5 shadow-sm"
             >
               <Sparkles className="size-3.5 text-[#C89B5A]" />
@@ -109,11 +146,11 @@ function HomePage() {
                 return (
                   <motion.span
                     key={line}
-                    initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
+                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{
-                      duration: 0.8,
-                      delay: 0.18 + index * 0.14,
+                      duration: 0.7,
+                      delay: 0.12 + index * 0.12,
                       ease: [0.21, 0.47, 0.32, 0.98],
                     }}
                     className={`block ${
@@ -211,12 +248,10 @@ function HomePage() {
 
           {/* Right Column — Growth Command Center Interactive Visual */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 24 }}
+            initial={{ opacity: 0, scale: 0.94, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="w-full"
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 180, damping: 20 }}
           >
             <GrowthDashboard />
           </motion.div>
@@ -348,5 +383,6 @@ function HomePage() {
         <ContactSection />
       </AnimatedSection>
     </main>
+    </>
   );
 }
