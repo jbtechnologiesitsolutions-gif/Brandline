@@ -69,16 +69,11 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
   const [introVisible, setIntroVisible] = useState(true);
-  const [introPhase, setIntroPhase] = useState<"show" | "move">("show");
 
   useEffect(() => {
-    // Cinematic intro: reveal and hold the brand, then move it to the real navbar logo position.
-    const moveTimer = window.setTimeout(() => setIntroPhase("move"), 3600);
-    const doneTimer = window.setTimeout(() => setIntroVisible(false), 6600);
-    return () => {
-      window.clearTimeout(moveTimer);
-      window.clearTimeout(doneTimer);
-    };
+    // Cinematic intro: reveal the brand and supporting text, then fade into the existing homepage.
+    const doneTimer = window.setTimeout(() => setIntroVisible(false), 5600);
+    return () => window.clearTimeout(doneTimer);
   }, []);
 
   return (
@@ -94,23 +89,9 @@ function HomePage() {
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.88, y: 30 }}
-              animate={
-                introPhase === "show"
-                  ? { opacity: 1, scale: 1, x: 0, y: 0 }
-                  : { opacity: 1, scale: 0.42, x: 0, y: 0 }
-              }
-              transition={
-                introPhase === "show"
-                  ? { duration: 1.55, ease: [0.22, 1, 0.36, 1] }
-                  : { duration: 2.25, ease: [0.76, 0, 0.24, 1] }
-              }
+              animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+              transition={{ duration: 1.55, ease: [0.22, 1, 0.36, 1] }}
               className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center whitespace-nowrap"
-              style={introPhase === "move" ? {
-                left: "max(20px, calc((100vw - 1200px) / 2))",
-                top: "34px",
-                transform: "translate(0, -50%)",
-                transformOrigin: "left center",
-              } : undefined}
             >
               <motion.div
                 initial={{ opacity: 0, filter: "blur(16px)", letterSpacing: "0.24em" }}
@@ -123,7 +104,7 @@ function HomePage() {
 
               <motion.h2
                 initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
-                animate={introPhase === "show" ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: -24, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 1.1, delay: 1.35, ease: [0.22, 1, 0.36, 1] }}
                 className="mt-5 text-center font-display text-lg font-semibold text-white/90 sm:text-2xl"
               >
@@ -132,7 +113,7 @@ function HomePage() {
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
-                animate={introPhase === "show" ? { opacity: 1, y: 0 } : { opacity: 0, y: -18 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.65 }}
                 className="mt-3 max-w-xl text-center text-sm text-white/45 sm:text-base"
               >
