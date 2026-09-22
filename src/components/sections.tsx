@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -228,7 +228,7 @@ export function GrowthDashboard({ dark = false }: { dark?: boolean }) {
           </p>
           <div className="mt-3 flex items-center justify-between text-xs font-bold text-[#1F1F1F] dark:text-[#F8F7F5] px-2">
             {["Amazon", "Flipkart", "Meesho", "Shopify"].map((name, i, arr) => (
-              <React.Fragment key={name}>
+              <Fragment key={name}>
                 <div className="flex flex-col items-center">
                   <span className="rounded-lg border border-[#C89B5A]/30 bg-background px-2.5 py-1 text-[11px] shadow-sm">
                     {name}
@@ -245,7 +245,7 @@ export function GrowthDashboard({ dark = false }: { dark?: boolean }) {
                     </div>
                   </div>
                 )}
-              </React.Fragment>
+              </Fragment>
             ))}
           </div>
         </div>
