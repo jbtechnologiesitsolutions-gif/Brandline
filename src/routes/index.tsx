@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { ArrowRight, MoveDownRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
 import { AnimatedSection } from "@/components/animated-section";
 import { GlowEffect } from "@/components/core/glow-effect";
 import {
@@ -67,46 +67,95 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const [showIntro, setShowIntro] = useState(true);
+  const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
+  const [introVisible, setIntroVisible] = useState(true);
+  const [introPhase, setIntroPhase] = useState<"show" | "move">("show");
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setShowIntro(false), 1850);
-    return () => window.clearTimeout(timer);
+    // Cinematic intro: reveal and hold the brand, then move it to the real navbar logo position.
+    const moveTimer = window.setTimeout(() => setIntroPhase("move"), 3600);
+    const doneTimer = window.setTimeout(() => setIntroVisible(false), 6600);
+    return () => {
+      window.clearTimeout(moveTimer);
+      window.clearTimeout(doneTimer);
+    };
   }, []);
-
-  const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
 
   return (
     <>
-      {/* Landing-page intro: Brandline starts centered, then moves to the top-left before revealing the homepage. */}
-      {showIntro && (
-        <motion.div
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.45, delay: 1.38, ease: "easeOut" }}
-          className="fixed inset-0 z-[100] pointer-events-none flex items-center justify-center bg-[#080808]"
-        >
+      <AnimatePresence>
+        {introVisible && (
           <motion.div
-            initial={{ x: 0, y: 0, scale: 1, opacity: 0 }}
-            animate={{
-              x: [0, 0, "calc(-50vw + 3rem)"],
-              y: [0, 0, "calc(-50vh + 2.1rem)"],
-              scale: [0.92, 1, 0.32],
-              opacity: [0, 1, 1],
-            }}
-            transition={{
-              duration: 1.55,
-              times: [0, 0.18, 1],
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="font-display text-5xl font-extrabold tracking-[-0.055em] text-white sm:text-6xl md:text-7xl"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] overflow-hidden bg-[#080808]"
+            aria-hidden="true"
           >
-            Brandline<span className="text-[#C89B5A]">Tech</span>
-          </motion.div>
-        </motion.div>
-      )}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.88, y: 30 }}
+              animate={
+                introPhase === "show"
+                  ? { opacity: 1, scale: 1, x: 0, y: 0 }
+                  : { opacity: 1, scale: 0.42, x: 0, y: 0 }
+              }
+              transition={
+                introPhase === "show"
+                  ? { duration: 1.55, ease: [0.22, 1, 0.36, 1] }
+                  : { duration: 2.25, ease: [0.76, 0, 0.24, 1] }
+              }
+              className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center whitespace-nowrap"
+              style={introPhase === "move" ? {
+                left: "max(20px, calc((100vw - 1200px) / 2))",
+                top: "34px",
+                transform: "translate(0, -50%)",
+                transformOrigin: "left center",
+              } : undefined}
+            >
+              <motion.div
+                initial={{ opacity: 0, filter: "blur(16px)", letterSpacing: "0.24em" }}
+                animate={{ opacity: 1, filter: "blur(0px)", letterSpacing: "-0.04em" }}
+                transition={{ duration: 1.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="font-display text-5xl font-extrabold text-white sm:text-7xl md:text-8xl"
+              >
+                Brandline<span className="text-[#C89B5A]">Tech</span>
+              </motion.div>
 
-      <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
+              <motion.h2
+                initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+                animate={introPhase === "show" ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: -24, filter: "blur(8px)" }}
+                transition={{ duration: 1.1, delay: 1.35, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-5 text-center font-display text-lg font-semibold text-white/90 sm:text-2xl"
+              >
+                Empowering Your Brand's Digital Journey
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={introPhase === "show" ? { opacity: 1, y: 0 } : { opacity: 0, y: -18 }}
+                transition={{ duration: 1, delay: 1.65 }}
+                className="mt-3 max-w-xl text-center text-sm text-white/45 sm:text-base"
+              >
+                Your products. Every marketplace. One growth partner.
+              </motion.p>
+
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: 90, opacity: 1 }}
+                transition={{ duration: 1, delay: 0.9 }}
+                className="mt-8 h-px bg-[#C89B5A]/50"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: introVisible ? 0 : 1 }}
+        transition={{ duration: 0.8 }}
+      >
+    <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
       {/* ── Hero Section ────────────────────────────────────────────────── */}
       <section className="relative subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
         {/* Minimal floating particles / ambient glow dots */}
@@ -383,6 +432,7 @@ function HomePage() {
         <ContactSection />
       </AnimatedSection>
     </main>
+      </motion.div>
     </>
   );
 }
