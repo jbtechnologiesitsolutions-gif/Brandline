@@ -27,67 +27,56 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin-login',
   path: '/admin-login',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const MarketplaceManagementRoute = MarketplaceManagementRouteImport.update({
   id: '/marketplace-management',
   path: '/marketplace-management',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const PackagesRoute = PackagesRouteImport.update({
   id: '/packages',
   path: '/packages',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -108,7 +97,6 @@ export interface FileRoutesByFullPath {
   '/solutions': typeof SolutionsRoute
   '/terms': typeof TermsRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
@@ -123,7 +111,6 @@ export interface FileRoutesByTo {
   '/solutions': typeof SolutionsRoute
   '/terms': typeof TermsRoute
 }
-
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
@@ -139,7 +126,6 @@ export interface FileRoutesById {
   '/solutions': typeof SolutionsRoute
   '/terms': typeof TermsRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -185,7 +171,6 @@ export interface FileRouteTypes {
     | '/terms'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
@@ -210,7 +195,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/about': {
       id: '/about'
       path: '/about'
@@ -218,7 +202,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/admin-login': {
       id: '/admin-login'
       path: '/admin-login'
@@ -226,7 +209,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -234,7 +216,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -242,7 +223,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/marketplace-management': {
       id: '/marketplace-management'
       path: '/marketplace-management'
@@ -250,7 +230,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceManagementRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/packages': {
       id: '/packages'
       path: '/packages'
@@ -258,7 +237,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PackagesRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -266,7 +244,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/resources': {
       id: '/resources'
       path: '/resources'
@@ -274,7 +251,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/services': {
       id: '/services'
       path: '/services'
@@ -282,7 +258,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -290,7 +265,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -315,14 +289,12 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsRoute: SolutionsRoute,
   TermsRoute: TermsRoute,
 }
-
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
 import type { startInstance } from './start.ts'
-
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
