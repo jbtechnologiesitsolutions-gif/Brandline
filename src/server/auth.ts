@@ -2,25 +2,24 @@ import { createServerFn } from "@tanstack/react-start";
 import { redirect } from "@tanstack/react-router";
 import { z } from "zod";
 
+import {
+  getAdminCredentials,
+  useAdminSession,
+  verifyPassword,
+} from "./auth.server";
+
 const loginSchema = z.object({
   email: z.string().email().max(255),
   password: z.string().min(8).max(128),
 });
 
-// Basic process-local guard. For multi-instance production deployments,
-// replace this with a shared rate limiter (Redis/KV/Durable Object).
+// Basic process-local guard. Replace with a shared rate limiter
+// for a multi-instance production deployment.
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
 export const loginAdmin = createServerFn({ method: "POST" })
   .validator((data) => loginSchema.parse(data))
   .handler(async ({ data }) => {
-    // Keep server-only session/auth code out of the browser bundle.
-    const {
-      getAdminCredentials,
-      useAdminSession,
-      verifyPassword,
-    } = await import("./auth.server");
-
     const now = Date.now();
     const key = data.email.toLowerCase();
     const current = attempts.get(key);
@@ -81,8 +80,6 @@ export const loginAdmin = createServerFn({ method: "POST" })
 export const getAdminSession = createServerFn({
   method: "GET",
 }).handler(async () => {
-  const { useAdminSession } = await import("./auth.server");
-
   const session = await useAdminSession();
 
   if (
@@ -101,8 +98,6 @@ export const getAdminSession = createServerFn({
 export const logoutAdmin = createServerFn({
   method: "POST",
 }).handler(async () => {
-  const { useAdminSession } = await import("./auth.server");
-
   const session = await useAdminSession();
 
   await session.clear();
