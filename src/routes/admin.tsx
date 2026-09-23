@@ -5,7 +5,7 @@ import {
   LogOut, Menu, MessageSquare, Package, Search, Settings, ShieldCheck,
   ShoppingBag, Users, X, ExternalLink
 } from "lucide-react";
-import { getAdminSession, logoutAdmin } from "@/server/auth";
+import { getAdminSession, logoutAdmin } from "@/lib/auth.functions";
 
 export const Route = createFileRoute("/admin")({
   beforeLoad: async () => {

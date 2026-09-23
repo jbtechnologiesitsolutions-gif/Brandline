@@ -6,7 +6,7 @@ import {
   getAdminCredentials,
   useAdminSession,
   verifyPassword,
-} from "./auth.server";
+} from "../server/auth.server";
 
 const loginSchema = z.object({
   email: z.string().email().max(255),
@@ -31,16 +31,9 @@ export const loginAdmin = createServerFn({ method: "POST" })
       };
     }
 
-    const {
-      email: adminEmail,
-      passwordHash,
-    } = getAdminCredentials();
-
+    const { email: adminEmail, passwordHash } = getAdminCredentials();
     const validEmail = key === adminEmail;
-    const validPassword = await verifyPassword(
-      data.password,
-      passwordHash,
-    );
+    const validPassword = await verifyPassword(data.password, passwordHash);
 
     if (!validEmail || !validPassword) {
       const next =
@@ -82,10 +75,7 @@ export const getAdminSession = createServerFn({
 }).handler(async () => {
   const session = await useAdminSession();
 
-  if (
-    !session.data.authenticated ||
-    session.data.role !== "admin"
-  ) {
+  if (!session.data.authenticated || session.data.role !== "admin") {
     return null;
   }
 
@@ -95,14 +85,14 @@ export const getAdminSession = createServerFn({
   };
 });
 
-export const logoutAdmin = createServerFn({
-  method: "POST",
-}).handler(async () => {
-  const session = await useAdminSession();
+export const logoutAdmin = createServerFn({ method: "POST" }).handler(
+  async () => {
+    const session = await useAdminSession();
 
-  await session.clear();
+    await session.clear();
 
-  throw redirect({
-    to: "/admin-login",
-  });
-});
+    throw redirect({
+      to: "/admin-login",
+    });
+  },
+);

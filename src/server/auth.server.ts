@@ -29,10 +29,7 @@ export function useAdminSession() {
   });
 }
 
-export async function verifyPassword(
-  password: string,
-  encoded: string,
-) {
+export async function verifyPassword(password: string, encoded: string) {
   const binary = atob(encoded);
   const raw = Uint8Array.from(binary, (char) => char.charCodeAt(0));
 
