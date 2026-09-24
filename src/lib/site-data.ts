@@ -39,6 +39,7 @@ export const quickCommercePlatforms = ["Blinkit", "Zepto", "Swiggy Instamart"];
 export const platformDetails = [
   {
     name: "Amazon",
+    domain: "amazon.in",
     color: "#FF9900",
     bg: "#FFF8EC",
     capabilities: [
@@ -51,6 +52,7 @@ export const platformDetails = [
   },
   {
     name: "Flipkart",
+    domain: "flipkart.com",
     color: "#2874F0",
     bg: "#EEF4FF",
     capabilities: [
@@ -63,6 +65,7 @@ export const platformDetails = [
   },
   {
     name: "Meesho",
+    domain: "meesho.com",
     color: "#9B2EAA",
     bg: "#F9EEFB",
     capabilities: [
@@ -75,6 +78,7 @@ export const platformDetails = [
   },
   {
     name: "Myntra",
+    domain: "myntra.com",
     color: "#FF3F6C",
     bg: "#FFF0F3",
     capabilities: [
@@ -87,6 +91,7 @@ export const platformDetails = [
   },
   {
     name: "AJIO",
+    domain: "ajio.com",
     color: "#1A1A2E",
     bg: "#F2F2F7",
     capabilities: [
@@ -99,6 +104,7 @@ export const platformDetails = [
   },
   {
     name: "Nykaa",
+    domain: "nykaa.com",
     color: "#FC2779",
     bg: "#FFF0F6",
     capabilities: [
@@ -111,6 +117,7 @@ export const platformDetails = [
   },
   {
     name: "JioMart",
+    domain: "jiomart.com",
     color: "#0059A9",
     bg: "#EEF5FF",
     capabilities: [
@@ -123,6 +130,7 @@ export const platformDetails = [
   },
   {
     name: "Tata CLiQ",
+    domain: "tatacliq.com",
     color: "#241535",
     bg: "#F5F2F8",
     capabilities: [
@@ -135,6 +143,7 @@ export const platformDetails = [
   },
   {
     name: "Shopify",
+    domain: "shopify.com",
     color: "#96BF48",
     bg: "#F3F8EC",
     capabilities: [
@@ -147,6 +156,7 @@ export const platformDetails = [
   },
   {
     name: "WooCommerce",
+    domain: "woocommerce.com",
     color: "#7F54B3",
     bg: "#F6F2FC",
     capabilities: [
