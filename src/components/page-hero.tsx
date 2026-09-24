@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/sections";
@@ -29,13 +28,13 @@ export function PageHero({
           <p className="max-w-2xl text-lg leading-8 text-muted-foreground">{description}</p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild variant="gold" size="lg">
-              <Link to={primaryHref as "/contact"}>
+              <a href={primaryHref}>
                 {primaryCta} <ArrowRight />
-              </Link>
+              </a>
             </Button>
             {secondaryCta && secondaryHref ? (
               <Button asChild variant="outline" size="lg">
-                <Link to={secondaryHref as "/"}>{secondaryCta}</Link>
+                <a href={secondaryHref}>{secondaryCta}</a>
               </Button>
             ) : null}
           </div>

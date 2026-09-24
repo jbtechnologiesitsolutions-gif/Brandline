@@ -501,7 +501,7 @@ export function MarketplaceFeature() {
               ))}
             </div>
             <Button asChild variant="gold" size="lg" className="mt-8">
-              <a href="#contact">
+              <a href="/contact">
                 Explore Marketplace Services <ArrowRight />
               </a>
             </Button>
@@ -551,7 +551,7 @@ export function MarketplaceFeature() {
 // ─── Marketplace Services (12-card grid with MorphingDialog & Tilt) ───────────
 export function MarketplaceServices() {
   return (
-    <section className="section-pad bg-surface">
+    <section className="section-pad bg-surface scroll-mt-24" id="marketplace-services">
       <div className="section-shell">
         <SlideIn direction="up">
           <Eyebrow>Operational coverage</Eyebrow>
@@ -663,7 +663,7 @@ export function MarketplaceServices() {
 // ─── Platform Section ─────────────────────────────────────────────────────────
 export function PlatformSection() {
   return (
-    <section className="section-pad">
+    <section className="section-pad scroll-mt-24" id="platforms">
       <div className="section-shell">
         <Eyebrow>Marketplace coverage</Eyebrow>
         <Heading>Sell where your customers shop.</Heading>
@@ -673,8 +673,9 @@ export function PlatformSection() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {platformDetails.map((p) => (
             <article
+              id={p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
               key={p.name}
-              className="group flex flex-col rounded-xl border bg-card p-6 shadow-card card-hover"
+              className="group flex scroll-mt-24 flex-col rounded-xl border bg-card p-6 shadow-card card-hover"
               style={{ borderTopColor: p.color, borderTopWidth: 3 }}
             >
               <div
@@ -926,7 +927,7 @@ export function PricingSection({ comparisonTable = true }: { comparisonTable?: b
                         size="lg"
                         className="w-full"
                       >
-                        <a href="#contact">{p.cta}</a>
+                        <a href="/contact">{p.cta}</a>
                       </Button>
                     </div>
                   </article>
@@ -989,7 +990,7 @@ export function Addons() {
               Build a package around your exact business goals and requirements.
             </p>
             <Button asChild className="mt-7" size="lg">
-              <a href="#contact">
+              <a href="/contact">
                 Build a Custom Package <ArrowRight />
               </a>
             </Button>
@@ -1304,7 +1305,7 @@ export function D2CSection() {
               ))}
             </ul>
             <Button asChild variant="gold" size="lg" className="mt-8">
-              <a href="#contact">
+              <a href="/contact">
                 Build Your D2C Store <ArrowRight />
               </a>
             </Button>
@@ -1367,7 +1368,7 @@ export function DigitalMarketing() {
             ))}
           </div>
           <Button asChild variant="gold" size="lg" className="mt-8">
-            <a href="#contact">
+            <a href="/contact">
               Explore Digital Marketing <ArrowRight />
             </a>
           </Button>
@@ -1420,7 +1421,7 @@ export function WebTechnology() {
               From high-converting storefronts to analytics integrations, we work with the platforms that power modern ecommerce.
             </p>
             <Button asChild size="lg" className="mt-8">
-              <a href="#contact">
+              <a href="/contact">
                 Start a Web Project <ArrowRight />
               </a>
             </Button>
@@ -1603,7 +1604,7 @@ export function AboutBlock() {
             From establishing an online marketplace presence to building D2C stores and managing digital channels, our approach combines structured strategy with practical execution.
           </p>
           <Button asChild variant="gold" size="lg" className="mt-8">
-            <a href="#contact">
+            <a href="/contact">
               Let's Work Together <ArrowRight />
             </a>
           </Button>
@@ -1670,7 +1671,7 @@ export function FAQ() {
             Have more questions? Contact us directly.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-7">
-            <a href="#contact">
+            <a href="/contact">
               Contact Us <ArrowRight />
             </a>
           </Button>
@@ -1706,7 +1707,7 @@ export function CTASection() {
         </p>
         <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
           <Button asChild variant="gold" size="lg">
-            <a href="#contact">
+            <a href="/contact">
               Get Free Consultation <ArrowRight />
             </a>
           </Button>

@@ -177,11 +177,11 @@ export function Footer() {
             <FooterCol
               title="Marketplace"
               links={[
-                ["Amazon Management", "/marketplace-management"],
-                ["Flipkart Management", "/marketplace-management"],
-                ["Meesho Management", "/marketplace-management"],
-                ["Myntra Management", "/marketplace-management"],
-                ["Multi-Marketplace", "/marketplace-management"],
+                ["Amazon Management", "/marketplace-management#amazon"],
+                ["Flipkart Management", "/marketplace-management#flipkart"],
+                ["Meesho Management", "/marketplace-management#meesho"],
+                ["Myntra Management", "/marketplace-management#myntra"],
+                ["Multi-Marketplace", "/marketplace-management#platforms"],
               ]}
             />
             <FooterCol
@@ -250,13 +250,13 @@ function FooterCol({
       <p className="label-caps text-gold">{title}</p>
       <div className="mt-5 space-y-3">
         {links.map(([label, to]) => (
-          <Link
+          <a
             key={label}
-            to={to as "/"}
+            href={to}
             className="block text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
           >
             {label}
-          </Link>
+          </a>
         ))}
       </div>
     </div>
