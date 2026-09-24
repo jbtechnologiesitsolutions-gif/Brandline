@@ -678,13 +678,23 @@ export function PlatformSection() {
               className="group flex scroll-mt-24 flex-col rounded-xl border bg-card p-6 shadow-card card-hover"
               style={{ borderTopColor: p.color, borderTopWidth: 3 }}
             >
-              <div
-                className="flex size-10 items-center justify-center rounded-lg text-sm font-bold"
-                style={{ background: p.bg, color: p.color }}
-              >
-                {p.name.slice(0, 2)}
+              <div className="flex h-20 items-center justify-center rounded-xl border border-border/70 bg-white px-5 shadow-sm">
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${p.domain}&sz=128`}
+                  alt={`${p.name} logo`}
+                  loading="lazy"
+                  className="max-h-12 max-w-[120px] object-contain"
+                />
               </div>
-              <h3 className="mt-4 font-display text-base font-bold">{p.name}</h3>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <h3 className="font-display text-base font-bold">{p.name}</h3>
+                <span
+                  className="rounded-full px-2 py-0.5 text-[10px] font-bold"
+                  style={{ background: p.bg, color: p.color }}
+                >
+                  Marketplace
+                </span>
+              </div>
               <ul className="mt-4 space-y-1.5">
                 {p.capabilities.map((cap) => (
                   <li key={cap} className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -693,6 +703,14 @@ export function PlatformSection() {
                   </li>
                 ))}
               </ul>
+              <a
+                href="/contact"
+                className="mt-5 inline-flex items-center gap-2 border-t border-border/70 pt-4 text-xs font-bold text-gold transition-colors hover:text-foreground"
+                aria-label={`Discuss ${p.name} marketplace management`}
+              >
+                Discuss {p.name} management
+                <ArrowRight className="size-3.5" />
+              </a>
             </article>
           ))}
         </div>
