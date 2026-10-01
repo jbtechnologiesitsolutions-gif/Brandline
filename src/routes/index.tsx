@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MoveDownRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { AnimatedSection } from "@/components/animated-section";
-import { GlowEffect } from "@/components/core/glow-effect";
 import {
   AboutBlock,
   Addons,
@@ -65,74 +64,55 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  const headlineLines = ["Grow Your Brand", "Across Every", "Digital Shelf."];
-
   return (
     <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
-      {/* ── Hero Section ────────────────────────────────────────────────── */}
-      <section className="relative subtle-grid overflow-hidden pb-16 pt-12 sm:pb-20 sm:pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
-        {/* Minimal floating particles / ambient glow dots */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <motion.div
-            className="absolute top-1/4 left-1/6 size-2 rounded-full bg-[#C89B5A]/30"
-            animate={{ y: [0, -12, 0], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-          />
-          <motion.div
-            className="absolute top-1/2 right-1/4 size-3 rounded-full bg-[#E4C27A]/20"
-            animate={{ y: [0, 15, 0], opacity: [0.2, 0.6, 0.2] }}
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-          />
-        </div>
+      {/* ── Full-screen Home Banner ───────────────────────────────────────── */}
+      <section className="relative flex min-h-[100svh] w-full items-center overflow-hidden bg-[#0E2133]">
+        <video
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-label="BrandlineTech digital marketing and SEO home banner"
+        >
+          <source src="/brandline-home-banner.mp4" type="video/mp4" />
+        </video>
 
-        <div className="section-shell grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 xl:gap-16">
-          {/* Left Column — Hero Content */}
-          <div className="flex flex-col items-start">
-            {/* 1. Small Eyebrow Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -12 }}
+        {/* Readability overlays while keeping the video fully visible */}
+        <div className="pointer-events-none absolute inset-0 bg-black/35" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-black/10" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/20" />
+
+        <div className="section-shell relative z-10 flex min-h-[100svh] w-full items-center py-24 sm:py-28 lg:py-32">
+          <div className="max-w-3xl">
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 rounded-full border border-[#C89B5A]/30 bg-[#C89B5A]/10 px-3.5 py-1.5 shadow-sm"
+              className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#E4C27A] sm:text-xs"
             >
-              <Sparkles className="size-3.5 text-[#C89B5A]" />
-              <p className="label-caps text-[#C89B5A] text-[10px] font-bold tracking-widest">
-                E-Commerce &nbsp;•&nbsp; Marketplaces &nbsp;•&nbsp; Digital Growth
-              </p>
-            </motion.div>
+              E-Commerce • Marketplaces • Digital Growth
+            </motion.p>
 
-            {/* 2. Main Headline (Staggered line-by-line reveal with blur) */}
-            <h1 className="display-title mt-7 max-w-3xl font-display font-extrabold tracking-tight text-[#1F1F1F]">
-              {headlineLines.map((line, index) => {
-                const isGold = index > 0;
-                return (
-                  <motion.span
-                    key={line}
-                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{
-                      duration: 0.7,
-                      delay: 0.12 + index * 0.12,
-                      ease: [0.21, 0.47, 0.32, 0.98],
-                    }}
-                    className={`block ${
-                      isGold
-                        ? "bg-gradient-to-r from-[#C89B5A] via-[#E4C27A] to-[#C89B5A] bg-[length:200%_auto] text-transparent bg-clip-text"
-                        : ""
-                    }`}
-                  >
-                    {line}
-                  </motion.span>
-                );
-              })}
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.08, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[0.98] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem]"
+            >
+              Grow Your Brand
+              <span className="block bg-gradient-to-r from-[#E4C27A] via-[#F2D79A] to-[#C89B5A] bg-clip-text text-transparent">
+                Across Every Digital Shelf.
+              </span>
+            </motion.h1>
 
-            {/* 3. Supporting Text */}
             <motion.h2
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-6 max-w-xl font-display text-xl font-bold leading-snug text-[#292526] sm:text-2xl"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-6 max-w-2xl font-display text-lg font-bold leading-snug text-white sm:text-xl md:text-2xl"
             >
               Your products. Every marketplace. One growth partner.
             </motion.h2>
@@ -140,102 +120,64 @@ function HomePage() {
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.52, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-5 max-w-xl text-base leading-8 text-[#6B6868]"
+              transition={{ duration: 0.6, delay: 0.28 }}
+              className="mt-4 max-w-2xl text-sm leading-7 text-white/85 sm:text-base sm:leading-8 md:text-lg"
             >
               From marketplace onboarding and catalog management to advertising,
               inventory coordination and D2C growth, BrandlineTech helps businesses
               build, manage and scale their online operations.
             </motion.p>
 
-            {/* 4. Interactive CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-8 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:items-center"
+              transition={{ duration: 0.6, delay: 0.38 }}
+              className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
             >
-              {/* Primary CTA */}
-              <motion.div
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="w-full sm:w-auto"
+              <Button
+                asChild
+                variant="gold"
+                size="lg"
+                className="group w-full bg-[#C89B5A] px-7 py-3.5 font-display text-sm font-bold text-[#1F1F1F] shadow-gold transition-colors hover:bg-[#E4C27A] sm:w-auto"
               >
-                <Button
-                  asChild
-                  variant="gold"
-                  size="lg"
-                  className="group relative z-10 w-full overflow-hidden bg-[#C89B5A] px-7 py-3.5 font-display text-sm font-bold text-[#1F1F1F] shadow-gold transition-colors hover:bg-[#E4C27A] sm:w-auto"
-                >
-                  <Link to="/contact">
-                    Get Free Consultation{" "}
-                    <ArrowRight className="ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-1.5" />
-                  </Link>
-                </Button>
-              </motion.div>
+                <Link to="/contact">
+                  Get Free Consultation
+                  <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
 
-              {/* Secondary CTA */}
-              <motion.div
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="w-full sm:w-auto"
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full border-white/50 bg-white/10 px-7 py-3.5 font-display text-sm font-semibold text-white backdrop-blur-sm hover:bg-white hover:text-[#1F1F1F] sm:w-auto"
               >
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="group w-full border border-[#292526]/20 bg-white/80 px-6 py-3.5 font-display text-sm font-semibold text-[#1F1F1F] shadow-sm transition-colors hover:bg-[#C89B5A]/10 hover:border-[#C89B5A]/50 sm:w-auto"
-                >
-                  <a href="#services">
-                    Explore Our Services{" "}
-                    <MoveDownRight className="ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:translate-y-1" />
-                  </a>
-                </Button>
-              </motion.div>
+                <a href="#services">Explore Our Services</a>
+              </Button>
             </motion.div>
 
-            {/* 5. Micro-label Tagline */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.72 }}
-              className="mt-9 text-[10px] font-bold uppercase leading-5 tracking-widest text-[#6B6868] sm:text-[11px]"
+              transition={{ duration: 0.6, delay: 0.48 }}
+              className="mt-8 text-[10px] font-bold uppercase leading-5 tracking-[0.18em] text-white/70 sm:text-[11px]"
             >
-              Strategy{" "}
-              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Technology{" "}
-              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Marketing{" "}
-              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Execution
+              Strategy <span className="mx-2 text-[#E4C27A]">•</span> Technology
+              <span className="mx-2 text-[#E4C27A]">•</span> Marketing
+              <span className="mx-2 text-[#E4C27A]">•</span> Execution
             </motion.p>
           </div>
-
-          {/* Right Column — Responsive Home Banner Video */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 18 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="w-full"
-          >
-            <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-white/60 bg-[#0E2133] shadow-[0_24px_70px_rgba(18,47,72,0.22)] sm:rounded-3xl">
-              <div className="aspect-video w-full">
-                <video
-                  className="h-full w-full object-cover object-center"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label="BrandlineTech digital marketing and SEO home banner"
-                >
-                  <source src="/brandline-home-banner.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0E2133]/20 via-transparent to-white/5" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#E4C27A]/70 to-transparent" />
-            </div>
-          </motion.div>
         </div>
+
+        <a
+          href="#services"
+          aria-label="Scroll to services"
+          className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 text-white/80 transition hover:text-white sm:bottom-7"
+        >
+          <span className="block h-10 w-6 rounded-full border border-white/50 p-1">
+            <span className="mx-auto block h-2 w-1 animate-bounce rounded-full bg-[#E4C27A]" />
+          </span>
+        </a>
       </section>
 
       {/* ── Trust Strip ───────────────────────────────────────────────────── */}
