@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SlideArrowButton from "@/components/slide-arrow-button";
 import { Eyebrow } from "@/components/sections";
 
 export function PageHero({
@@ -26,12 +26,8 @@ export function PageHero({
         <h1 className="display-title mt-6 max-w-5xl">{title}</h1>
         <div className="mt-8 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
           <p className="max-w-2xl text-lg leading-8 text-muted-foreground">{description}</p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="gold" size="lg">
-              <a href={primaryHref}>
-                {primaryCta} <ArrowRight />
-              </a>
-            </Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <SlideArrowButton href={primaryHref} text={primaryCta} primaryColor="#EB175D" />
             {secondaryCta && secondaryHref ? (
               <Button asChild variant="outline" size="lg">
                 <a href={secondaryHref}>{secondaryCta}</a>
