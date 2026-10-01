@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Phone, Mail } from "lucide-react";
+import { Menu, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SlideArrowButton from "@/components/slide-arrow-button";
 import {
   Sheet,
   SheetClose,
@@ -75,11 +76,7 @@ export function Navbar() {
             ))}
           </nav>
           <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-            <Button asChild variant="gold" size="lg" className="group relative overflow-hidden bg-[#EB175D] font-bold text-white shadow-gold hover:bg-[#CC527A]">
-              <Link to="/contact">
-                Get Free Consultation <ArrowRight className="ml-1 size-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <SlideArrowButton href="/contact" text="Get Free Consultation" primaryColor="#EB175D" />
           </motion.div>
         </div>
 
@@ -106,9 +103,7 @@ export function Navbar() {
               ))}
             </nav>
             <SheetClose asChild>
-              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#EB175D] font-bold text-white hover:bg-[#CC527A]">
-                <Link to="/contact">Get Free Consultation <ArrowRight className="ml-1 size-4" /></Link>
-              </Button>
+              <SlideArrowButton href="/contact" text="Get Free Consultation" primaryColor="#EB175D" className="mt-8 w-full justify-start" />
             </SheetClose>
             <div className="mt-6 flex flex-col gap-3 text-sm text-[#666163]">
               <a href="tel:+919789104651" className="flex items-center gap-2.5 transition-colors hover:text-[#EB175D]">
