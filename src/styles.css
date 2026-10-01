@@ -35,46 +35,67 @@
   --color-surface: var(--surface);
   --font-display: "Manrope", sans-serif;
   --font-sans: "Inter", sans-serif;
-  --shadow-card: 0 18px 50px -32px color-mix(in oklab, var(--dark) 26%, transparent);
-  --shadow-nav: 0 10px 35px -24px color-mix(in oklab, var(--dark) 35%, transparent);
-  --shadow-gold: 0 8px 30px -12px color-mix(in oklab, var(--gold) 45%, transparent);
+  --shadow-card: 0 18px 50px -32px color-mix(in oklab, var(--dark) 30%, transparent);
+  --shadow-nav: 0 10px 35px -24px color-mix(in oklab, var(--dark) 38%, transparent);
+  --shadow-gold: 0 10px 32px -14px color-mix(in oklab, var(--gold) 52%, transparent);
 }
 
 :root {
   --radius: .5rem;
-  --background: oklch(0.975 0.004 70);
-  --foreground: oklch(0.235 0.005 25);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.005 25);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.005 25);
-  --primary: oklch(0.275 0.008 20);
-  --primary-foreground: oklch(0.985 0.003 75);
-  --secondary: oklch(0.94 0.007 70);
-  --secondary-foreground: oklch(0.275 0.008 20);
-  --muted: oklch(0.935 0.004 65);
-  --muted-foreground: oklch(0.5 0.008 25);
-  --accent: oklch(0.69 0.092 70);
-  --accent-foreground: oklch(0.2 0.01 25);
-  --destructive: oklch(0.57 0.2 27);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.88 0.008 65);
-  --input: oklch(0.88 0.008 65);
-  --ring: oklch(0.69 0.092 70);
-  --gold: oklch(0.69 0.092 70);
-  --gold-soft: oklch(0.93 0.035 75);
-  --dark: oklch(0.275 0.008 20);
-  --dark-secondary: oklch(0.34 0.008 20);
-  --surface: oklch(0.99 0.002 75);
+
+  /* Brandline palette based on supplied reference */
+  --brand-grey: #AAA7A7;
+  --brand-pink-soft: #CC527A;
+  --brand-pink: #EB175D;
+  --brand-charcoal: #474747;
+  --brand-dark: #363636;
+
+  /* Light grey / blush base for the whole website */
+  --background: #F6F1F3;
+  --foreground: #363636;
+  --card: #FFFDFE;
+  --card-foreground: #363636;
+  --popover: #FFFDFE;
+  --popover-foreground: #363636;
+
+  /* Primary action and accents */
+  --primary: #EB175D;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEE7EA;
+  --secondary-foreground: #474747;
+  --muted: #E7E1E3;
+  --muted-foreground: #666163;
+  --accent: #CC527A;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #C6284B;
+  --destructive-foreground: #FFFFFF;
+  --border: #D8CED2;
+  --input: #D8CED2;
+  --ring: #EB175D;
+
+  /* Keep existing semantic utility names, remapped to the new palette */
+  --gold: #EB175D;
+  --gold-soft: #F8D8E3;
+  --dark: #363636;
+  --dark-secondary: #474747;
+  --surface: #FBF7F8;
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
-  body { background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); letter-spacing: 0; }
+  body {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(204, 82, 122, .10), transparent 28rem),
+      linear-gradient(180deg, #F1ECEE 0%, #F8F4F5 30%, #F6F1F3 100%);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+  }
   h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: 0; }
-  ::selection { background: var(--color-gold-soft); color: var(--color-dark); }
-  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; }
+  ::selection { background: var(--brand-pink-soft); color: #fff; }
+  :focus-visible { outline: 2px solid var(--brand-pink); outline-offset: 3px; }
 }
 
 @utility section-shell { width: 100%; max-width: 86rem; margin-inline: auto; padding-inline: 1.25rem; @media (min-width: 640px) { padding-inline: 2rem; } @media (min-width: 1024px) { padding-inline: 3rem; } }
@@ -82,20 +103,20 @@
 @utility label-caps { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; }
 @utility display-title { font-size: clamp(2.75rem, 6vw, 4.75rem); line-height: .98; font-weight: 750; }
 @utility section-title { font-size: clamp(2.15rem, 4vw, 3.65rem); line-height: 1.05; font-weight: 720; }
-@utility subtle-grid { background-image: linear-gradient(to right, color-mix(in oklab, var(--border) 38%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--border) 38%, transparent) 1px, transparent 1px); background-size: 38px 38px; }
+@utility subtle-grid { background-image: linear-gradient(to right, color-mix(in oklab, var(--brand-grey) 25%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--brand-grey) 25%, transparent) 1px, transparent 1px); background-size: 38px 38px; }
 @utility reveal { animation: reveal .7s cubic-bezier(.2,.75,.2,1) both; }
 @utility reveal-delay { animation: reveal .7s .18s cubic-bezier(.2,.75,.2,1) both; }
 @utility float-in { animation: float-in .8s cubic-bezier(.2,.75,.2,1) both; }
 @utility float-in-delay { animation: float-in .8s .2s cubic-bezier(.2,.75,.2,1) both; }
 @utility chart-draw { stroke-dasharray: 420; stroke-dashoffset: 420; animation: chart 1.8s .5s ease forwards; }
-@utility gradient-gold { background: linear-gradient(135deg, var(--color-gold) 0%, oklch(0.75 0.08 75) 100%); }
-@utility text-gradient-gold { background: linear-gradient(135deg, var(--color-gold) 0%, oklch(0.6 0.1 60) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+@utility gradient-gold { background: linear-gradient(135deg, #CC527A 0%, #EB175D 100%); }
+@utility text-gradient-gold { background: linear-gradient(135deg, #CC527A 0%, #EB175D 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 @utility card-hover {
   transition: transform .25s cubic-bezier(.2,.75,.2,1), box-shadow .25s cubic-bezier(.2,.75,.2,1), border-color .25s;
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 60px -20px color-mix(in oklab, var(--dark) 22%, transparent);
-    border-color: color-mix(in oklab, var(--gold) 50%, transparent);
+    box-shadow: 0 24px 60px -20px color-mix(in oklab, var(--dark) 24%, transparent);
+    border-color: color-mix(in oklab, var(--brand-pink) 50%, transparent);
   }
 }
 @utility platform-scroll {
@@ -105,9 +126,7 @@
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  &::-webkit-scrollbar { display: none; }
 }
 @utility snap-item { scroll-snap-align: start; flex-shrink: 0; }
 @utility counter-animate { animation: counter-pulse .6s 1s cubic-bezier(.2,.75,.2,1) both; }
@@ -121,9 +140,7 @@
   display: flex;
   animation: marquee 28s linear infinite;
   width: max-content;
-  &:hover {
-    animation-play-state: paused;
-  }
+  &:hover { animation-play-state: paused; }
 }
 
 @media (prefers-reduced-motion: reduce) {
