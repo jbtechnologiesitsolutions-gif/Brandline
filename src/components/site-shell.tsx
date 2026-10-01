@@ -127,67 +127,57 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="bg-[#363636] text-white">
-      <div className="section-shell py-16 lg:py-20">
-        <div className="grid gap-12 border-b border-white/15 pb-14 lg:grid-cols-[1.4fr_2fr]">
+    <footer className="relative overflow-hidden bg-[#090909] text-white">
+      <div className="section-shell pt-8 sm:pt-10 lg:pt-12">
+        <div className="border-t border-white/12" />
+
+        <div className="grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.35fr_.7fr_.8fr_.8fr_.8fr] lg:gap-10 lg:py-20">
           <div>
-            <Link to="/" className="font-display text-2xl font-bold">
-              Brandline<span className="text-[#EB175D]">Tech</span>
+            <Link to="/" className="inline-flex items-center gap-3 font-display text-xl font-bold tracking-tight text-white">
+              <span className="flex size-8 items-center justify-center rounded-md bg-white text-sm font-black text-[#090909]">B</span>
+              <span>Brandline<span className="text-[#EB175D]">Tech</span></span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-7 text-white/65">Empowering Your Brand's Digital Journey</p>
-            <p className="mt-4 max-w-xs text-xs leading-6 text-white/45">Your products. Every marketplace. One growth partner.</p>
-            <div className="mt-7 space-y-3 text-sm">
-              <a href="tel:+919789104651" className="flex items-center gap-2.5 text-white/65 transition-colors hover:text-[#EB175D]">
-                <Phone className="size-4 shrink-0" /> +91 9789 104 651
-              </a>
-              <a href="mailto:support@brandlinetech.com" className="flex items-center gap-2.5 break-all text-white/65 transition-colors hover:text-[#EB175D]">
-                <Mail className="size-4 shrink-0" /> support@brandlinetech.com
-              </a>
-            </div>
+            <p className="mt-6 max-w-sm text-sm leading-7 text-white/48">
+              Empowering Your Brand&apos;s Digital Journey through marketplace management, ecommerce operations and digital growth.
+            </p>
+            <p className="mt-6 text-sm text-white/42">© 2026 BrandlineTech. All rights reserved.</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <FooterCol title="Marketplace" links={[
-              ["Amazon Management", "/marketplace-management#amazon"],
-              ["Flipkart Management", "/marketplace-management#flipkart"],
-              ["Meesho Management", "/marketplace-management#meesho"],
-              ["Myntra Management", "/marketplace-management#myntra"],
-              ["Multi-Marketplace", "/marketplace-management#platforms"],
-            ]} />
-            <FooterCol title="Services" links={[
-              ["Catalog Management", "/services#catalog"],
-              ["Marketplace Advertising", "/services#advertising"],
-              ["SEO", "/services#seo"],
-              ["Digital Marketing", "/services#marketing"],
-              ["D2C Development", "/services#d2c"],
-            ]} />
-            <FooterCol title="Company" links={[
-              ["About", "/about"],
-              ["Why Us", "/about#why-us"],
-              ["Packages", "/packages"],
-              ["Resources", "/resources"],
-              ["Contact", "/contact"],
-            ]} />
-            <div>
-              <p className="label-caps text-[#EB175D]">Contact</p>
-              <div className="mt-5 space-y-3 text-sm text-white/65">
-                <p>Coimbatore, Tamil Nadu</p>
-                <p>Palakkad, Kerala</p>
-                <a href="tel:+919789104651" className="block hover:text-white">+91 9789 104 651</a>
-                <a href="mailto:support@brandlinetech.com" className="block break-all hover:text-white">support@brandlinetech.com</a>
-              </div>
-              <p className="mt-5 label-caps text-[#EB175D]">Legal</p>
-              <div className="mt-3 space-y-2 text-sm">
-                <Link to="/privacy-policy" className="block text-white/65 hover:text-white">Privacy Policy</Link>
-                <Link to="/terms" className="block text-white/65 hover:text-white">Terms & Conditions</Link>
-              </div>
+          <FooterCol title="Pages" links={[
+            ["Services", "/services"],
+            ["Marketplaces", "/marketplace-management"],
+            ["Solutions", "/solutions"],
+            ["Packages", "/packages"],
+            ["Resources", "/resources"],
+          ]} />
+
+          <FooterCol title="Company" links={[
+            ["About", "/about"],
+            ["Why Us", "/about#why-us"],
+            ["Contact", "/contact"],
+            ["Get Consultation", "/contact"],
+          ]} />
+
+          <FooterCol title="Legal" links={[
+            ["Privacy Policy", "/privacy-policy"],
+            ["Terms & Conditions", "/terms"],
+          ]} />
+
+          <div>
+            <p className="text-sm font-semibold text-white">Contact</p>
+            <div className="mt-5 space-y-4 text-sm text-white/72">
+              <a href="tel:+919789104651" className="block transition-colors hover:text-[#EB175D]">+91 9789 104 651</a>
+              <a href="mailto:support@brandlinetech.com" className="block break-all transition-colors hover:text-[#EB175D]">support@brandlinetech.com</a>
+              <p className="leading-6 text-white/48">Coimbatore, Tamil Nadu</p>
+              <p className="leading-6 text-white/48">Palakkad, Kerala</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 BrandlineTech. All Rights Reserved.</p>
-          <p>Brandline Tech Solutions Pvt. Ltd.</p>
+        <div className="pointer-events-none select-none overflow-hidden pb-0 pt-1" aria-hidden="true">
+          <div className="whitespace-nowrap font-display text-[18vw] font-extrabold leading-[.72] tracking-[-0.07em] text-white/[0.045] sm:text-[15vw] lg:text-[12.5vw]">
+            BrandlineTech
+          </div>
         </div>
       </div>
     </footer>
@@ -197,10 +187,12 @@ export function Footer() {
 function FooterCol({ title, links }: { title: string; links: readonly (readonly [string, string])[] }) {
   return (
     <div>
-      <p className="label-caps text-[#EB175D]">{title}</p>
-      <div className="mt-5 space-y-3">
+      <p className="text-sm font-semibold text-white">{title}</p>
+      <div className="mt-5 space-y-4">
         {links.map(([label, to]) => (
-          <a key={label} href={to} className="block text-sm text-white/65 transition-colors hover:text-white">{label}</a>
+          <a key={label} href={to} className="block text-sm text-white/72 transition-colors hover:text-[#EB175D]">
+            {label}
+          </a>
         ))}
       </div>
     </div>
