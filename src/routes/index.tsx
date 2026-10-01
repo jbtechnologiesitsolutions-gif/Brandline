@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatedSection } from "@/components/animated-section";
+import { IntegratedCapabilities } from "@/components/integrated-capabilities";
 import {
   AboutBlock,
   Addons,
@@ -18,7 +19,6 @@ import {
   ProcessSection,
   ResourcesSection,
   SellerAudit,
-  ServicesSection,
   Stats,
   ToolsSection,
   TrustStrip,
@@ -82,7 +82,7 @@ function HomePage() {
       <div className="theme-zone theme-zone-grey">
         <AnimatedSection className="theme-section" direction="fade" delay={0.1}><TrustStrip /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><WhoWeHelp /></AnimatedSection>
-        <AnimatedSection className="theme-section" direction="up"><ServicesSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><IntegratedCapabilities /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="left"><GrowthFramework /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><MarketplaceFeature /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><MarketplaceServices /></AnimatedSection>
