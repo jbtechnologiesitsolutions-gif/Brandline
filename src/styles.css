@@ -47,7 +47,7 @@
   --brand-pink: #EB175D;
   --brand-charcoal: #474747;
   --brand-dark: #363636;
-  --background: #F6F1F3;
+  --background: #F3EEF0;
   --foreground: #363636;
   --card: #FFFDFE;
   --card-foreground: #363636;
@@ -70,12 +70,12 @@
   --gold-soft: #F8D8E3;
   --dark: #363636;
   --dark-secondary: #474747;
-  --surface: #FBF7F8;
+  --surface: rgba(255,255,255,.36);
 }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: #363636; }
   body {
     background: #363636;
     color: var(--color-foreground);
@@ -92,7 +92,7 @@
 @utility label-caps { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; }
 @utility display-title { font-size: clamp(2.75rem, 6vw, 4.75rem); line-height: .98; font-weight: 750; }
 @utility section-title { font-size: clamp(2.15rem, 4vw, 3.65rem); line-height: 1.05; font-weight: 720; }
-@utility subtle-grid { background-image: linear-gradient(to right, color-mix(in oklab, var(--brand-grey) 25%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--brand-grey) 25%, transparent) 1px, transparent 1px); background-size: 38px 38px; }
+@utility subtle-grid { background-image: linear-gradient(to right, color-mix(in oklab, var(--brand-grey) 18%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--brand-grey) 18%, transparent) 1px, transparent 1px); background-size: 38px 38px; }
 @utility reveal { animation: reveal .7s cubic-bezier(.2,.75,.2,1) both; }
 @utility reveal-delay { animation: reveal .7s .18s cubic-bezier(.2,.75,.2,1) both; }
 @utility float-in { animation: float-in .8s cubic-bezier(.2,.75,.2,1) both; }
@@ -101,11 +101,11 @@
 @utility gradient-gold { background: linear-gradient(135deg, #CC527A 0%, #EB175D 100%); }
 @utility text-gradient-gold { background: linear-gradient(135deg, #CC527A 0%, #EB175D 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 @utility card-hover {
-  transition: transform .25s cubic-bezier(.2,.75,.2,1), box-shadow .25s cubic-bezier(.2,.75,.2,1), border-color .25s;
+  transition: transform .25s cubic-bezier(.2,.75,.2,1), box-shadow .25s cubic-bezier(.2,.75,.2,1), border-color .25s, background-color .25s;
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 60px -20px color-mix(in oklab, var(--dark) 24%, transparent);
-    border-color: color-mix(in oklab, var(--brand-pink) 50%, transparent);
+    box-shadow: 0 24px 60px -20px color-mix(in oklab, var(--dark) 22%, transparent);
+    border-color: color-mix(in oklab, var(--brand-pink) 42%, transparent);
   }
 }
 @utility platform-scroll {
@@ -120,78 +120,128 @@
 @utility snap-item { scroll-snap-align: start; flex-shrink: 0; }
 @utility counter-animate { animation: counter-pulse .6s 1s cubic-bezier(.2,.75,.2,1) both; }
 
-/* Full-page palette flow: grey at the top, pink through the middle, charcoal/black at the bottom. */
-.home-theme-flow { background: #363636; }
-.theme-zone { position: relative; isolation: isolate; }
-.theme-zone-grey {
-  background: linear-gradient(180deg, #AAA7A7 0%, #BBB7B8 55%, #C8B5BC 100%);
-  color: #363636;
-}
-.theme-zone-pink {
-  background: linear-gradient(180deg, #CC527A 0%, #EB175D 58%, #9E3559 100%);
-  color: #2f2428;
-}
-.theme-zone-dark {
-  background: linear-gradient(180deg, #474747 0%, #3D3D3D 32%, #363636 72%, #171717 100%);
-  color: #FFFFFF;
+/* One continuous palette composition for the whole home page. */
+.home-theme-flow {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 78% 22%, rgba(235,23,93,.16), transparent 30%),
+    radial-gradient(circle at 20% 48%, rgba(204,82,122,.18), transparent 34%),
+    linear-gradient(
+      180deg,
+      #AAA7A7 0%,
+      #B5B0B2 12%,
+      #C3B7BC 23%,
+      #D5A0B1 34%,
+      #CC527A 45%,
+      #E43A72 54%,
+      #EB175D 61%,
+      #B74468 70%,
+      #76505D 77%,
+      #474747 84%,
+      #3D3D3D 91%,
+      #363636 96%,
+      #171717 100%
+    );
 }
 
-/* Section components become part of their large color zone instead of looking like separate white bands. */
+/* Zones now only control readability; they no longer paint hard bands. */
+.theme-zone { position: relative; isolation: isolate; background: transparent !important; }
+.theme-zone-grey { color: #363636; }
+.theme-zone-pink { color: #33282c; }
+.theme-zone-dark { color: #FFFFFF; }
+
+/* Soft overlap at zone boundaries removes visible seams. */
+.theme-zone-grey::after,
+.theme-zone-pink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7rem;
+  height: 14rem;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(24px);
+  opacity: .6;
+}
+.theme-zone-grey::after { background: linear-gradient(180deg, transparent, rgba(204,82,122,.24), transparent); }
+.theme-zone-pink::after { background: linear-gradient(180deg, transparent, rgba(71,71,71,.38), transparent); }
+
+/* Components should feel embedded into the flowing page, not pasted on top. */
 .theme-section > section,
 .theme-section > div:first-child {
   background-color: transparent !important;
   background-image: none !important;
 }
+.theme-section { border-top: 0 !important; }
 
-/* Light translucent surfaces keep cards readable while preserving the zone color behind them. */
+/* Consistent glass surfaces across sections. */
 .theme-zone-grey [class*="bg-white"],
 .theme-zone-grey [class*="bg-card"],
 .theme-zone-grey [class*="bg-surface"] {
-  background-color: rgba(255,255,255,.58) !important;
-  backdrop-filter: blur(8px);
+  background-color: rgba(255,255,255,.48) !important;
+  border-color: rgba(54,54,54,.10) !important;
+  backdrop-filter: blur(14px) saturate(120%);
 }
 .theme-zone-pink [class*="bg-white"],
 .theme-zone-pink [class*="bg-card"],
 .theme-zone-pink [class*="bg-surface"] {
-  background-color: rgba(255,255,255,.72) !important;
-  backdrop-filter: blur(8px);
+  background-color: rgba(255,247,250,.54) !important;
+  border-color: rgba(255,255,255,.25) !important;
+  backdrop-filter: blur(14px) saturate(125%);
 }
 .theme-zone-dark [class*="bg-white"],
 .theme-zone-dark [class*="bg-card"],
 .theme-zone-dark [class*="bg-surface"] {
-  background-color: rgba(255,255,255,.09) !important;
-  border-color: rgba(255,255,255,.14) !important;
-  backdrop-filter: blur(10px);
+  background-color: rgba(255,255,255,.075) !important;
+  border-color: rgba(255,255,255,.12) !important;
+  backdrop-filter: blur(14px) saturate(115%);
 }
 
-/* Dark lower area uses light typography while retaining pink accents. */
+/* Typography adapts smoothly with the dark lower area. */
 .theme-zone-dark h1,
 .theme-zone-dark h2,
 .theme-zone-dark h3,
 .theme-zone-dark h4 { color: #FFFFFF !important; }
 .theme-zone-dark p,
-.theme-zone-dark li { color: rgba(255,255,255,.72); }
+.theme-zone-dark li { color: rgba(255,255,255,.74); }
 .theme-zone-dark [class*="text-muted-foreground"],
 .theme-zone-dark [class*="text-[#6B6868]"],
-.theme-zone-dark [class*="text-[#666163]"] { color: rgba(255,255,255,.64) !important; }
+.theme-zone-dark [class*="text-[#666163]"] { color: rgba(255,255,255,.66) !important; }
 .theme-zone-dark [class*="text-foreground"],
 .theme-zone-dark [class*="text-[#363636]"],
 .theme-zone-dark [class*="text-[#474747]"] { color: #FFFFFF !important; }
-.theme-zone-dark [class*="border-"] { border-color: rgba(255,255,255,.14); }
+.theme-zone-dark [class*="border-"] { border-color: rgba(255,255,255,.13); }
 
-/* Pink zone gets subtle translucent separators rather than abrupt white section breaks. */
-.theme-zone-pink .theme-section + .theme-section { border-top: 1px solid rgba(255,255,255,.12); }
-.theme-zone-grey .theme-section + .theme-section { border-top: 1px solid rgba(54,54,54,.07); }
-.theme-zone-dark .theme-section + .theme-section { border-top: 1px solid rgba(255,255,255,.08); }
-
-/* Internal pages keep the same visual language: grey top / blush middle surfaces. */
-#main-content > main:not(.home-theme-flow) {
-  background: linear-gradient(180deg, #AAA7A7 0%, #E8D4DB 28%, #F5E9ED 68%, #CC527A 100%);
-  min-height: 100vh;
+/* Header is part of the design instead of a separate white strip. */
+header.sticky {
+  background: linear-gradient(90deg, rgba(170,167,167,.72), rgba(230,205,214,.70), rgba(204,82,122,.16)) !important;
+  border-color: rgba(54,54,54,.10) !important;
+  backdrop-filter: blur(22px) saturate(135%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(135%) !important;
+  box-shadow: 0 10px 36px -28px rgba(54,54,54,.5) !important;
+}
+header.sticky nav a { color: rgba(54,54,54,.78) !important; }
+header.sticky nav a:hover { color: #363636 !important; }
+header.sticky [class*="bg-[#EB175D]"] {
+  background: linear-gradient(135deg, #CC527A, #EB175D) !important;
+  box-shadow: 0 12px 28px -16px rgba(235,23,93,.75) !important;
 }
 
-/* Compatibility remap for existing components that still use the old hard-coded palette. */
-[class*="bg-[#F8F7F5]"] { background-color: #F6F1F3 !important; }
+/* Internal pages use the same gradual language instead of abrupt solid blocks. */
+#main-content > main:not(.home-theme-flow) {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(235,23,93,.12), transparent 28rem),
+    linear-gradient(180deg, #AAA7A7 0%, #C9B8BF 20%, #E2B2C2 42%, #CC527A 68%, #7A4A5A 84%, #363636 100%);
+  min-height: 100vh;
+}
+#main-content > main:not(.home-theme-flow) section {
+  background-color: transparent !important;
+}
+
+/* Compatibility remap for older hard-coded palette values. */
+[class*="bg-[#F8F7F5]"] { background-color: rgba(255,255,255,.30) !important; }
 [class*="bg-[#C89B5A]"] { background-color: #EB175D !important; }
 [class*="bg-[#E4C27A]"] { background-color: #CC527A !important; }
 [class*="text-[#C89B5A]"] { color: #EB175D !important; }
@@ -200,7 +250,7 @@
 [class*="text-[#292526]"] { color: #474747 !important; }
 [class*="text-[#6B6868]"] { color: #666163 !important; }
 [class*="border-[#C89B5A]"] { border-color: #EB175D !important; }
-[class*="border-[#292526]"] { border-color: rgba(71, 71, 71, .22) !important; }
+[class*="border-[#292526]"] { border-color: rgba(71,71,71,.18) !important; }
 [class*="from-[#C89B5A]"] { --tw-gradient-from: #EB175D var(--tw-gradient-from-position) !important; }
 [class*="via-[#E4C27A]"] { --tw-gradient-via: #CC527A var(--tw-gradient-via-position) !important; }
 [class*="to-[#C89B5A]"] { --tw-gradient-to: #EB175D var(--tw-gradient-to-position) !important; }
