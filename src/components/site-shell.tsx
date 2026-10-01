@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Phone, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, Menu, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -24,16 +24,13 @@ const desktopLinks = [
   ["Contact", "/contact"],
 ] as const;
 
-const mobileLinks = [
-  ["Home", "/"],
-  ...desktopLinks,
-] as const;
+const mobileLinks = [["Home", "/"], ...desktopLinks] as const;
 
 export function Logo() {
   return (
     <Link to="/" className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.02]" aria-label="BrandlineTech home">
-      <span className="font-display text-xl font-extrabold tracking-tight text-[#1F1F1F]">
-        Brandline<span className="text-[#C89B5A] transition-colors group-hover:text-[#E4C27A]">Tech</span>
+      <span className="font-display text-xl font-extrabold tracking-tight text-[#363636]">
+        Brandline<span className="text-[#EB175D] transition-colors group-hover:text-[#CC527A]">Tech</span>
       </span>
     </Link>
   );
@@ -57,8 +54,8 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-40 border-b backdrop-blur-xl transition-all duration-300",
         scrolled
-          ? "border-[#292526]/10 bg-[#F8F7F5]/90 shadow-sm py-1"
-          : "border-transparent bg-[#F8F7F5]/70 py-2",
+          ? "border-[#AAA7A7]/35 bg-[#F3ECEF]/94 shadow-sm py-1"
+          : "border-transparent bg-[#EEE7EA]/82 py-2",
       )}
     >
       <div className="section-shell flex h-[4.25rem] items-center justify-between gap-4">
@@ -69,23 +66,18 @@ export function Navbar() {
               <Link
                 key={label}
                 to={to}
-                className="group relative py-1 text-sm font-medium text-[#6B6868] transition-colors hover:text-[#1F1F1F]"
-                activeProps={{ className: "text-[#1F1F1F] font-semibold" }}
+                className="group relative py-1 text-sm font-medium text-[#666163] transition-colors hover:text-[#363636]"
+                activeProps={{ className: "text-[#363636] font-semibold" }}
               >
                 {label}
-                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#C89B5A] transition-all duration-300 ease-out group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#EB175D] transition-all duration-300 ease-out group-hover:w-full" />
               </Link>
             ))}
           </nav>
-          <motion.div
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          >
-            <Button asChild variant="gold" size="lg" className="shadow-gold group relative overflow-hidden bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
+          <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
+            <Button asChild variant="gold" size="lg" className="group relative overflow-hidden bg-[#EB175D] font-bold text-white shadow-gold hover:bg-[#CC527A]">
               <Link to="/contact">
-                Get Free Consultation{" "}
-                <ArrowRight className="ml-1 size-4 transition-transform duration-200 group-hover:translate-x-1" />
+                Get Free Consultation <ArrowRight className="ml-1 size-4 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </Button>
           </motion.div>
@@ -93,44 +85,37 @@ export function Navbar() {
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden border-[#292526]/15 hover:bg-[#C89B5A]/10" aria-label="Open navigation">
-              <Menu className="size-5 text-[#1F1F1F]" />
+            <Button variant="outline" size="icon" className="border-[#AAA7A7]/45 bg-white/55 lg:hidden hover:bg-[#CC527A]/10" aria-label="Open navigation">
+              <Menu className="size-5 text-[#363636]" />
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-full max-w-md bg-[#F8F7F5] border-l border-[#292526]/10">
+          <SheetContent className="w-full max-w-md border-l border-[#AAA7A7]/30 bg-[#F6F1F3]">
             <SheetHeader className="text-left">
-              <SheetTitle>
-                <Logo />
-              </SheetTitle>
-              <SheetDescription className="text-xs text-[#6B6868]">
+              <SheetTitle><Logo /></SheetTitle>
+              <SheetDescription className="text-xs text-[#666163]">
                 Ecommerce growth, marketplace management and digital solutions.
               </SheetDescription>
             </SheetHeader>
             <nav className="mt-8 flex flex-col" aria-label="Mobile navigation">
               {mobileLinks.map(([label, to]) => (
                 <SheetClose asChild key={label}>
-                  <Link to={to} className="border-b border-[#292526]/10 py-3.5 font-display text-xl font-semibold text-[#1F1F1F] hover:text-[#C89B5A] transition-colors">
+                  <Link to={to} className="border-b border-[#AAA7A7]/30 py-3.5 font-display text-xl font-semibold text-[#363636] transition-colors hover:text-[#EB175D]">
                     {label}
                   </Link>
                 </SheetClose>
               ))}
             </nav>
             <SheetClose asChild>
-              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#C89B5A] text-[#1F1F1F] font-bold hover:bg-[#E4C27A]">
-                <Link to="/contact">
-                  Get Free Consultation <ArrowRight className="ml-1 size-4" />
-                </Link>
+              <Button asChild variant="gold" size="lg" className="mt-8 w-full bg-[#EB175D] font-bold text-white hover:bg-[#CC527A]">
+                <Link to="/contact">Get Free Consultation <ArrowRight className="ml-1 size-4" /></Link>
               </Button>
             </SheetClose>
-            <div className="mt-6 flex flex-col gap-3 text-sm text-[#6B6868]">
-              <a href="tel:+919789104651" className="flex items-center gap-2.5 hover:text-[#C89B5A] transition-colors">
-                <Phone className="size-4 text-[#C89B5A]" /> +91 9789 104 651
+            <div className="mt-6 flex flex-col gap-3 text-sm text-[#666163]">
+              <a href="tel:+919789104651" className="flex items-center gap-2.5 transition-colors hover:text-[#EB175D]">
+                <Phone className="size-4 text-[#EB175D]" /> +91 9789 104 651
               </a>
-              <a
-                href="mailto:support@brandlinetech.com"
-                className="flex items-center gap-2.5 hover:text-[#C89B5A] transition-colors"
-              >
-                <Mail className="size-4 text-[#C89B5A]" /> support@brandlinetech.com
+              <a href="mailto:support@brandlinetech.com" className="flex items-center gap-2.5 transition-colors hover:text-[#EB175D]">
+                <Mail className="size-4 text-[#EB175D]" /> support@brandlinetech.com
               </a>
             </div>
           </SheetContent>
@@ -142,94 +127,65 @@ export function Navbar() {
 
 export function Footer() {
   return (
-    <footer className="bg-dark text-primary-foreground">
+    <footer className="bg-[#363636] text-white">
       <div className="section-shell py-16 lg:py-20">
-        <div className="grid gap-12 border-b border-primary-foreground/15 pb-14 lg:grid-cols-[1.4fr_2fr]">
+        <div className="grid gap-12 border-b border-white/15 pb-14 lg:grid-cols-[1.4fr_2fr]">
           <div>
             <Link to="/" className="font-display text-2xl font-bold">
-              Brandline<span className="text-gold">Tech</span>
+              Brandline<span className="text-[#EB175D]">Tech</span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-7 text-primary-foreground/60">
-              Empowering Your Brand's Digital Journey
-            </p>
-            <p className="mt-4 max-w-xs text-xs leading-6 text-primary-foreground/40">
-              Your products. Every marketplace. One growth partner.
-            </p>
+            <p className="mt-4 max-w-xs text-sm leading-7 text-white/65">Empowering Your Brand's Digital Journey</p>
+            <p className="mt-4 max-w-xs text-xs leading-6 text-white/45">Your products. Every marketplace. One growth partner.</p>
             <div className="mt-7 space-y-3 text-sm">
-              <a
-                href="tel:+919789104651"
-                className="flex items-center gap-2.5 text-primary-foreground/60 hover:text-gold transition-colors"
-              >
-                <Phone className="size-4 shrink-0" />
-                +91 9789 104 651
+              <a href="tel:+919789104651" className="flex items-center gap-2.5 text-white/65 transition-colors hover:text-[#EB175D]">
+                <Phone className="size-4 shrink-0" /> +91 9789 104 651
               </a>
-              <a
-                href="mailto:support@brandlinetech.com"
-                className="flex items-center gap-2.5 break-all text-primary-foreground/60 hover:text-gold transition-colors"
-              >
-                <Mail className="size-4 shrink-0" />
-                support@brandlinetech.com
+              <a href="mailto:support@brandlinetech.com" className="flex items-center gap-2.5 break-all text-white/65 transition-colors hover:text-[#EB175D]">
+                <Mail className="size-4 shrink-0" /> support@brandlinetech.com
               </a>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <FooterCol
-              title="Marketplace"
-              links={[
-                ["Amazon Management", "/marketplace-management#amazon"],
-                ["Flipkart Management", "/marketplace-management#flipkart"],
-                ["Meesho Management", "/marketplace-management#meesho"],
-                ["Myntra Management", "/marketplace-management#myntra"],
-                ["Multi-Marketplace", "/marketplace-management#platforms"],
-              ]}
-            />
-            <FooterCol
-              title="Services"
-              links={[
-                ["Catalog Management", "/services#catalog"],
-                ["Marketplace Advertising", "/services#advertising"],
-                ["SEO", "/services#seo"],
-                ["Digital Marketing", "/services#marketing"],
-                ["D2C Development", "/services#d2c"],
-              ]}
-            />
-            <FooterCol
-              title="Company"
-              links={[
-                ["About", "/about"],
-                ["Why Us", "/about#why-us"],
-                ["Packages", "/packages"],
-                ["Resources", "/resources"],
-                ["Contact", "/contact"],
-              ]}
-            />
+            <FooterCol title="Marketplace" links={[
+              ["Amazon Management", "/marketplace-management#amazon"],
+              ["Flipkart Management", "/marketplace-management#flipkart"],
+              ["Meesho Management", "/marketplace-management#meesho"],
+              ["Myntra Management", "/marketplace-management#myntra"],
+              ["Multi-Marketplace", "/marketplace-management#platforms"],
+            ]} />
+            <FooterCol title="Services" links={[
+              ["Catalog Management", "/services#catalog"],
+              ["Marketplace Advertising", "/services#advertising"],
+              ["SEO", "/services#seo"],
+              ["Digital Marketing", "/services#marketing"],
+              ["D2C Development", "/services#d2c"],
+            ]} />
+            <FooterCol title="Company" links={[
+              ["About", "/about"],
+              ["Why Us", "/about#why-us"],
+              ["Packages", "/packages"],
+              ["Resources", "/resources"],
+              ["Contact", "/contact"],
+            ]} />
             <div>
-              <p className="label-caps text-gold">Contact</p>
-              <div className="mt-5 space-y-3 text-sm text-primary-foreground/60">
+              <p className="label-caps text-[#EB175D]">Contact</p>
+              <div className="mt-5 space-y-3 text-sm text-white/65">
                 <p>Coimbatore, Tamil Nadu</p>
                 <p>Palakkad, Kerala</p>
-                <a href="tel:+919789104651" className="block hover:text-primary-foreground">
-                  +91 9789 104 651
-                </a>
-                <a href="mailto:support@brandlinetech.com" className="block break-all hover:text-primary-foreground">
-                  support@brandlinetech.com
-                </a>
+                <a href="tel:+919789104651" className="block hover:text-white">+91 9789 104 651</a>
+                <a href="mailto:support@brandlinetech.com" className="block break-all hover:text-white">support@brandlinetech.com</a>
               </div>
-              <p className="mt-5 label-caps text-gold">Legal</p>
+              <p className="mt-5 label-caps text-[#EB175D]">Legal</p>
               <div className="mt-3 space-y-2 text-sm">
-                <Link to="/privacy-policy" className="block text-primary-foreground/60 hover:text-primary-foreground">
-                  Privacy Policy
-                </Link>
-                <Link to="/terms" className="block text-primary-foreground/60 hover:text-primary-foreground">
-                  Terms & Conditions
-                </Link>
+                <Link to="/privacy-policy" className="block text-white/65 hover:text-white">Privacy Policy</Link>
+                <Link to="/terms" className="block text-white/65 hover:text-white">Terms & Conditions</Link>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 pt-7 text-xs text-primary-foreground/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 BrandlineTech. All Rights Reserved.</p>
           <p>Brandline Tech Solutions Pvt. Ltd.</p>
         </div>
@@ -238,25 +194,13 @@ export function Footer() {
   );
 }
 
-function FooterCol({
-  title,
-  links,
-}: {
-  title: string;
-  links: readonly (readonly [string, string])[];
-}) {
+function FooterCol({ title, links }: { title: string; links: readonly (readonly [string, string])[] }) {
   return (
     <div>
-      <p className="label-caps text-gold">{title}</p>
+      <p className="label-caps text-[#EB175D]">{title}</p>
       <div className="mt-5 space-y-3">
         {links.map(([label, to]) => (
-          <a
-            key={label}
-            href={to}
-            className="block text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-          >
-            {label}
-          </a>
+          <a key={label} href={to} className="block text-sm text-white/65 transition-colors hover:text-white">{label}</a>
         ))}
       </div>
     </div>
