@@ -62,9 +62,9 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <main className="overflow-hidden bg-background text-foreground">
-      {/* Full-screen video banner — intentionally clean with no text overlay */}
-      <section className="relative h-[100svh] min-h-[34rem] w-full overflow-hidden bg-[#363636]">
+    <main className="home-theme-flow overflow-hidden text-foreground">
+      {/* Clean full-screen video banner */}
+      <section className="relative h-[100svh] min-h-[34rem] w-full overflow-hidden bg-[#AAA7A7]">
         <video
           className="absolute inset-0 h-full w-full object-cover object-center"
           autoPlay
@@ -78,105 +78,42 @@ function HomePage() {
         </video>
       </section>
 
-      <AnimatedSection direction="fade" delay={0.1}>
-        <TrustStrip />
-      </AnimatedSection>
+      {/* TOP ZONE — LIGHT GREY */}
+      <div className="theme-zone theme-zone-grey">
+        <AnimatedSection className="theme-section" direction="fade" delay={0.1}><TrustStrip /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><WhoWeHelp /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><ServicesSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="left"><GrowthFramework /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><MarketplaceFeature /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><MarketplaceServices /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="right"><PlatformSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><SellerAudit /></AnimatedSection>
+      </div>
 
-      <AnimatedSection direction="up">
-        <WhoWeHelp />
-      </AnimatedSection>
+      {/* MIDDLE ZONE — PINK */}
+      <div className="theme-zone theme-zone-pink">
+        <AnimatedSection className="theme-section" direction="up"><PricingSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="left"><Addons /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="zoom"><Stats /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="right"><WhyIndustries /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><CaseStudies /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="left"><D2CSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="right"><DigitalMarketing /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="left"><WebTechnology /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><GoalSection /></AnimatedSection>
+      </div>
 
-      <AnimatedSection direction="up">
-        <ServicesSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left">
-        <GrowthFramework />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <MarketplaceFeature />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <MarketplaceServices />
-      </AnimatedSection>
-
-      <AnimatedSection direction="right">
-        <PlatformSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <SellerAudit />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <PricingSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left">
-        <Addons />
-      </AnimatedSection>
-
-      <AnimatedSection direction="zoom">
-        <Stats />
-      </AnimatedSection>
-
-      <AnimatedSection direction="right">
-        <WhyIndustries />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <CaseStudies />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left">
-        <D2CSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="right">
-        <DigitalMarketing />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left">
-        <WebTechnology />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <GoalSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <ProcessSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="right">
-        <ResourcesSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <ToolsSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="left">
-        <AboutBlock />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <ValueSection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <FAQ />
-      </AnimatedSection>
-
-      <AnimatedSection direction="zoom">
-        <CTASection />
-      </AnimatedSection>
-
-      <AnimatedSection direction="up">
-        <ContactSection />
-      </AnimatedSection>
+      {/* BOTTOM ZONE — CHARCOAL / BLACK */}
+      <div className="theme-zone theme-zone-dark">
+        <AnimatedSection className="theme-section" direction="up"><ProcessSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="right"><ResourcesSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><ToolsSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="left"><AboutBlock /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><ValueSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><FAQ /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="zoom"><CTASection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><ContactSection /></AnimatedSection>
+      </div>
     </main>
   );
 }
