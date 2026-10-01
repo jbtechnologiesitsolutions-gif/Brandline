@@ -14,7 +14,6 @@ import {
   DigitalMarketing,
   FAQ,
   GoalSection,
-  GrowthDashboard,
   GrowthFramework,
   MarketplaceFeature,
   MarketplaceServices,
@@ -71,7 +70,7 @@ function HomePage() {
   return (
     <main className="overflow-hidden bg-[#F8F7F5] text-[#1F1F1F]">
       {/* ── Hero Section ────────────────────────────────────────────────── */}
-      <section className="relative subtle-grid overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
+      <section className="relative subtle-grid overflow-hidden pb-16 pt-12 sm:pb-20 sm:pt-16 md:pb-28 md:pt-24 bg-[radial-gradient(ellipse_at_top_right,rgba(200,155,90,0.12),transparent_55%)]">
         {/* Minimal floating particles / ambient glow dots */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
@@ -86,7 +85,7 @@ function HomePage() {
           />
         </div>
 
-        <div className="section-shell grid items-center gap-14 lg:grid-cols-[1.1fr_.9fr]">
+        <div className="section-shell grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-14 xl:gap-16">
           {/* Left Column — Hero Content */}
           <div className="flex flex-col items-start">
             {/* 1. Small Eyebrow Badge */}
@@ -154,19 +153,20 @@ function HomePage() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-              className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center"
+              className="mt-8 flex w-full flex-col gap-3.5 sm:w-auto sm:flex-row sm:items-center"
             >
               {/* Primary CTA */}
               <motion.div
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   asChild
                   variant="gold"
                   size="lg"
-                  className="group relative z-10 overflow-hidden bg-[#C89B5A] px-7 py-3.5 font-display text-sm font-bold text-[#1F1F1F] shadow-gold transition-colors hover:bg-[#E4C27A]"
+                  className="group relative z-10 w-full overflow-hidden bg-[#C89B5A] px-7 py-3.5 font-display text-sm font-bold text-[#1F1F1F] shadow-gold transition-colors hover:bg-[#E4C27A] sm:w-auto"
                 >
                   <Link to="/contact">
                     Get Free Consultation{" "}
@@ -180,12 +180,13 @@ function HomePage() {
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   asChild
                   variant="outline"
                   size="lg"
-                  className="group border border-[#292526]/20 bg-white/80 px-6 py-3.5 font-display text-sm font-semibold text-[#1F1F1F] shadow-sm transition-colors hover:bg-[#C89B5A]/10 hover:border-[#C89B5A]/50"
+                  className="group w-full border border-[#292526]/20 bg-white/80 px-6 py-3.5 font-display text-sm font-semibold text-[#1F1F1F] shadow-sm transition-colors hover:bg-[#C89B5A]/10 hover:border-[#C89B5A]/50 sm:w-auto"
                 >
                   <a href="#services">
                     Explore Our Services{" "}
@@ -200,23 +201,39 @@ function HomePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.72 }}
-              className="mt-9 text-[11px] font-bold uppercase tracking-widest text-[#6B6868]"
+              className="mt-9 text-[10px] font-bold uppercase leading-5 tracking-widest text-[#6B6868] sm:text-[11px]"
             >
               Strategy{" "}
-              <span className="mx-2 text-[#C89B5A]">•</span> Technology{" "}
-              <span className="mx-2 text-[#C89B5A]">•</span> Marketing{" "}
-              <span className="mx-2 text-[#C89B5A]">•</span> Execution
+              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Technology{" "}
+              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Marketing{" "}
+              <span className="mx-1.5 text-[#C89B5A] sm:mx-2">•</span> Execution
             </motion.p>
           </div>
 
-          {/* Right Column — Growth Command Center Interactive Visual */}
+          {/* Right Column — Responsive Home Banner Video */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 15 }}
+            initial={{ opacity: 0, scale: 0.96, y: 18 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="w-full"
           >
-            <GrowthDashboard />
+            <div className="relative mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-white/60 bg-[#0E2133] shadow-[0_24px_70px_rgba(18,47,72,0.22)] sm:rounded-3xl">
+              <div className="aspect-video w-full">
+                <video
+                  className="h-full w-full object-cover object-center"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="BrandlineTech digital marketing and SEO home banner"
+                >
+                  <source src="/brandline-home-banner.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0E2133]/20 via-transparent to-white/5" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#E4C27A]/70 to-transparent" />
+            </div>
           </motion.div>
         </div>
       </section>
