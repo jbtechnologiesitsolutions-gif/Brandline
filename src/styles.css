@@ -42,23 +42,17 @@
 
 :root {
   --radius: .5rem;
-
-  /* Brandline palette based on supplied reference */
   --brand-grey: #AAA7A7;
   --brand-pink-soft: #CC527A;
   --brand-pink: #EB175D;
   --brand-charcoal: #474747;
   --brand-dark: #363636;
-
-  /* Light grey / blush base for the whole website */
   --background: #F6F1F3;
   --foreground: #363636;
   --card: #FFFDFE;
   --card-foreground: #363636;
   --popover: #FFFDFE;
   --popover-foreground: #363636;
-
-  /* Primary action and accents */
   --primary: #EB175D;
   --primary-foreground: #FFFFFF;
   --secondary: #EEE7EA;
@@ -67,14 +61,11 @@
   --muted-foreground: #666163;
   --accent: #CC527A;
   --accent-foreground: #FFFFFF;
-
   --destructive: #C6284B;
   --destructive-foreground: #FFFFFF;
   --border: #D8CED2;
   --input: #D8CED2;
   --ring: #EB175D;
-
-  /* Keep existing semantic utility names, remapped to the new palette */
   --gold: #EB175D;
   --gold-soft: #F8D8E3;
   --dark: #363636;
@@ -130,6 +121,21 @@
 }
 @utility snap-item { scroll-snap-align: start; flex-shrink: 0; }
 @utility counter-animate { animation: counter-pulse .6s 1s cubic-bezier(.2,.75,.2,1) both; }
+
+/* Compatibility remap for existing components that still use the old hard-coded palette. */
+[class*="bg-[#F8F7F5]"] { background-color: #F6F1F3 !important; }
+[class*="bg-[#C89B5A]"] { background-color: #EB175D !important; }
+[class*="bg-[#E4C27A]"] { background-color: #CC527A !important; }
+[class*="text-[#C89B5A]"] { color: #EB175D !important; }
+[class*="text-[#E4C27A]"] { color: #CC527A !important; }
+[class*="text-[#1F1F1F]"] { color: #363636 !important; }
+[class*="text-[#292526]"] { color: #474747 !important; }
+[class*="text-[#6B6868]"] { color: #666163 !important; }
+[class*="border-[#C89B5A]"] { border-color: #EB175D !important; }
+[class*="border-[#292526]"] { border-color: rgba(71, 71, 71, .22) !important; }
+[class*="from-[#C89B5A]"] { --tw-gradient-from: #EB175D var(--tw-gradient-from-position) !important; }
+[class*="via-[#E4C27A]"] { --tw-gradient-via: #CC527A var(--tw-gradient-via-position) !important; }
+[class*="to-[#C89B5A]"] { --tw-gradient-to: #EB175D var(--tw-gradient-to-position) !important; }
 
 @keyframes reveal { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes float-in { from { opacity: 0; transform: translateY(22px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
