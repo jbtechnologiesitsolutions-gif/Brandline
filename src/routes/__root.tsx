@@ -39,8 +39,27 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
+
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
+
+    const message = `${error?.name ?? ""} ${error?.message ?? ""}`;
+    const isStaleChunkError =
+      /Failed to fetch dynamically imported module/i.test(message) ||
+      /Importing a module script failed/i.test(message) ||
+      /Loading chunk .* failed/i.test(message);
+
+    if (!isStaleChunkError || typeof window === "undefined") return;
+
+    const recoveryKey = "brandline-stale-chunk-recovery";
+    const recoveredAt = Number(sessionStorage.getItem(recoveryKey) || 0);
+    const now = Date.now();
+
+    // Avoid an infinite refresh loop if the deployment itself is genuinely broken.
+    if (!recoveredAt || now - recoveredAt > 60_000) {
+      sessionStorage.setItem(recoveryKey, String(now));
+      window.location.reload();
+    }
   }, [error]);
 
   return (
@@ -147,6 +166,23 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
+
+  useEffect(() => {
+    const handlePreloadError = (event: Event) => {
+      event.preventDefault();
+      const recoveryKey = "brandline-vite-preload-recovery";
+      const recoveredAt = Number(sessionStorage.getItem(recoveryKey) || 0);
+      const now = Date.now();
+
+      if (!recoveredAt || now - recoveredAt > 60_000) {
+        sessionStorage.setItem(recoveryKey, String(now));
+        window.location.reload();
+      }
+    };
+
+    window.addEventListener("vite:preloadError", handlePreloadError);
+    return () => window.removeEventListener("vite:preloadError", handlePreloadError);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
