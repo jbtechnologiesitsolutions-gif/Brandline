@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Mail, ShieldCheck } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { addActivityLog } from "@/lib/admin-control";
 
 export const Route = createFileRoute("/admin-login")({
   component: AdminLoginPage,
@@ -21,11 +22,25 @@ function AdminLoginPage() {
     const normalizedEmail = email.trim().toLowerCase();
 
     if (normalizedEmail !== ADMIN_EMAIL) {
+      addActivityLog({
+        type: "login",
+        action: "Admin login attempt",
+        actor: normalizedEmail || "unknown",
+        status: "failed",
+        details: "Login rejected because the email did not match the approved admin account.",
+      });
       setError("Please enter the approved admin email.");
       return;
     }
 
     window.localStorage.setItem(STORAGE_KEY, normalizedEmail);
+    addActivityLog({
+      type: "login",
+      action: "Admin login",
+      actor: normalizedEmail,
+      status: "success",
+      details: "Admin signed in successfully.",
+    });
     navigate({ to: "/admin" });
   }
 
@@ -36,9 +51,7 @@ function AdminLoginPage() {
           to="/"
           className="mb-10 inline-flex items-center gap-3 text-sm text-white/60 transition-colors hover:text-white"
         >
-          <span className="grid size-9 place-items-center rounded-xl bg-white font-black text-black">
-            B
-          </span>
+          <span className="grid size-9 place-items-center rounded-xl bg-white font-black text-black">B</span>
           <span className="font-semibold">BrandlineTech</span>
         </Link>
 
@@ -47,28 +60,15 @@ function AdminLoginPage() {
             <div className="mb-5 grid size-12 place-items-center rounded-2xl border border-[#C9952E]/20 bg-[#C9952E]/10 text-[#C9952E]">
               <ShieldCheck size={22} />
             </div>
-
-            <h1 className="text-3xl font-bold tracking-tight">
-              Admin Sign In
-            </h1>
-
-            <p className="mt-2 text-sm text-white/50">
-              Enter the approved admin email to open the BrandlineTech dashboard.
-            </p>
+            <h1 className="text-3xl font-bold tracking-tight">Admin Sign In</h1>
+            <p className="mt-2 text-sm text-white/50">Enter the approved admin email to open the BrandlineTech dashboard.</p>
           </div>
 
           <form onSubmit={submit} className="space-y-5">
             <label className="block">
-              <span className="mb-2 block text-sm text-white/70">
-                Admin email
-              </span>
-
+              <span className="mb-2 block text-sm text-white/70">Admin email</span>
               <div className="relative">
-                <Mail
-                  size={17}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"
-                />
-
+                <Mail size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
                 <input
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
@@ -81,21 +81,11 @@ function AdminLoginPage() {
               </div>
             </label>
 
-            {error && (
-              <p
-                role="alert"
-                className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-200"
-              >
-                {error}
-              </p>
-            )}
+            {error && <p role="alert" className="rounded-xl border border-red-400/20 bg-red-400/10 px-4 py-3 text-sm text-red-200">{error}</p>}
 
             <button className="group flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3.5 font-semibold text-black transition hover:bg-[#C9952E]">
               Continue to Admin
-              <ArrowRight
-                size={17}
-                className="transition-transform group-hover:translate-x-1"
-              />
+              <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
             </button>
           </form>
         </div>
