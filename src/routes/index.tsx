@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatedSection } from "@/components/animated-section";
+import { HomeBanner } from "@/components/home-banner";
 import { IntegratedCapabilities } from "@/components/integrated-capabilities";
 import {
   AboutBlock,
@@ -63,22 +64,8 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <main className="home-theme-flow overflow-hidden text-foreground">
-      {/* Clean full-screen video banner */}
-      <section className="relative h-[100svh] min-h-[34rem] w-full overflow-hidden bg-[#AAA7A7]">
-        <video
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-label="BrandlineTech digital marketing and SEO home banner"
-        >
-          <source src="/brandline-home-banner.mp4" type="video/mp4" />
-        </video>
-      </section>
+      <HomeBanner />
 
-      {/* TOP ZONE — LIGHT GREY */}
       <div className="theme-zone theme-zone-grey">
         <AnimatedSection className="theme-section" direction="fade" delay={0.1}><TrustStrip /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><WhoWeHelp /></AnimatedSection>
@@ -90,7 +77,6 @@ function HomePage() {
         <AnimatedSection className="theme-section" direction="up"><SellerAudit /></AnimatedSection>
       </div>
 
-      {/* MIDDLE ZONE — PINK */}
       <div className="theme-zone theme-zone-pink">
         <AnimatedSection className="theme-section" direction="up"><PricingSection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="left"><Addons /></AnimatedSection>
@@ -103,7 +89,6 @@ function HomePage() {
         <AnimatedSection className="theme-section" direction="up"><GoalSection /></AnimatedSection>
       </div>
 
-      {/* BOTTOM ZONE — CHARCOAL / BLACK */}
       <div className="theme-zone theme-zone-dark">
         <AnimatedSection className="theme-section" direction="up"><ProcessSection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="right"><ResourcesSection /></AnimatedSection>
