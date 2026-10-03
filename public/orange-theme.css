@@ -1,0 +1,185 @@
+:root {
+  --brand-orange: #ff6a00;
+  --brand-orange-deep: #e85d00;
+  --brand-orange-soft: #fff1e6;
+  --brand-orange-pale: #fff8f2;
+  --brand-ink: #2c2c2c;
+  --background: #ffffff;
+  --foreground: #2c2c2c;
+  --card: #ffffff;
+  --card-foreground: #2c2c2c;
+  --popover: #ffffff;
+  --popover-foreground: #2c2c2c;
+  --primary: #ff6a00;
+  --primary-foreground: #ffffff;
+  --secondary: #fff1e6;
+  --secondary-foreground: #2c2c2c;
+  --muted: #fff5ed;
+  --muted-foreground: #6f625a;
+  --accent: #ff8a2b;
+  --accent-foreground: #ffffff;
+  --border: #f1d7c4;
+  --input: #f1d7c4;
+  --ring: #ff6a00;
+  --gold: #ff6a00;
+  --gold-soft: #fff1e6;
+  --dark: #2c2c2c;
+  --dark-secondary: #3a3a3a;
+  --surface: rgba(255,255,255,.72);
+}
+
+html,
+body {
+  background: #ffffff !important;
+  color: #2c2c2c !important;
+}
+
+::selection {
+  background: #ff6a00 !important;
+  color: #ffffff !important;
+}
+
+:focus-visible {
+  outline-color: #ff6a00 !important;
+}
+
+/* One smooth orange + white canvas for the public website. */
+.home-theme-flow {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255,106,0,.14), transparent 30%),
+    radial-gradient(circle at 18% 48%, rgba(255,168,94,.18), transparent 34%),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fffaf6 14%,
+      #fff3e9 28%,
+      #ffe1cb 42%,
+      #ffc798 56%,
+      #ff9a4a 70%,
+      #ff7a1a 82%,
+      #ff6a00 92%,
+      #e85d00 100%
+    ) !important;
+}
+
+.theme-zone,
+.theme-zone-grey,
+.theme-zone-pink,
+.theme-zone-dark {
+  background: transparent !important;
+  color: #2c2c2c !important;
+}
+
+.theme-zone-grey::after,
+.theme-zone-pink::after {
+  background: linear-gradient(180deg, transparent, rgba(255,106,0,.16), transparent) !important;
+}
+
+.theme-zone-dark h1,
+.theme-zone-dark h2,
+.theme-zone-dark h3,
+.theme-zone-dark h4,
+.theme-zone-dark p,
+.theme-zone-dark li,
+.theme-zone-dark [class*="text-foreground"],
+.theme-zone-dark [class*="text-muted-foreground"],
+.theme-zone-dark [class*="text-[#"] {
+  color: #2c2c2c !important;
+}
+
+.theme-zone-grey [class*="bg-white"],
+.theme-zone-grey [class*="bg-card"],
+.theme-zone-grey [class*="bg-surface"],
+.theme-zone-pink [class*="bg-white"],
+.theme-zone-pink [class*="bg-card"],
+.theme-zone-pink [class*="bg-surface"],
+.theme-zone-dark [class*="bg-white"],
+.theme-zone-dark [class*="bg-card"],
+.theme-zone-dark [class*="bg-surface"] {
+  background-color: rgba(255,255,255,.82) !important;
+  border-color: rgba(232,93,0,.14) !important;
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+/* Header */
+header.sticky {
+  background: linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,248,242,.94), rgba(255,241,230,.92)) !important;
+  border-color: rgba(255,106,0,.14) !important;
+  box-shadow: 0 12px 32px -26px rgba(232,93,0,.45) !important;
+}
+header.sticky nav a { color: #5c514b !important; }
+header.sticky nav a:hover,
+header.sticky nav a[aria-current="page"] { color: #ff6a00 !important; }
+
+/* Internal pages */
+#main-content > main:not(.home-theme-flow) {
+  background:
+    radial-gradient(circle at 84% 15%, rgba(255,106,0,.10), transparent 26rem),
+    linear-gradient(180deg, #ffffff 0%, #fffaf6 24%, #fff1e6 50%, #ffd9ba 76%, #ff9a4a 100%) !important;
+  min-height: 100vh;
+}
+#main-content > main:not(.home-theme-flow) section {
+  background-color: transparent !important;
+}
+
+/* Remap the old pink/grey palette everywhere in public UI. */
+[class*="text-[#EB175D]"] { color: #ff6a00 !important; }
+[class*="text-[#CC527A]"] { color: #e85d00 !important; }
+[class*="bg-[#EB175D]"] { background-color: #ff6a00 !important; }
+[class*="bg-[#CC527A]"] { background-color: #ff8a2b !important; }
+[class*="bg-[#F8D8E3]"] { background-color: #fff1e6 !important; }
+[class*="bg-[#F6F1F3]"] { background-color: #fffaf6 !important; }
+[class*="bg-[#F3ECEF]"] { background-color: #fff8f2 !important; }
+[class*="bg-[#EEE7EA]"] { background-color: #fff5ed !important; }
+[class*="border-[#EB175D]"] { border-color: #ff6a00 !important; }
+[class*="border-[#CC527A]"] { border-color: #ff8a2b !important; }
+[class*="hover:text-[#EB175D]"]:hover { color: #ff6a00 !important; }
+[class*="hover:text-[#CC527A]"]:hover { color: #e85d00 !important; }
+[class*="hover:bg-[#CC527A]"]:hover { background-color: rgba(255,106,0,.10) !important; }
+[class*="from-[#CC527A]"] { --tw-gradient-from: #ff8a2b var(--tw-gradient-from-position) !important; }
+[class*="via-[#EB175D]"] { --tw-gradient-via: #ff6a00 var(--tw-gradient-via-position) !important; }
+[class*="to-[#EB175D]"] { --tw-gradient-to: #e85d00 var(--tw-gradient-to-position) !important; }
+[class*="from-[#EB175D]"] { --tw-gradient-from: #ff6a00 var(--tw-gradient-from-position) !important; }
+[class*="to-[#8F123E]"] { --tw-gradient-to: #d95000 var(--tw-gradient-to-position) !important; }
+
+/* Existing gold compatibility now means orange. */
+[class*="bg-[#C89B5A]"],
+[class*="bg-[#E4C27A]"] { background-color: #ff6a00 !important; }
+[class*="text-[#C89B5A]"],
+[class*="text-[#E4C27A]"] { color: #ff6a00 !important; }
+[class*="border-[#C89B5A]"] { border-color: #ff6a00 !important; }
+
+/* Primary CTA / animated button fill */
+button [style*="background-color: rgb(235, 23, 93)"],
+a [style*="background-color: rgb(235, 23, 93)"],
+[style*="background-color:#EB175D"],
+[style*="background-color: #EB175D"] {
+  background-color: #ff6a00 !important;
+}
+
+/* Footer: white base with orange directory accents. */
+footer {
+  background: #ffffff !important;
+  color: #2c2c2c !important;
+  border-top: 1px solid rgba(255,106,0,.18) !important;
+}
+footer [class*="text-white"] { color: #2c2c2c !important; }
+footer [class*="text-white/"] { color: rgba(44,44,44,.68) !important; }
+footer [class*="border-white"] { border-color: rgba(255,106,0,.16) !important; }
+footer a:hover,
+footer svg { color: #ff6a00 !important; }
+footer [class*="bg-white"] { background-color: #ff6a00 !important; color: #ffffff !important; }
+footer [class*="text-[#EB175D]"] { color: #ff6a00 !important; }
+
+/* Keep cards premium and readable. */
+.card-hover:hover {
+  border-color: rgba(255,106,0,.32) !important;
+  box-shadow: 0 24px 60px -22px rgba(232,93,0,.28) !important;
+}
+
+/* Reduce old charcoal appearance on common pills/cards in public sections. */
+#main-content [class*="bg-[#363636]"],
+#main-content [class*="bg-[#474747]"] {
+  background-color: #ff6a00 !important;
+  color: #ffffff !important;
+}
