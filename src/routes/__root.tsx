@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar, Footer } from "@/components/site-shell";
+import { TechnologyStackSection } from "@/components/technology-stack";
 
 function NotFoundComponent() {
   return (
@@ -190,6 +191,7 @@ function RootComponent() {
       <div id="main-content">
         <Outlet />
       </div>
+      {!isAdmin && <TechnologyStackSection />}
       {!isAdmin && <Footer />}
     </QueryClientProvider>
   );
