@@ -3,6 +3,7 @@ import { AnimatedSection } from "@/components/animated-section";
 import { CustomerPortalCard } from "@/components/customer-portal-card";
 import { HomeBanner } from "@/components/home-banner";
 import { IntegratedCapabilities } from "@/components/integrated-capabilities";
+import { LandingSignatureIntro } from "@/components/landing-signature-intro";
 import { ManagedPackagesSection } from "@/components/managed-packages";
 import {
   AboutBlock,
@@ -65,6 +66,7 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   return (
     <main className="home-theme-flow overflow-hidden text-foreground">
+      <LandingSignatureIntro />
       <HomeBanner />
 
       <div className="theme-zone theme-zone-grey">
