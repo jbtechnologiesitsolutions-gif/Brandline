@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatedSection } from "@/components/animated-section";
+import { CustomerPortalCard } from "@/components/customer-portal-card";
 import { HomeBanner } from "@/components/home-banner";
 import { IntegratedCapabilities } from "@/components/integrated-capabilities";
 import {
@@ -96,6 +97,7 @@ function HomePage() {
         <AnimatedSection className="theme-section" direction="left"><AboutBlock /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><ValueSection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><FAQ /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="zoom"><CustomerPortalCard /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="zoom"><CTASection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><ContactSection /></AnimatedSection>
       </div>
