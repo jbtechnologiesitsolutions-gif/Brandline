@@ -13,20 +13,16 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
     offset: ["start start", "end end"],
   });
 
-  // Keep the same three-stage effect, but complete it in a much shorter scroll range.
-  const leftX = useTransform(scrollYProgress, [0, 0.28, 0.58], [0, -46, -20]);
-  const rightX = useTransform(scrollYProgress, [0, 0.28, 0.58], [0, 46, 20]);
-  const scale = useTransform(scrollYProgress, [0, 0.28], [1, 0.94]);
-  const rotateY = useTransform(scrollYProgress, [0.28, 0.66], [0, 180]);
-  const rotateZLeft = useTransform(scrollYProgress, [0.28, 0.66], [0, 4]);
-  const rotateZRight = useTransform(scrollYProgress, [0.28, 0.66], [0, -4]);
-
-  // Small final movement only, so the cards do not visually jump away before the next section.
-  const cardsY = useTransform(scrollYProgress, [0.72, 0.94], [0, -54]);
-  const introOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.08], [0, 14]);
-  const endOpacity = useTransform(scrollYProgress, [0.72, 0.9], [0, 1]);
-  const endY = useTransform(scrollYProgress, [0.72, 0.9], [28, 0]);
+  const leftX = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, -42, -18]);
+  const rightX = useTransform(scrollYProgress, [0, 0.3, 0.6], [0, 42, 18]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+  const rotateY = useTransform(scrollYProgress, [0.3, 0.68], [0, 180]);
+  const rotateZLeft = useTransform(scrollYProgress, [0.3, 0.68], [0, 3.5]);
+  const rotateZRight = useTransform(scrollYProgress, [0.3, 0.68], [0, -3.5]);
+  const introOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.09], [0, 12]);
+  const endOpacity = useTransform(scrollYProgress, [0.7, 0.88], [0, 1]);
+  const endY = useTransform(scrollYProgress, [0.7, 0.88], [22, 0]);
 
   if (visible.length < 3 || reduceMotion) {
     return <StaticPackageCards packages={packages} />;
@@ -34,10 +30,10 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
 
   return (
     <>
-      <div ref={containerRef} className="relative hidden h-[250vh] w-full lg:block">
-        <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden [perspective:1400px]">
+      <div ref={containerRef} className="relative hidden h-[155vh] w-full lg:block">
+        <div className="sticky top-[74px] flex h-[calc(100vh-74px)] min-h-[620px] w-full items-center justify-center overflow-hidden [perspective:1400px]">
           <motion.div
-            className="pointer-events-none absolute left-0 right-0 top-[12%] text-center"
+            className="pointer-events-none absolute left-0 right-0 top-[6%] text-center"
             style={{ opacity: introOpacity, y: introY }}
           >
             <p className="text-xs font-extrabold uppercase tracking-[.22em] text-[#EB175D]">Scroll to explore packages</p>
@@ -45,8 +41,8 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
           </motion.div>
 
           <motion.div
-            className="relative flex h-[430px] w-full max-w-5xl px-6"
-            style={{ scale, y: cardsY, transformStyle: "preserve-3d" }}
+            className="relative flex h-[390px] w-full max-w-5xl px-6"
+            style={{ scale, transformStyle: "preserve-3d" }}
           >
             {visible.map((item, index) => (
               <motion.div
@@ -86,7 +82,7 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
                 </div>
 
                 <div
-                  className={`absolute inset-0 flex flex-col overflow-hidden border p-7 shadow-[0_30px_70px_-28px_rgba(54,54,54,.55)] [backface-visibility:hidden] ${
+                  className={`absolute inset-0 flex flex-col overflow-hidden border p-6 shadow-[0_30px_70px_-28px_rgba(54,54,54,.55)] [backface-visibility:hidden] ${
                     item.featured ? "border-[#EB175D]/40 bg-[#FFF7FA]" : "border-[#AAA7A7]/30 bg-white"
                   }`}
                   style={{
@@ -105,13 +101,13 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
                       {item.featured && <span className="rounded-full bg-[#EB175D] px-3 py-1 text-[10px] font-extrabold uppercase tracking-[.12em] text-white">Popular</span>}
                     </div>
 
-                    <div className="mt-5 flex items-end gap-2">
+                    <div className="mt-4 flex items-end gap-2">
                       <span className="text-3xl font-black text-[#363636]">{item.price}</span>
                       <span className="pb-1 text-xs text-[#666163]">{item.billing}</span>
                     </div>
                     <p className="mt-3 text-sm leading-6 text-[#666163]">{item.description}</p>
 
-                    <ul className="mt-5 space-y-2.5">
+                    <ul className="mt-4 space-y-2">
                       {item.features.slice(0, 4).map((feature) => (
                         <li key={feature} className="flex gap-2.5 text-sm text-[#474747]">
                           <Check className="mt-0.5 size-4 shrink-0 text-[#EB175D]" />
@@ -130,11 +126,11 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
           </motion.div>
 
           <motion.div
-            className="pointer-events-none absolute bottom-[9%] left-0 right-0 text-center"
+            className="pointer-events-none absolute bottom-[4%] left-0 right-0 px-6 text-center"
             style={{ opacity: endOpacity, y: endY }}
           >
-            <p className="font-display text-3xl font-extrabold tracking-tight text-[#363636]">Choose the support level that fits your growth stage.</p>
-            <p className="mt-2 text-sm text-[#666163]">Every package can be customized around your marketplaces, SKU volume and goals.</p>
+            <p className="font-display text-2xl font-extrabold tracking-tight text-[#363636]">Choose the support level that fits your growth stage.</p>
+            <p className="mt-1.5 text-sm text-[#666163]">Every package can be customized around your marketplaces, SKU volume and goals.</p>
           </motion.div>
         </div>
       </div>
