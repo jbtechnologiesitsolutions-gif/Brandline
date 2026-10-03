@@ -70,30 +70,21 @@ export function ClientProjectsSection() {
     .sort((a, b) => a.order - b.order);
 
   return (
-    <section className="relative overflow-hidden border-t border-[#AAA7A7]/20 bg-[#F8F5F6] py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(204,82,122,.08),transparent_26%),radial-gradient(circle_at_88%_78%,rgba(235,23,93,.08),transparent_30%)]" />
+    <section className="relative overflow-hidden border-t border-[#AAA7A7]/14 bg-[#F8F5F6] py-8 sm:py-10 lg:py-12">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(204,82,122,.06),transparent_26%),radial-gradient(circle_at_88%_78%,rgba(235,23,93,.06),transparent_30%)]" />
       <div className="section-shell relative">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex rounded-full bg-[#EB175D]/8 px-4 py-2 text-[10px] font-extrabold uppercase tracking-[.2em] text-[#EB175D]">
-            {settings.eyebrow}
-          </span>
-          <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-[#363636] sm:text-5xl">
-            {settings.title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#666163] sm:text-base">
-            {settings.description}
-          </p>
-        </div>
-
-        <div className="mt-12">
-          {projects.length > 0 ? (
-            <ClientProjectSurfer projects={projects} />
-          ) : (
-            <div className="rounded-2xl border border-dashed border-[#AAA7A7]/35 bg-white/45 p-10 text-center text-sm text-[#666163]">
-              Client projects can be added from the BrandlineTech admin panel.
-            </div>
-          )}
-        </div>
+        {projects.length > 0 ? (
+          <ClientProjectSurfer
+            projects={projects}
+            eyebrow={settings.eyebrow}
+            title={settings.title}
+            description={settings.description}
+          />
+        ) : (
+          <div className="rounded-2xl border border-dashed border-[#AAA7A7]/35 bg-white/45 p-10 text-center text-sm text-[#666163]">
+            Client projects can be added from the BrandlineTech admin panel.
+          </div>
+        )}
       </div>
     </section>
   );
