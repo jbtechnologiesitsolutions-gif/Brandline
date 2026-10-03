@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar, Footer } from "@/components/site-shell";
 import { ClientProjectsSection } from "@/components/client-projects";
 import { TechnologyStackSection } from "@/components/technology-stack";
+import { FrontendBrandingRuntime } from "@/components/frontend-branding-runtime";
 
 function NotFoundComponent() {
   return (
@@ -188,22 +189,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <FrontendBrandingRuntime />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-3">Skip to content</a>
       {!isAdmin && <Navbar />}
       {isAdminDashboard && (
-        <div className="fixed bottom-6 right-6 z-[60] flex flex-col gap-2">
-          <a
-            href="/admin-client-projects"
-            className="rounded-xl border border-[#EB175D]/35 bg-[#EB175D] px-4 py-3 text-center text-sm font-bold text-white shadow-2xl transition hover:bg-[#CC527A]"
-          >
-            Manage Client Websites
-          </a>
-          <a
-            href="/admin-technology-stack"
-            className="rounded-xl border border-white/15 bg-[#111111] px-4 py-3 text-center text-sm font-bold text-white shadow-2xl transition hover:bg-[#252525]"
-          >
-            Manage Technology Stack
-          </a>
+        <div className="fixed bottom-6 right-6 z-[60] flex max-h-[72vh] flex-col gap-2 overflow-auto rounded-2xl border border-white/10 bg-[#0d0d0d]/95 p-2 shadow-2xl backdrop-blur-xl">
+          <a href="/admin-policy-pages" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Policy Pages</a>
+          <a href="/admin-branding-theme" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Branding & Theme</a>
+          <a href="/admin-activity-logs" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Activity & Login Logs</a>
+          <a href="/admin-client-projects" className="rounded-xl border border-[#EB175D]/35 bg-[#EB175D] px-4 py-3 text-center text-sm font-bold text-white shadow-xl transition hover:bg-[#CC527A]">Client Websites</a>
+          <a href="/admin-technology-stack" className="rounded-xl border border-white/15 bg-[#111111] px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-[#252525]">Technology Stack</a>
         </div>
       )}
       <div id="main-content">
