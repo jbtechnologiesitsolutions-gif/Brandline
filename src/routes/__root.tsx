@@ -8,7 +8,18 @@ import {
   Scripts,
   useLocation,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
+import {
+  Activity,
+  Boxes,
+  FileText,
+  Globe2,
+  Image,
+  LayoutDashboard,
+  Palette,
+  ShieldCheck,
+} from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -16,6 +27,112 @@ import { Navbar, Footer } from "@/components/site-shell";
 import { ClientProjectsSection } from "@/components/client-projects";
 import { TechnologyStackSection } from "@/components/technology-stack";
 import { FrontendBrandingRuntime } from "@/components/frontend-branding-runtime";
+
+const adminManagementLinks = [
+  { label: "Home Banner", href: "/admin-home-banner", icon: Image },
+  { label: "Client Websites", href: "/admin-client-projects", icon: Globe2 },
+  { label: "Technology Stack", href: "/admin-technology-stack", icon: Boxes },
+  { label: "Policy Pages", href: "/admin-policy-pages", icon: FileText },
+  { label: "Branding & Theme", href: "/admin-branding-theme", icon: Palette },
+  { label: "Activity & Login Logs", href: "/admin-activity-logs", icon: Activity },
+] as const;
+
+function AdminManagementLinks({ compact = false }: { compact?: boolean }) {
+  const location = useLocation();
+
+  return (
+    <div className={compact ? "space-y-1" : "space-y-1.5"}>
+      {adminManagementLinks.map(({ label, href, icon: Icon }) => {
+        const active = location.pathname === href;
+        return (
+          <a
+            key={href}
+            href={href}
+            className={`flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm transition ${
+              active
+                ? "bg-[#EB175D]/14 text-[#EB175D]"
+                : "text-white/55 hover:bg-white/[0.04] hover:text-white"
+            }`}
+          >
+            <Icon size={17} />
+            <span>{label}</span>
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+function AdminDashboardSidebarModules() {
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setTarget(document.querySelector("aside"));
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  if (!target) return null;
+
+  return createPortal(
+    <div className="absolute bottom-[116px] left-5 right-5 top-[438px] overflow-y-auto border-t border-white/8 pt-3">
+      <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
+        Site Management
+      </p>
+      <AdminManagementLinks compact />
+    </div>,
+    target,
+  );
+}
+
+function StandaloneAdminSidebar() {
+  return (
+    <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 flex-col border-r border-white/10 bg-[#0d0d0d] p-5 text-white lg:flex">
+      <a href="/admin" className="flex items-center gap-3 px-2 pb-7">
+        <span className="grid size-10 place-items-center rounded-xl bg-white text-lg font-black text-black">
+          B
+        </span>
+        <div>
+          <div className="font-bold">BrandlineTech</div>
+          <div className="text-[11px] text-white/40">ADMIN CONSOLE</div>
+        </div>
+      </a>
+
+      <a
+        href="/admin"
+        className="mb-3 flex items-center gap-3 rounded-xl px-3.5 py-3 text-sm text-white/60 transition hover:bg-white/[0.04] hover:text-white"
+      >
+        <LayoutDashboard size={18} />
+        <span>Dashboard</span>
+      </a>
+
+      <div className="border-t border-white/8 pt-3">
+        <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
+          Site Management
+        </p>
+        <AdminManagementLinks />
+      </div>
+
+      <div className="mt-auto space-y-1 border-t border-white/8 pt-4">
+        <a
+          href="/customer-login"
+          className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm text-white/45 transition hover:bg-white/[0.04] hover:text-white"
+        >
+          <ShieldCheck size={17} />
+          Customer Portal Preview
+        </a>
+        <a
+          href="/"
+          className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm text-white/45 transition hover:bg-white/[0.04] hover:text-white"
+        >
+          <Globe2 size={17} />
+          View Website
+        </a>
+      </div>
+    </aside>
+  );
+}
 
 function NotFoundComponent() {
   return (
@@ -169,6 +286,8 @@ function RootComponent() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
   const isAdminDashboard = location.pathname === "/admin";
+  const isAdminLogin = location.pathname === "/admin-login";
+  const isStandaloneAdminPage = isAdmin && !isAdminDashboard && !isAdminLogin;
 
   useEffect(() => {
     const handlePreloadError = (event: Event) => {
@@ -192,18 +311,14 @@ function RootComponent() {
       <FrontendBrandingRuntime />
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-3">Skip to content</a>
       {!isAdmin && <Navbar />}
-      {isAdminDashboard && (
-        <div className="fixed bottom-6 right-6 z-[60] flex max-h-[72vh] flex-col gap-2 overflow-auto rounded-2xl border border-white/10 bg-[#0d0d0d]/95 p-2 shadow-2xl backdrop-blur-xl">
-          <a href="/admin-policy-pages" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Policy Pages</a>
-          <a href="/admin-branding-theme" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Branding & Theme</a>
-          <a href="/admin-activity-logs" className="rounded-xl border border-white/10 bg-white/[.04] px-4 py-3 text-center text-sm font-bold text-white transition hover:border-[#EB175D]/40">Activity & Login Logs</a>
-          <a href="/admin-client-projects" className="rounded-xl border border-[#EB175D]/35 bg-[#EB175D] px-4 py-3 text-center text-sm font-bold text-white shadow-xl transition hover:bg-[#CC527A]">Client Websites</a>
-          <a href="/admin-technology-stack" className="rounded-xl border border-white/15 bg-[#111111] px-4 py-3 text-center text-sm font-bold text-white transition hover:bg-[#252525]">Technology Stack</a>
-        </div>
-      )}
-      <div id="main-content">
+
+      {isAdminDashboard && <AdminDashboardSidebarModules />}
+      {isStandaloneAdminPage && <StandaloneAdminSidebar />}
+
+      <div id="main-content" className={isStandaloneAdminPage ? "lg:pl-72" : ""}>
         <Outlet />
       </div>
+
       {!isAdmin && <ClientProjectsSection />}
       {!isAdmin && <TechnologyStackSection />}
       {!isAdmin && <Footer />}
