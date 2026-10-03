@@ -166,6 +166,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
   const isAdmin = location.pathname.startsWith("/admin");
+  const isAdminDashboard = location.pathname === "/admin";
 
   useEffect(() => {
     const handlePreloadError = (event: Event) => {
@@ -188,6 +189,14 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:p-3">Skip to content</a>
       {!isAdmin && <Navbar />}
+      {isAdminDashboard && (
+        <a
+          href="/admin-technology-stack"
+          className="fixed bottom-6 right-6 z-[60] rounded-xl border border-[#EB175D]/35 bg-[#EB175D] px-4 py-3 text-sm font-bold text-white shadow-2xl transition hover:bg-[#CC527A]"
+        >
+          Manage Technology Stack
+        </a>
+      )}
       <div id="main-content">
         <Outlet />
       </div>
