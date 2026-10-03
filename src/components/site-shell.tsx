@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Phone, Mail } from "lucide-react";
+import { ChevronRight, Mail, MapPin, Menu, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SlideArrowButton from "@/components/slide-arrow-button";
 import {
@@ -120,57 +120,177 @@ export function Navbar() {
   );
 }
 
+const footerGroups = [
+  {
+    title: "Ecommerce Seller Account Management",
+    links: [
+      ["Amazon Seller Account Management", "/marketplace-management"],
+      ["Flipkart Seller Account Management", "/marketplace-management"],
+      ["Meesho Seller Account Management", "/marketplace-management"],
+      ["Myntra Seller Account Management", "/marketplace-management"],
+      ["AJIO Seller Account Management", "/marketplace-management"],
+      ["Nykaa Seller Account Management", "/marketplace-management"],
+      ["JioMart Seller Account Management", "/marketplace-management"],
+      ["Multi-Marketplace Management", "/marketplace-management"],
+    ],
+  },
+  {
+    title: "Global Ecommerce Growth",
+    links: [
+      ["Amazon Global Selling Support", "/solutions"],
+      ["Etsy Marketplace Support", "/solutions"],
+      ["eBay Marketplace Support", "/solutions"],
+      ["Walmart Marketplace Support", "/solutions"],
+      ["International Product Listings", "/solutions"],
+      ["Cross-Border Ecommerce Strategy", "/solutions"],
+      ["Global Marketplace Expansion", "/solutions"],
+    ],
+  },
+  {
+    title: "Marketplace Operations",
+    links: [
+      ["Seller Account Setup", "/marketplace-management"],
+      ["Account Health Monitoring", "/marketplace-management"],
+      ["Inventory Coordination", "/marketplace-management"],
+      ["Order Management", "/marketplace-management"],
+      ["Returns & Claims Support", "/marketplace-management"],
+      ["Pricing Optimization", "/marketplace-management"],
+      ["Performance Reporting", "/marketplace-management"],
+    ],
+  },
+  {
+    title: "Quick Commerce",
+    links: [
+      ["Blinkit Onboarding Support", "/solutions"],
+      ["Zepto Onboarding Support", "/solutions"],
+      ["Swiggy Instamart Onboarding", "/solutions"],
+      ["Quick Commerce Catalog Setup", "/solutions"],
+      ["Quick Commerce Growth Support", "/solutions"],
+    ],
+  },
+  {
+    title: "Listing / Catalog Management",
+    links: [
+      ["Product Listing Service", "/services#catalog"],
+      ["Catalog Optimization", "/services#catalog"],
+      ["Title Optimization", "/services#catalog"],
+      ["Description Optimization", "/services#catalog"],
+      ["Keyword Optimization", "/services#catalog"],
+      ["Product Attribute Setup", "/services#catalog"],
+      ["Image Optimization", "/services#catalog"],
+      ["A+ Content Support", "/services#catalog"],
+    ],
+  },
+  {
+    title: "Advertising Services",
+    links: [
+      ["Amazon Marketplace Ads", "/services#advertising"],
+      ["Flipkart Marketplace Ads", "/services#advertising"],
+      ["Meesho Advertising Support", "/services#advertising"],
+      ["Sponsored Ads Management", "/services#advertising"],
+      ["Keyword Research", "/services#advertising"],
+      ["Bid Optimization", "/services#advertising"],
+      ["Campaign Monitoring", "/services#advertising"],
+      ["Ad Budget Management", "/services#advertising"],
+    ],
+  },
+  {
+    title: "Digital Marketing",
+    links: [
+      ["Search Engine Optimization", "/services#seo"],
+      ["Marketplace SEO", "/services#seo"],
+      ["Google Ads", "/services#marketing"],
+      ["Meta Ads", "/services#marketing"],
+      ["Social Media Marketing", "/services#marketing"],
+      ["Content Marketing", "/services#marketing"],
+      ["Influencer Marketing", "/services#marketing"],
+      ["Online Reputation Management", "/services#marketing"],
+    ],
+  },
+  {
+    title: "Web & D2C Technology",
+    links: [
+      ["D2C Website Development", "/services#d2c"],
+      ["Shopify Development", "/services#d2c"],
+      ["WooCommerce Development", "/services#d2c"],
+      ["WordPress Development", "/services#d2c"],
+      ["Custom Ecommerce Development", "/services#d2c"],
+      ["UI / UX Design", "/services#d2c"],
+      ["Landing Page Development", "/services#d2c"],
+      ["Payment Integration", "/services#d2c"],
+    ],
+  },
+] as const;
+
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#090909] text-white">
-      <div className="section-shell pt-8 sm:pt-10 lg:pt-12">
-        <div className="border-t border-white/12" />
+    <footer className="relative overflow-hidden bg-[#111111] text-white">
+      <div className="section-shell py-12 sm:py-14 lg:py-16">
+        <div className="mb-10 border-t border-white/12" />
 
-        <div className="grid gap-12 py-14 sm:py-16 lg:grid-cols-[1.35fr_.7fr_.8fr_.8fr_.8fr] lg:gap-10 lg:py-20">
+        <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {footerGroups.map((group) => (
+            <FooterDirectoryGroup key={group.title} title={group.title} links={group.links} />
+          ))}
+        </div>
+
+        <div className="mt-14 grid gap-10 border-t border-white/10 pt-10 lg:grid-cols-[1.1fr_.9fr_.9fr]">
           <div>
             <Link to="/" className="inline-flex items-center gap-3 font-display text-xl font-bold tracking-tight text-white">
-              <span className="flex size-8 items-center justify-center rounded-md bg-white text-sm font-black text-[#090909]">B</span>
+              <span className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-black text-[#111111]">B</span>
               <span>Brandline<span className="text-[#EB175D]">Tech</span></span>
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-7 text-white/48">
-              Empowering Your Brand&apos;s Digital Journey through marketplace management, ecommerce operations and digital growth.
+            <p className="mt-5 max-w-md text-sm leading-7 text-white/55">
+              Marketplace management, ecommerce operations, digital marketing and D2C technology support for growing brands and sellers.
             </p>
-            <p className="mt-6 text-sm text-white/42">© 2026 BrandlineTech. All rights reserved.</p>
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/65">
+              <a href="/about" className="transition-colors hover:text-[#EB175D]">About</a>
+              <a href="/packages" className="transition-colors hover:text-[#EB175D]">Packages</a>
+              <a href="/resources" className="transition-colors hover:text-[#EB175D]">Resources</a>
+              <a href="/contact" className="transition-colors hover:text-[#EB175D]">Contact</a>
+            </div>
           </div>
 
-          <FooterCol title="Pages" links={[
-            ["Services", "/services"],
-            ["Marketplaces", "/marketplace-management"],
-            ["Solutions", "/solutions"],
-            ["Packages", "/packages"],
-            ["Resources", "/resources"],
-          ]} />
-
-          <FooterCol title="Company" links={[
-            ["About", "/about"],
-            ["Why Us", "/about#why-us"],
-            ["Contact", "/contact"],
-            ["Get Consultation", "/contact"],
-          ]} />
-
-          <FooterCol title="Legal" links={[
-            ["Privacy Policy", "/privacy-policy"],
-            ["Terms & Conditions", "/terms"],
-          ]} />
+          <div>
+            <p className="text-xs font-extrabold uppercase tracking-[.08em] text-white">Contact Info</p>
+            <div className="mt-5 space-y-4 text-sm text-white/68">
+              <a href="tel:+919789104651" className="flex items-start gap-3 transition-colors hover:text-[#EB175D]">
+                <Phone className="mt-0.5 size-4 shrink-0 text-[#EB175D]" />
+                <span><strong className="block text-white/90">Phone</strong>+91 9789 104 651</span>
+              </a>
+              <a href="mailto:support@brandlinetech.com" className="flex items-start gap-3 transition-colors hover:text-[#EB175D]">
+                <Mail className="mt-0.5 size-4 shrink-0 text-[#EB175D]" />
+                <span className="break-all"><strong className="block text-white/90">Email</strong>support@brandlinetech.com</span>
+              </a>
+            </div>
+          </div>
 
           <div>
-            <p className="text-sm font-semibold text-white">Contact</p>
-            <div className="mt-5 space-y-4 text-sm text-white/72">
-              <a href="tel:+919789104651" className="block transition-colors hover:text-[#EB175D]">+91 9789 104 651</a>
-              <a href="mailto:support@brandlinetech.com" className="block break-all transition-colors hover:text-[#EB175D]">support@brandlinetech.com</a>
-              <p className="leading-6 text-white/48">Coimbatore, Tamil Nadu</p>
-              <p className="leading-6 text-white/48">Palakkad, Kerala</p>
+            <p className="text-xs font-extrabold uppercase tracking-[.08em] text-white">Locations & Policies</p>
+            <div className="mt-5 space-y-4 text-sm text-white/68">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-[#EB175D]" />
+                <div>
+                  <strong className="block text-white/90">Service Locations</strong>
+                  <p className="mt-1 leading-6 text-white/55">Coimbatore, Tamil Nadu</p>
+                  <p className="leading-6 text-white/55">Palakkad, Kerala</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
+                <a href="/privacy-policy" className="transition-colors hover:text-[#EB175D]">Privacy Policy</a>
+                <a href="/terms" className="transition-colors hover:text-[#EB175D]">Terms & Conditions</a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="pointer-events-none select-none overflow-hidden pb-0 pt-1" aria-hidden="true">
-          <div className="whitespace-nowrap font-display text-[18vw] font-extrabold leading-[.72] tracking-[-0.07em] text-white/[0.045] sm:text-[15vw] lg:text-[12.5vw]">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 BrandlineTech. All rights reserved.</p>
+          <p>Empowering Your Brand&apos;s Digital Journey.</p>
+        </div>
+
+        <div className="pointer-events-none select-none overflow-hidden pt-10" aria-hidden="true">
+          <div className="whitespace-nowrap font-display text-[17vw] font-extrabold leading-[.72] tracking-[-0.07em] text-white/[0.035] sm:text-[14vw] lg:text-[11.5vw]">
             BrandlineTech
           </div>
         </div>
@@ -179,14 +299,25 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: readonly (readonly [string, string])[] }) {
+function FooterDirectoryGroup({
+  title,
+  links,
+}: {
+  title: string;
+  links: readonly (readonly [string, string])[];
+}) {
   return (
     <div>
-      <p className="text-sm font-semibold text-white">{title}</p>
-      <div className="mt-5 space-y-4">
+      <p className="text-[11px] font-extrabold uppercase tracking-[.04em] text-white/95">{title}</p>
+      <div className="mt-4 space-y-2.5">
         {links.map(([label, to]) => (
-          <a key={label} href={to} className="block text-sm text-white/72 transition-colors hover:text-[#EB175D]">
-            {label}
+          <a
+            key={label}
+            href={to}
+            className="group flex items-start gap-2 text-[13px] leading-5 text-white/72 transition-colors hover:text-[#EB175D]"
+          >
+            <ChevronRight className="mt-[3px] size-3.5 shrink-0 text-white/45 transition-transform group-hover:translate-x-0.5 group-hover:text-[#EB175D]" />
+            <span>{label}</span>
           </a>
         ))}
       </div>
