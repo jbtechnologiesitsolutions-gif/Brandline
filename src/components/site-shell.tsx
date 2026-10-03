@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ChevronRight, Mail, MapPin, Menu, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SlideArrowButton from "@/components/slide-arrow-button";
-import VectorWordmark from "@/components/vector-wordmark";
 import {
   Sheet,
   SheetClose,
@@ -288,34 +287,6 @@ export function Footer() {
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/38 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 BrandlineTech. All rights reserved.</p>
           <p>Empowering Your Brand&apos;s Digital Journey.</p>
-        </div>
-
-        <div className="mt-6 overflow-hidden" aria-label="Interactive BrandlineTech wordmark">
-          <VectorWordmark
-            text="BrandlineTech"
-            background="#111111"
-            textColor="#FFFFFF"
-            shade="#474747"
-            accent="#EB175DCC"
-            reach={360}
-            speed={42}
-            damping={64}
-            handles={{ size: 92, spread: 24, labels: false }}
-            font={{
-              fontFamily: "Manrope, Inter, sans-serif",
-              fontWeight: 800,
-              fontSize: "230px",
-              lineHeight: "1em",
-              letterSpacing: "-0.055em",
-            }}
-            style={{
-              minWidth: 0,
-              minHeight: 0,
-              width: "100%",
-              height: "clamp(150px, 19vw, 310px)",
-              borderRadius: "1rem",
-            }}
-          />
         </div>
       </div>
     </footer>
