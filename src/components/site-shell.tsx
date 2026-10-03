@@ -20,6 +20,7 @@ const desktopLinks = [
   ["Marketplaces", "/marketplace-management"],
   ["Solutions", "/solutions"],
   ["Packages", "/packages"],
+  ["Testimonials", "/testimonials"],
   ["Resources", "/resources"],
   ["About", "/about"],
   ["Contact", "/contact"],
@@ -61,8 +62,8 @@ export function Navbar() {
     >
       <div className="section-shell flex h-[4.25rem] items-center justify-between gap-4">
         <Logo />
-        <div className="hidden items-center gap-8 lg:flex">
-          <nav className="flex items-center gap-6" aria-label="Main navigation">
+        <div className="hidden items-center gap-6 lg:flex">
+          <nav className="flex items-center gap-5" aria-label="Main navigation">
             {desktopLinks.map(([label, to]) => (
               <Link
                 key={label}
@@ -246,6 +247,7 @@ export function Footer() {
             <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/65">
               <a href="/about" className="transition-colors hover:text-[#EB175D]">About</a>
               <a href="/packages" className="transition-colors hover:text-[#EB175D]">Packages</a>
+              <a href="/testimonials" className="transition-colors hover:text-[#EB175D]">Testimonials</a>
               <a href="/resources" className="transition-colors hover:text-[#EB175D]">Resources</a>
               <a href="/contact" className="transition-colors hover:text-[#EB175D]">Contact</a>
             </div>
