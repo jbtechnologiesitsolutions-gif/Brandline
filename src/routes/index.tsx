@@ -3,6 +3,7 @@ import { AnimatedSection } from "@/components/animated-section";
 import { CustomerPortalCard } from "@/components/customer-portal-card";
 import { HomeBanner } from "@/components/home-banner";
 import { IntegratedCapabilities } from "@/components/integrated-capabilities";
+import { ManagedPackagesSection } from "@/components/managed-packages";
 import {
   AboutBlock,
   Addons,
@@ -17,7 +18,6 @@ import {
   MarketplaceFeature,
   MarketplaceServices,
   PlatformSection,
-  PricingSection,
   ProcessSection,
   ResourcesSection,
   SellerAudit,
@@ -79,7 +79,7 @@ function HomePage() {
       </div>
 
       <div className="theme-zone theme-zone-pink">
-        <AnimatedSection className="theme-section" direction="up"><PricingSection /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><ManagedPackagesSection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="left"><Addons /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="zoom"><Stats /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="right"><WhyIndustries /></AnimatedSection>
