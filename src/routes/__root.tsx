@@ -55,7 +55,6 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     const recoveredAt = Number(sessionStorage.getItem(recoveryKey) || 0);
     const now = Date.now();
 
-    // Avoid an infinite refresh loop if the deployment itself is genuinely broken.
     if (!recoveredAt || now - recoveredAt > 60_000) {
       sessionStorage.setItem(recoveryKey, String(now));
       window.location.reload();
@@ -111,6 +110,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "stylesheet",
+        href: "/orange-theme.css",
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
