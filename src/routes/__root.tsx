@@ -12,14 +12,22 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import {
   Activity,
+  BarChart3,
+  Bell,
   Boxes,
   CircleDollarSign,
+  CircleHelp,
   FileText,
   Globe2,
   Image,
   LayoutDashboard,
+  MessageSquare,
   Palette,
+  Settings,
+  Share2,
   ShieldCheck,
+  UserCog,
+  Users,
 } from "lucide-react";
 
 import appCss from "../styles.css?url";
@@ -32,11 +40,19 @@ import { FrontendBrandingRuntime } from "@/components/frontend-branding-runtime"
 const adminManagementLinks = [
   { label: "Home Banner", href: "/admin-home-banner", icon: Image },
   { label: "Packages Management", href: "/admin-packages", icon: CircleDollarSign },
+  { label: "Customer Management", href: "/admin-customers", icon: Users },
+  { label: "Roles & Permissions", href: "/admin-roles-permissions", icon: UserCog },
   { label: "Client Websites", href: "/admin-client-projects", icon: Globe2 },
   { label: "Technology Stack", href: "/admin-technology-stack", icon: Boxes },
+  { label: "Enquiry Settings", href: "/admin-enquiry-settings", icon: MessageSquare },
+  { label: "FAQ Management", href: "/admin-faq", icon: CircleHelp },
+  { label: "Notifications", href: "/admin-notifications", icon: Bell },
+  { label: "Social Media", href: "/admin-social-media", icon: Share2 },
+  { label: "Analytics", href: "/admin-analytics", icon: BarChart3 },
   { label: "Policy Pages", href: "/admin-policy-pages", icon: FileText },
   { label: "Branding & Theme", href: "/admin-branding-theme", icon: Palette },
   { label: "Activity & Login Logs", href: "/admin-activity-logs", icon: Activity },
+  { label: "System Settings", href: "/admin-system-settings", icon: Settings },
 ] as const;
 
 function AdminManagementLinks({ compact = false }: { compact?: boolean }) {
@@ -109,14 +125,14 @@ function StandaloneAdminSidebar() {
         <span>Dashboard</span>
       </a>
 
-      <div className="border-t border-white/8 pt-3">
+      <div className="min-h-0 flex-1 overflow-y-auto border-t border-white/8 pt-3">
         <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/25">
           Site Management
         </p>
         <AdminManagementLinks />
       </div>
 
-      <div className="mt-auto space-y-1 border-t border-white/8 pt-4">
+      <div className="mt-4 space-y-1 border-t border-white/8 pt-4">
         <a
           href="/customer-login"
           className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm text-white/45 transition hover:bg-white/[0.04] hover:text-white"
