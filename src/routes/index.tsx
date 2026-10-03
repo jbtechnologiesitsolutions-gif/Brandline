@@ -69,6 +69,32 @@ function HomePage() {
       <LandingSignatureIntro />
       <HomeBanner />
 
+      <style>{`
+        .home-theme-flow .section-pad {
+          padding-top: 4rem !important;
+          padding-bottom: 4rem !important;
+        }
+        .home-theme-flow .theme-section + .theme-section {
+          margin-top: 0 !important;
+        }
+        .home-theme-flow .theme-section > section {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+        @media (min-width: 768px) {
+          .home-theme-flow .section-pad {
+            padding-top: 5rem !important;
+            padding-bottom: 5rem !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .home-theme-flow .section-pad {
+            padding-top: 5.5rem !important;
+            padding-bottom: 5.5rem !important;
+          }
+        }
+      `}</style>
+
       <div className="theme-zone theme-zone-grey">
         <AnimatedSection className="theme-section" direction="fade" delay={0.1}><TrustStrip /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><WhoWeHelp /></AnimatedSection>
