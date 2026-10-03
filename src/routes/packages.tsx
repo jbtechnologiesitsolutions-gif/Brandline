@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
-import { Addons, CTASection, FAQ, PricingSection } from "@/components/sections";
+import { Addons, CTASection, FAQ } from "@/components/sections";
+import { ManagedPackagesSection } from "@/components/managed-packages";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/packages")({
@@ -21,7 +22,7 @@ function PackagesPage() {
         title="Choose the support your business needs."
         description="Structured monthly marketplace support based on SKU volume, platforms and operational depth. Packages can be customized."
       />
-      <PricingSection />
+      <ManagedPackagesSection />
       <Addons />
       <FAQ />
       <CTASection />
