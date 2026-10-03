@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ExternalLink } from "lucide-react";
+import { ClientProjectSurfer } from "@/components/client-project-surfer";
 
 export type ClientProject = {
   id: string;
@@ -85,56 +85,15 @@ export function ClientProjectsSection() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {projects.map((project) => {
-            const Card = (
-              <article className="group overflow-hidden rounded-2xl border border-[#AAA7A7]/22 bg-white/80 shadow-sm backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:border-[#EB175D]/28 hover:shadow-xl">
-                <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-[#EEE7EA] via-white to-[#F8D8E3]">
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={`${project.name} website preview`}
-                      className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.025]"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="absolute inset-5 rounded-xl border border-[#AAA7A7]/25 bg-white shadow-lg">
-                      <div className="flex h-5 items-center gap-1.5 border-b border-[#AAA7A7]/18 px-2.5">
-                        <span className="size-1.5 rounded-full bg-[#EB175D]/55" />
-                        <span className="size-1.5 rounded-full bg-[#CC527A]/40" />
-                        <span className="size-1.5 rounded-full bg-[#AAA7A7]/45" />
-                      </div>
-                      <div className="grid h-[calc(100%-1.25rem)] place-items-center px-4 text-center">
-                        <span className="font-display text-lg font-extrabold text-[#363636]/35">{project.name}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="p-5 text-center">
-                  <h3 className="font-display text-base font-extrabold text-[#363636]">{project.name}</h3>
-                  <span className="mt-3 inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[.12em] text-[#EB175D]">
-                    {project.websiteUrl ? "Visit website" : "Project showcase"}
-                    <ExternalLink className="size-3.5" />
-                  </span>
-                </div>
-              </article>
-            );
-
-            return project.websiteUrl ? (
-              <a key={project.id} href={project.websiteUrl} target="_blank" rel="noreferrer" aria-label={`Visit ${project.name}`}>
-                {Card}
-              </a>
-            ) : (
-              <div key={project.id}>{Card}</div>
-            );
-          })}
+        <div className="mt-12">
+          {projects.length > 0 ? (
+            <ClientProjectSurfer projects={projects} />
+          ) : (
+            <div className="rounded-2xl border border-dashed border-[#AAA7A7]/35 bg-white/45 p-10 text-center text-sm text-[#666163]">
+              Client projects can be added from the BrandlineTech admin panel.
+            </div>
+          )}
         </div>
-
-        {projects.length === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-[#AAA7A7]/35 bg-white/45 p-10 text-center text-sm text-[#666163]">
-            Client projects can be added from the BrandlineTech admin panel.
-          </div>
-        )}
       </div>
     </section>
   );
