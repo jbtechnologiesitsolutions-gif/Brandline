@@ -13,6 +13,7 @@ import { createPortal } from "react-dom";
 import {
   Activity,
   Boxes,
+  CircleDollarSign,
   FileText,
   Globe2,
   Image,
@@ -30,6 +31,7 @@ import { FrontendBrandingRuntime } from "@/components/frontend-branding-runtime"
 
 const adminManagementLinks = [
   { label: "Home Banner", href: "/admin-home-banner", icon: Image },
+  { label: "Packages Management", href: "/admin-packages", icon: CircleDollarSign },
   { label: "Client Websites", href: "/admin-client-projects", icon: Globe2 },
   { label: "Technology Stack", href: "/admin-technology-stack", icon: Boxes },
   { label: "Policy Pages", href: "/admin-policy-pages", icon: FileText },
