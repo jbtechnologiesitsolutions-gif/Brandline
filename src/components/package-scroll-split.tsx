@@ -13,17 +13,20 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
     offset: ["start start", "end end"],
   });
 
-  const leftX = useTransform(scrollYProgress, [0, 0.36, 0.72], [0, -54, -24]);
-  const rightX = useTransform(scrollYProgress, [0, 0.36, 0.72], [0, 54, 24]);
-  const scale = useTransform(scrollYProgress, [0, 0.36], [1, 0.92]);
-  const rotateY = useTransform(scrollYProgress, [0.36, 0.76], [0, 180]);
-  const rotateZLeft = useTransform(scrollYProgress, [0.36, 0.76], [0, 5]);
-  const rotateZRight = useTransform(scrollYProgress, [0.36, 0.76], [0, -5]);
-  const cardsY = useTransform(scrollYProgress, [0.78, 1], [0, -130]);
-  const introOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.1], [0, 18]);
-  const endOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
-  const endY = useTransform(scrollYProgress, [0.8, 1], [36, 0]);
+  // Keep the same three-stage effect, but complete it in a much shorter scroll range.
+  const leftX = useTransform(scrollYProgress, [0, 0.28, 0.58], [0, -46, -20]);
+  const rightX = useTransform(scrollYProgress, [0, 0.28, 0.58], [0, 46, 20]);
+  const scale = useTransform(scrollYProgress, [0, 0.28], [1, 0.94]);
+  const rotateY = useTransform(scrollYProgress, [0.28, 0.66], [0, 180]);
+  const rotateZLeft = useTransform(scrollYProgress, [0.28, 0.66], [0, 4]);
+  const rotateZRight = useTransform(scrollYProgress, [0.28, 0.66], [0, -4]);
+
+  // Small final movement only, so the cards do not visually jump away before the next section.
+  const cardsY = useTransform(scrollYProgress, [0.72, 0.94], [0, -54]);
+  const introOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  const introY = useTransform(scrollYProgress, [0, 0.08], [0, 14]);
+  const endOpacity = useTransform(scrollYProgress, [0.72, 0.9], [0, 1]);
+  const endY = useTransform(scrollYProgress, [0.72, 0.9], [28, 0]);
 
   if (visible.length < 3 || reduceMotion) {
     return <StaticPackageCards packages={packages} />;
@@ -31,10 +34,10 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
 
   return (
     <>
-      <div ref={containerRef} className="relative hidden h-[420vh] w-full lg:block">
+      <div ref={containerRef} className="relative hidden h-[250vh] w-full lg:block">
         <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden [perspective:1400px]">
           <motion.div
-            className="pointer-events-none absolute left-0 right-0 top-[14%] text-center"
+            className="pointer-events-none absolute left-0 right-0 top-[12%] text-center"
             style={{ opacity: introOpacity, y: introY }}
           >
             <p className="text-xs font-extrabold uppercase tracking-[.22em] text-[#EB175D]">Scroll to explore packages</p>
@@ -127,7 +130,7 @@ export function PackageScrollSplit({ packages }: { packages: ManagedPackage[] })
           </motion.div>
 
           <motion.div
-            className="pointer-events-none absolute bottom-[12%] left-0 right-0 text-center"
+            className="pointer-events-none absolute bottom-[9%] left-0 right-0 text-center"
             style={{ opacity: endOpacity, y: endY }}
           >
             <p className="font-display text-3xl font-extrabold tracking-tight text-[#363636]">Choose the support level that fits your growth stage.</p>
