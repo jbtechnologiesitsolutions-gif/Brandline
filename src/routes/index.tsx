@@ -5,6 +5,7 @@ import { HomeBanner } from "@/components/home-banner";
 import { IntegratedCapabilities } from "@/components/integrated-capabilities";
 import { LandingSignatureIntro } from "@/components/landing-signature-intro";
 import { ManagedPackagesSection } from "@/components/managed-packages";
+import { MarketplaceLayeredServices } from "@/components/marketplace-layered-services";
 import {
   AboutBlock,
   Addons,
@@ -17,7 +18,6 @@ import {
   GoalSection,
   GrowthFramework,
   MarketplaceFeature,
-  MarketplaceServices,
   PlatformSection,
   ProcessSection,
   ResourcesSection,
@@ -75,7 +75,7 @@ function HomePage() {
         <AnimatedSection className="theme-section" direction="up"><IntegratedCapabilities /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="left"><GrowthFramework /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><MarketplaceFeature /></AnimatedSection>
-        <AnimatedSection className="theme-section" direction="up"><MarketplaceServices /></AnimatedSection>
+        <AnimatedSection className="theme-section" direction="up"><MarketplaceLayeredServices /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="right"><PlatformSection /></AnimatedSection>
         <AnimatedSection className="theme-section" direction="up"><SellerAudit /></AnimatedSection>
       </div>
